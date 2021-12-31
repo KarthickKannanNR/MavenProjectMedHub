@@ -1,16 +1,16 @@
-package com.medHub.Dao;
+package com.medHub.dao;
 
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.medHub.model.AdminModel;
-import com.medHub.model.CartModel;
-import com.medHub.model.OrderItemsModel;
-import com.medHub.model.OrderModel;
-import com.medHub.model.ProductModel;
-import com.medHub.model.UserModel;
+import com.medHub.model.Admin;
+import com.medHub.model.Cart;
+import com.medHub.model.OrderItems;
+import com.medHub.model.Order;
+import com.medHub.model.Product;
+import com.medHub.model.User;
 
 
 
@@ -18,10 +18,10 @@ public class TestMain {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		AdminDao adminDao = new AdminDao();
-		UserDao userDao1 = new UserDao();
-		ProductDao productDao = new ProductDao();
-		CartDao cartdao = new CartDao();
+		AdminDaoImpl adminDao = new AdminDaoImpl();
+		UserDaoImpl userDao1 = new UserDaoImpl();
+		ProductDaoImpl productDao = new ProductDaoImpl();
+		CartDaoImpl cartdao = new CartDaoImpl();
 
 		String  logregtem = null;
 		boolean end = true;
@@ -111,7 +111,7 @@ public class TestMain {
 									+ " contains one upper case, one lower case, one number , one special character");
 						}
 					} while (flagpswd);
-					UserModel user = new UserModel(userName, mobile, userMail, pswd);
+					User user = new User(userName, mobile, userMail, pswd);
 					userDao1.insert(user);
 //															 Login  
 				case 2:
@@ -148,7 +148,7 @@ public class TestMain {
 
 					if (loginEmail.endsWith("medhub.com")) {
 						do {
-							AdminModel admin = adminDao.login(loginEmail, loginPassword);
+							Admin admin = adminDao.login(loginEmail, loginPassword);
 
 							if (admin == null) {
 								System.out.println("invalid username or password");
@@ -166,7 +166,7 @@ public class TestMain {
 									"1. Show all products   2. Show all users   3. Add product   4.update Product Details   5.Delete Product   6.SHow user by Id");
 
 							String adminchoice = sc.nextLine();
-							ProductDao allProducts = new ProductDao();
+							ProductDaoImpl allProducts = new ProductDaoImpl();
 							if (adminchoice.contains("1") || adminchoice.contains("2") || adminchoice.contains("3")
 									|| adminchoice.contains("4") || adminchoice.contains("5")) {
 
@@ -174,7 +174,7 @@ public class TestMain {
 								switch (adminchoice) {
 //																		  List All products
 								case "1":
-									List<ProductModel> productList = allProducts.viewProduts();
+									List<Product> productList = allProducts.viewProduts();
 
 									for (int i = 0; i < productList.size(); i++) {
 										System.out.println(productList.get(i));
@@ -182,8 +182,8 @@ public class TestMain {
 									break;
 //																			List All users
 								case "2":
-									UserDao allUsers = new UserDao();
-									List<UserModel> userList = allUsers.ViewAllUser();
+									UserDaoImpl allUsers = new UserDaoImpl();
+									List<User> userList = allUsers.ViewAllUser();
 
 									for (int i = 0; i < userList.size(); i++) {
 										System.out.println(userList.get(i));
@@ -205,7 +205,7 @@ public class TestMain {
 									int quantity = Integer.parseInt(sc.nextLine());
 									System.out.println("Enter product Id");
 									int productId = Integer.parseInt(sc.nextLine());
-									ProductModel productModule = new ProductModel(productname, productcategory,
+									Product productModule = new Product(productname, productcategory,
 											description, unitPrice, quantity, productId);
 									productDao.insertProduct(productModule);
 									break;
@@ -249,7 +249,7 @@ public class TestMain {
 					} else {
 
 						boolean adminflag = true;
-						UserModel currentUser = userDao1.login(loginEmail, loginPassword);
+						User currentUser = userDao1.login(loginEmail, loginPassword);
 //						System.out.println(currentUser.getName());
 						if (currentUser == null) {
 							System.out.println("not a registered user");
@@ -261,7 +261,7 @@ public class TestMain {
 						}
 
 						do {
-							ProductDao allProducts = new ProductDao();
+							ProductDaoImpl allProducts = new ProductDaoImpl();
 							System.out.println("1. Show All Products    2.Update Account    3.Delete Account    4.Forget Password");
 							String choice = sc.nextLine();
 							if (choice.matches("[0-9]{1}")) {
@@ -272,7 +272,7 @@ public class TestMain {
 //																			Show all products
 								case 1:
 
-									List<ProductModel> productList = allProducts.viewProduts();
+									List<Product> productList = allProducts.viewProduts();
 
 									for (int i = 0; i < productList.size(); i++) {
 										System.out.println(productList.get(i));
@@ -293,7 +293,7 @@ public class TestMain {
 												System.out.println("enter product name");
 												String productName = sc.nextLine();
 												productName.toLowerCase();
-												ProductModel products = productDao.findProductByName(productName);
+												Product products = productDao.findProductByName(productName);
 												System.out.println(products.getProductName());
 												System.out.println(products.getQuantity());
 												System.out.println("enter quantity");
@@ -302,9 +302,9 @@ public class TestMain {
 
 												if (products.getQuantity() > quantity) {
 
-													CartModel cart = new CartModel(products, currentUser, quantity,
+													Cart cart = new Cart(products, currentUser, quantity,
 															products.getUnitPrice(), totalPrice);
-													CartDao cartDao = new CartDao();
+													CartDaoImpl cartDao = new CartDaoImpl();
 													cartDao.insertProduct(cart);
 
 												}
@@ -314,10 +314,10 @@ public class TestMain {
 //																			Buy product
 											case 2:
 												int points;
-												List<OrderItemsModel> orderLitemsList = new ArrayList<OrderItemsModel>();
+												List<OrderItems> orderLitemsList = new ArrayList<OrderItems>();
 												double sum = 0;
-												OrderModel order = new OrderModel();
-												ProductModel buyProducts = new ProductModel();
+												Order order = new Order();
+												Product buyProducts = new Product();
 												int buyProductQuantity;
 												do {
 													System.out.println("Enter Product name");
@@ -332,8 +332,8 @@ public class TestMain {
 													if (buyProducts.getQuantity() >= buyProductQuantity) {
 														if (currentUser.getWallet() >= sum) {
 
-															order = new OrderModel(currentUser, sum);
-															OrderDao orderDao = new OrderDao();
+															order = new Order(currentUser, sum);
+															OrderDaoImpl orderDao = new OrderDaoImpl();
 //																		points calculation
 															
 															currentUser.setPoints(currentUser.getPoints() + (buyProducts.getPoints() * buyProductQuantity));
@@ -346,12 +346,12 @@ public class TestMain {
 //															reducing amt from user wallet
 															double userPayableAmtForBuying = currentUser.getWallet()-(buyProducts.getUnitPrice() * buyProductQuantity);
 															userDao1.updateWalletMoney(order,userPayableAmtForBuying);
-															OrderItemsDao orderItemDao = new OrderItemsDao();
-															for (OrderItemsModel oi : orderLitemsList) {
+															OrderItemsDaoImpl orderItemDao = new OrderItemsDaoImpl();
+															for (OrderItems oi : orderLitemsList) {
 																oi.getOrderModel().setOrderId(orderId);
 																orderItemDao.insertOrders(oi);
 
-																OrderItemsModel orderItem = new OrderItemsModel(currentUser, order, buyProducts,
+																OrderItems orderItem = new OrderItems(currentUser, order, buyProducts,
 																		buyProductQuantity, buyProducts.getUnitPrice(),(buyProducts.getUnitPrice()* buyProductQuantity));
 																orderLitemsList.add(orderItem);		
 																sum += (buyProducts.getUnitPrice()
@@ -376,7 +376,7 @@ public class TestMain {
 												break;
 //																		View Cart
 											case 3:
-												List<CartModel> cartItems = cartdao.viewCart(currentUser);
+												List<Cart> cartItems = cartdao.viewCart(currentUser);
 
 												for (int i = 0; i < cartItems.size(); i++) {
 													System.out.println(cartItems.get(i));
@@ -398,7 +398,7 @@ public class TestMain {
 //															My Orders
 											case 4:
 												System.out.println("view my orders");
-												OrderItemsDao myOrder = new OrderItemsDao();
+												OrderItemsDaoImpl myOrder = new OrderItemsDaoImpl();
 												myOrder.ViewMyOrders(currentUser);
 												break;
 												
@@ -422,7 +422,7 @@ public class TestMain {
 //																		Update Account By User
 								case 2:
 									System.out.println("update all");
-									UserModel userModule = new UserModel();
+									User userModule = new User();
 									System.out.println(userModule.getUserMail());
 									System.out.println("update full name");
 									String fullname = sc.nextLine();

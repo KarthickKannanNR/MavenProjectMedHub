@@ -241,6 +241,17 @@ body{
     box-shadow: 0 0 5px black;
 }
     
+#companyname{
+    position: absolute;
+    text-align: center;
+    left: 100px;
+    top: 0px;
+    
+}
+#companyname img{
+    width: 120px;
+}    
+
     </style>
 </head>
 <body>
@@ -263,12 +274,15 @@ body{
             <div class="logo">
                 <img src="Images/medhublogo.png"
                     alt="logo">
+                      <div id="companyname">
+                        <img   src="https://d1hbpr09pwz0sk.cloudfront.net/logo_url/medhub-f6c08b33" alt="">
+                    </div>
             </div>
         </div>
 
         <!-- login screen default hidden -->
         <div class="loginscreen" id="loginform">
-            <form action="LoginController" class="formcontent">
+            <form action="LoginController" class="formcontent" method="post">
                 <h2>Login Here</h2>
                 <label for="fullName">Email*</label><br>
                 <input type="text" name="loginMail" required placeholder="Enter Email"><br><br><br>
@@ -286,7 +300,7 @@ body{
         <!-- sign/register form -->
         <div id="registerScreen">
             <div id="registerScreenContent">
-                <form action="RegisterController" class="registerform">
+                <form action="RegisterController" class="registerform" method="post">
                     <label for="fullName" class="reglab" ">FullName*</label><br><br>
                     <input type="text" name="regfullName" id="fullname" placeholder="Enter fullname" required><br><br>
                     <label for="mail" class="reglab">Mail Id</label><br><br>
@@ -299,14 +313,13 @@ body{
                         pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%?&]{8,15}$"
                         title="Minimum eight and Minimum 8 and maximum 15 characters, at least one uppercase letter, one lowercase letter, one number and one special character"><br><br>
                     <label for="confirnPassword" class="reglab" name="regConfirmPassword">Confirm Password*</label><br><br>
-                    <input type="text" name="confirmPassword" placeholder="Confirm Password" required
+                    <input type="password" name="confirmPassword" placeholder="Confirm Password" required
                         pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%?&]{8,15}$"
                         title="Minimum 8 and maximum 15 characters, at least one uppercase letter, one lowercase letter, one number and one special character"><br><br><br>
                     <!-- <label for="address" class="reglab">Address</label></br><br> -->
                     <!-- <textarea name="address" id="address" cols="30" rows="5"
                         style="max-width: 300px;max-height: 100px;border-radius: 3px;outline: none;"></textarea><br><br> -->
-                        <label for="userage"class="userage" name="Age">Age*</label><br><br>
-                        <input type="text" id="userage"  name="regAge" ><br><br>
+                        
                     <button id="regbtn" type="submit">Register</button>
             </div>
             </form>
