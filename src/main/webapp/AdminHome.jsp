@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>AdminHome</title>
     <style>
         * {
             margin: 0;
@@ -24,9 +24,8 @@
        left:200px;
        } 
        
-    
-        body{
-            background-color: rgb(216, 203, 216);
+    	body{
+            background-color: white;
 
             }
         #navigation ul li {
@@ -37,18 +36,25 @@
         #navigation{
             margin-left: 10px;
             background-color: rgb(83, 137, 168);
-            width: 150px;
-            height: 800px;
+           
         }
         #navigation ul li a {
             text-decoration: none;
             color: whitesmoke;
-            
-        }
+			display: inline-block;
+			}
         #navigation ul li a:hover{
             color: white;
             font-weight: 600;
-            transition-delay: 0.1ms;
+        }
+        #allusers table,th,tr,td{
+        border: 1px solid black;
+        border:none;
+        padding: 15px;
+        }
+        #allproducts table img{
+        height:80px;
+        width: 80px;
         }
     </style>
 </head>
@@ -57,13 +63,13 @@
     <div class="container">
         <div id="navigation">
         <ul>
-            <li ><a href="" onclick="allusers()">All Users</a></li>
+            <li ><a href="AllUser.jsp" >All Users</a></li>
             <li><a href="">All Products</a></li>
             <li><a href="">Add Products</a></li>
         </div>
         </ul>
     </div>
-<div>
+<%-- <div>
 <% UserDaoImpl userdao = new UserDaoImpl();
 List<User> userList = new ArrayList<User>();
 userList=userdao.ViewAllUser();%>
@@ -93,7 +99,8 @@ userList=userdao.ViewAllUser();%>
 </tbody>
 </table>
 </div>
-<%	ProductDaoImpl productDao = new ProductDaoImpl();
+ --%>
+ <%	ProductDaoImpl productDao = new ProductDaoImpl();
 List<Product> productList = new ArrayList<Product>();
 productList=productDao.viewProduts();%>
 <div id="allproducts">
@@ -105,10 +112,12 @@ productList=productDao.viewProduts();%>
 <th>Name</th>
 <th>Description</th>
 <th>Unit_price</th>
-<th>available_qty</th>
-<th>image</th>
-<th>points</th>
-<th>status</th>
+<th>Available_qty</th>
+<th>Image</th>
+<th>Points</th>
+<th>Status</th>
+<th>Offer</th>
+
 
 </tr>
 </thead>
@@ -121,10 +130,8 @@ productList=productDao.viewProduts();%>
 <td><%=product.getDescription() %></td>
 <td><%=product.getUnitPrice()%></td>
 <td><%=product.getQuantity()%></td>
-<td><%=product.getProductImg()%></td>
+<td ><img alt="img" src="<%=product.getProductImg()%>"></td>
 <td><%=product.getPoints()%></td>
-
-
 </tr>
 <%} %>
 </tbody>

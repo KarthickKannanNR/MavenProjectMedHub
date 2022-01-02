@@ -29,7 +29,6 @@ public class LoginServlet extends HttpServlet {
 		Admin admin;
 		AdminDaoImpl admindao= new AdminDaoImpl();
 		boolean currentuser = false;
-		System.out.println("successs");
 		System.out.println(email+""+password);
 	
 		try {
@@ -46,28 +45,33 @@ public class LoginServlet extends HttpServlet {
 			}
 			else
 			{
-				try {
-					admin=new Admin(email,password);
-					Admin adminModule= admindao.login(admin);
-					if(adminModule!=null)
-					{
-						res.sendRedirect("AdminHome.jsp");
-
-					}
-					else
-					{
-						
-					}
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				System.out.println("invalid username or password");
 			}
-		}
-		
-		else {
+		}else
+		{
+			try {
+				System.out.println(email);
+				System.out.println(password);
+				admin=new Admin(email,password);
+				Admin adminModule= admindao.login(admin);
+				if(adminModule!=null)
+				{
+					res.sendRedirect("AdminHome.jsp");
+
+				}
+				else
+				{
+					System.out.println("invalid username or password");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 			
 		}
+		
+		
 			} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

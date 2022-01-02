@@ -16,11 +16,44 @@ public class Product
 	private String productImg;
 	private int points;
 	private String status;
+	private int offer;
 	
 	public int getPoints() {
 		return points;
 	}
 	
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public int getOffer() {
+		return offer;
+	}
+
+	public void setOffer(int offer) {
+		this.offer = offer;
+	}
+
 	public void setPoints(int points) {
 		this.points = points;
 	}
@@ -92,11 +125,8 @@ public class Product
 		this.productId=productId;
 	}
 
-
-	
-	
 	public Product(int productId, String productCategory, String productName, String description, double unitPrice, int availableQuantity,
-			String productImg,int points,String status) {
+			String productImg,int points,String status,int offer) {
 		// TODO Auto-generated constructor stub
 		this.productId=productId;
 		this.productCategory=productCategory;
@@ -107,7 +137,21 @@ public class Product
 		this.productImg=productImg;
 		this.points=points;
 		this.status=status;
+		this.offer=offer;
 	}
+	
+	public Product(String category,String productname,double price,int quantity,String imageurl,int points,int offer,String description)
+	{
+		this.productCategory=category;
+		this.productName=productname;
+		this.unitPrice=price;
+		this.quantity=quantity;
+		this.productImg=imageurl;
+		this.points=points;
+		this.offer=offer;
+		this.description=description;
+		}
+	
 
 	public Product() {
 		// TODO Auto-generated constructor stub

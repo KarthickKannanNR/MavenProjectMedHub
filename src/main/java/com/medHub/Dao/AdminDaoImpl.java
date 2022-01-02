@@ -21,7 +21,7 @@ public class AdminDaoImpl implements AdminDAO{
 
 	public Admin login(Admin admin) throws SQLException
 	{
-		Admin adminmodule=null;
+		Admin adminmodule=new Admin();
 		System.out.println(admin.getAdminMail());
 		System.out.println(admin.getAdminPassword());
 		String check="select * from admin where admin_email=? and admin_password=?";
@@ -30,7 +30,7 @@ public class AdminDaoImpl implements AdminDAO{
 		PreparedStatement ps = con.prepareStatement(check);
 		ps.setString(1, admin.getAdminMail());
 		ps.setString(2, admin.getAdminPassword());
-		ResultSet rs = ps.executeQuery(check);
+		ResultSet rs = ps.executeQuery();
 	
 		if(rs.next()) {
 			adminmodule=new Admin(rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getLong(6));

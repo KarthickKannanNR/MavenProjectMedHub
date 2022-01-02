@@ -28,8 +28,8 @@ public class ProductDaoImpl implements ProductDAO{
 			
 			while(rs.next()) {
 				Product product=new Product(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDouble(5),
-						rs.getInt(6),rs.getString(7),rs.getInt(8),rs.getString(9));
-				productList.add(product);				
+						rs.getInt(6),rs.getString(7),rs.getInt(8),rs.getString(9),rs.getInt(10));
+				productList.add(product);	
 				}
 			
 		} catch (SQLException e) {
@@ -44,7 +44,7 @@ public class ProductDaoImpl implements ProductDAO{
 	public void insertProduct(Product productModel) throws SQLException
 	{
 	
-		String query="insert into products (product_category,product_name,description,unit_price,quantity,product_id) values (?,?,?,?,?,?)";
+		String query="insert into products (product_category,product_name,description,price,available_quantity,product_img,points_per_unit,offer) values (?,?,?,?,?,?,?,?)";
 		Connection con=ConnectionUtil.getDBconnect();
 		PreparedStatement pst = con.prepareStatement(query);
 		pst.setString(1, productModel.getProductCategory());
@@ -52,7 +52,9 @@ public class ProductDaoImpl implements ProductDAO{
 		pst.setString(3, productModel.getDescription());
 		pst.setDouble(4, productModel.getUnitPrice());
 		pst.setInt(5, productModel.getQuantity());
-		pst.setInt(6, productModel.getProductId());
+		pst.setString(6, productModel.getProductImg());
+		pst.setInt(7,productModel.getPoints());
+		pst.setInt(8, productModel.getOffer());
 		int result=pst.executeUpdate();
 		System.out.println(result + " product inserted");
 	}
@@ -169,7 +171,7 @@ public class ProductDaoImpl implements ProductDAO{
 				ResultSet rs = pst.executeQuery();
 				if(rs.next())
 				{
-				 product= new Product(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDouble(5),rs.getInt(6),rs.getString(7),rs.getInt(8),rs.getString(9));
+				 product= new Product(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDouble(5),rs.getInt(6),rs.getString(7),rs.getInt(8),rs.getString(9),rs.getInt(10));
 				}
 				
 				

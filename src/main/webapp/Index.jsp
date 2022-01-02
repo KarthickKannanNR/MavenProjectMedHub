@@ -265,7 +265,7 @@ body{
 
             <nav class="list">
                 <ul>
-                    <li> <a>Cart</a></li>
+                    
                     <!-- <li> <a>SignOut</a></li> -->
                     <li onclick="getRegisterForm()"> <a id="register">Signup</a></li>
                     <li onclick="getLoginForm()"> <a id="login">Login</a></li>
@@ -276,7 +276,7 @@ body{
                     alt="logo">
                       <div id="companyname">
                         <img   src="https://d1hbpr09pwz0sk.cloudfront.net/logo_url/medhub-f6c08b33" alt="">
-                    </div>
+                    </div>Karthick@1234
             </div>
         </div>
 
