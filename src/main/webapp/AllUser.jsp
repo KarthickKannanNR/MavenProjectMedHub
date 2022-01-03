@@ -25,6 +25,7 @@
             list-style: none;
             padding: 20px;
             display: inline-block;
+            margin-left: 60px;
 
         }
         #navigation{
@@ -60,8 +61,8 @@
 <div id="navigation">
         <ul>
             <li ><a href="AllUser.jsp" >All Users</a></li>
-            <li><a href="">All Products</a></li>
-            <li><a href="">Add Products</a></li>
+            <li><a href="AdminAllProducts.jsp">All Products</a></li>
+            <li><a href="AddProduct.jsp">Add Products</a></li>
         </div>
         </ul>
     </div>

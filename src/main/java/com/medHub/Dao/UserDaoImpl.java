@@ -43,27 +43,32 @@ public void insert(User user) {
 	}
 	
 
-public boolean login(User user)
+public User login(User user)
 {
+	System.out.println(user.getUserMail());
+	System.out.println(user.getUserPassword());
+	User loginUser=null;
 	try {
 	
 	String check="select * from users where user_email='"+user.getUserMail()+"' and user_password='"+user.getUserPassword()+"'";
 	Connection con= ConnectionUtil.getDBconnect();
 	Statement stm=con.createStatement();
 	int i=stm.executeUpdate(check);
-	if(i>0) {
-		return true;
-	}
-	else {
-		return false;
-	}
-	
-//	if(rs.next())
-//	{	
-//		user=new UserModel(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDouble(5),rs.getString(6),
-//	rs.getLong(7),rs.getString(8),rs.getInt(9));
-//		System.out.println("login sucessfulls");
+	ResultSet rs = stm.executeQuery(check);
+//	if(i>0) {
+//		return loginUser;
 //	}
+
+	
+	if(rs.next())
+	{	
+		user=new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDouble(5),rs.getString(6),
+		rs.getLong(7),rs.getString(8),rs.getInt(9));
+		System.out.println(rs.getString(4));
+		System.out.println(rs.getDouble(5));
+		System.out.println("login sucessfulls");
+		return user;
+	}
 	
 		}
 	catch(Exception e)
@@ -71,7 +76,7 @@ public boolean login(User user)
 		System.out.println(e.getMessage());
 //		e.printStackTrace();
 	}
-	return false;
+	return loginUser;
 
 	}
 

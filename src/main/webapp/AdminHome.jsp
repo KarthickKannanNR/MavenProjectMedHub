@@ -28,25 +28,27 @@
             background-color: white;
 
             }
-        #navigation ul li {
+       #navigation ul li {
             
             list-style: none;
             padding: 20px;
+            display: inline-block;
+            margin-left: 60px;
+
         }
         #navigation{
-            margin-left: 10px;
             background-color: rgb(83, 137, 168);
-           
+            align-items: center;
         }
         #navigation ul li a {
             text-decoration: none;
             color: whitesmoke;
-			display: inline-block;
-			}
-        #navigation ul li a:hover{
-            color: white;
-            font-weight: 600;
+            display: inline;
+            
         }
+        #navigation ul li a:hover{
+        color: black;        
+    	}
         #allusers table,th,tr,td{
         border: 1px solid black;
         border:none;
@@ -61,14 +63,15 @@
 
 <body>
     <div class="container">
-        <div id="navigation">
+    <div id="navigation">
         <ul>
             <li ><a href="AllUser.jsp" >All Users</a></li>
-            <li><a href="">All Products</a></li>
+            <li><a href="AdminAllProducts.jsp">All Products</a></li>
             <li><a href="">Add Products</a></li>
         </div>
         </ul>
     </div>
+       
 <%-- <div>
 <% UserDaoImpl userdao = new UserDaoImpl();
 List<User> userList = new ArrayList<User>();
@@ -117,8 +120,6 @@ productList=productDao.viewProduts();%>
 <th>Points</th>
 <th>Status</th>
 <th>Offer</th>
-
-
 </tr>
 </thead>
 <tbody>

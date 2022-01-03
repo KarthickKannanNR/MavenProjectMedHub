@@ -1,28 +1,48 @@
-<%@page import="java.util.List"%>
-<%@page import="com.medHub.model.Product"%>
-<%@page import="com.medHub.dao.ProductDaoImpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@page import="java.util.List"%>
+<%@page import="com.medHub.model.Product"%>
+<%@page import="com.medHub.dao.ProductDaoImpl"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Products</title>
-    <style>
-         * {
+<meta charset="ISO-8859-1">
+<title>All Products</title>
+<style>
+  * {
             margin-left: -5px;
             padding: 0;
             box-sizing: border-box;
             font-family: Arial, Helvetica, sans-serif;
-        	}
+        }
         body{
             background-image: url(Images/homepage_img.jpg);
             background-repeat: no-repeat;
             background-size: cover;
 
         }
+         #navigation ul li {
+            
+            list-style: none;
+            padding: 20px;
+            display: inline-block;
+            margin-left: 60px;
+
+        }
+        #navigation{
+            background-color: rgb(83, 137, 168);
+            align-items: center;
+        }
+        #navigation ul li a {
+            text-decoration: none;
+            color: whitesmoke;
+            display: inline;
+            
+        }
+        #navigation ul li a:hover{
+        color: black;        
+    	}
+        
         #product{
             position: relative;
             top: 30px;
@@ -31,10 +51,10 @@
         } 
         #product{
             position: relative;
-            background-color: rgba(158, 202, 207,0.5);
+            background-color: rgb(158, 202, 207);
             height: 190px;
             border-radius: 5px;
-            width: 1200px;
+            width: 1300px;
         }
         #product img{
             height: 100px;
@@ -69,7 +89,7 @@
          #btn1{
              position: relative;
              left: 120px;
-             top: -40px;
+             top: 30px;
          }  
          #product #btn button:hover{
              background-color: white;
@@ -79,17 +99,17 @@
          position: relative;
          left: 30px;
          }
-         #btn #buynow{
-         position: relative;
-         top:-10px;
-         }
-         a{
-         text-decoration: none;
-         color: black;
-         }
-    </style>
+</style>
 </head>
 <body>
+<div id="navigation">
+        <ul>
+            <li ><a href="AllUser.jsp" >All Users</a></li>
+            <li><a href="">All Products</a></li>
+            <li><a href="">Add Products</a></li>
+        </div>
+        </ul>
+    </div>
 <% ProductDaoImpl product= new ProductDaoImpl();
 List<Product> allproduct = product.viewProduts();
 	%>
@@ -110,12 +130,15 @@ List<Product> allproduct = product.viewProduts();
             <h3>Points : <%=products.getPoints() %></h3>
         </div>
         <div id="btn">
-            <button id="buynow"><a href="">Buy Now</a></button><br>
-           <button id="btn1"><a href="">Add To Cart</button></button>
+        <form action="confirmBuying">
+            <button id="btn1" type="button">Buy Now</button><br>
+         </form>
+            <button>Add To Cart</button>
         </div>
 	</div>
 	</form>
 		<br><br>
 	<%} %>
+
 </body>
 </html>

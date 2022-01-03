@@ -35,10 +35,8 @@ public class AdminDaoImpl implements AdminDAO{
 		if(rs.next()) {
 			adminmodule=new Admin(rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getLong(6));
 			System.out.println(rs.getString(2));
-			System.out.println("sdfghjk");
 			return adminmodule;
 		}
-		System.out.println("no");
 		return adminmodule;
 		
 		}

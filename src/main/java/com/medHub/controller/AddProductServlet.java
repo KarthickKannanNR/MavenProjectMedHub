@@ -31,14 +31,7 @@ public class AddProductServlet extends HttpServlet {
 		int offer=Integer.parseInt(req.getParameter("offer"));
 		System.out.println(offer);
 		String description= req.getParameter("description");
-		
-		
-		
-		
-		System.out.println(imageurl);
-		
-		
-		System.out.println(description);
+				
 		Product product= new Product(category,productname,price,quantity,imageurl,points,offer,description);
 		ProductDaoImpl products = new ProductDaoImpl();
 		
