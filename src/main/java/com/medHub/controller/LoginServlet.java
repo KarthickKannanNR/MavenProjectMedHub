@@ -52,7 +52,6 @@ public class LoginServlet extends HttpServlet {
 		}else
 		{
 			try {
-				
 				admin=new Admin(email,password);
 				Admin adminModule= admindao.login(admin);
 				if(adminModule!=null)

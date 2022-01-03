@@ -110,8 +110,8 @@ List<Product> allproduct = product.viewProduts();
             <h3>Points : <%=products.getPoints() %></h3>
         </div>
         <div id="btn">
-            <button id="buynow"><a href="">Buy Now</a></button><br>
-           <button id="btn1"><a href="">Add To Cart</button></button>
+            <a href="BuyProduct.jsp">Buy Now</a><br>
+           <a href="">Add To Cart</a></button>
         </div>
 	</div>
 	</form>

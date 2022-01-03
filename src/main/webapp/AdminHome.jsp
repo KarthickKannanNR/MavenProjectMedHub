@@ -58,6 +58,10 @@
         height:80px;
         width: 80px;
         }
+        #navigation #logout a{
+        position:relative;
+        right: 10px;
+        }
     </style>
 </head>
 
@@ -68,6 +72,7 @@
             <li ><a href="AllUser.jsp" >All Users</a></li>
             <li><a href="AdminAllProducts.jsp">All Products</a></li>
             <li><a href="">Add Products</a></li>
+            <li id="logout"><a href="Index.jsp">Logout</a></li>
         </div>
         </ul>
     </div>
@@ -103,7 +108,7 @@ userList=userdao.ViewAllUser();%>
 </table>
 </div>
  --%>
- <%	ProductDaoImpl productDao = new ProductDaoImpl();
+ <%-- <%	ProductDaoImpl productDao = new ProductDaoImpl();
 List<Product> productList = new ArrayList<Product>();
 productList=productDao.viewProduts();%>
 <div id="allproducts">
@@ -138,13 +143,10 @@ productList=productDao.viewProduts();%>
 </tbody>
 </table>
 </div>
-
+ --%>
 </div>
 <script>
-function allusers()
-{
-    document.getElementById("allusers").style.display="visible";
-}
+
 </script>
 </body>
 

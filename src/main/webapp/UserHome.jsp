@@ -1,3 +1,4 @@
+<%@page import="javax.swing.plaf.metal.MetalBorders.Flush3DBorder"%>
 <%@page import="java.util.List"%>
 <%@page import="com.medHub.model.*"%>
 <%@page import="com.medHub.dao.*"%>
@@ -188,6 +189,7 @@ img {
 #product #btn button:hover {
 	background-color: white;
 	box-shadow: 0 0 5px black;
+	color: green;
 }
 
 #product #img h3 {
@@ -205,13 +207,17 @@ a {
 	text-decoration: none;
 	color: black;
 }
+#userName{
+position: relative;
+left: 1100px;
+}
 </style>
 </head>
 
 <body>
-	<%User currentuser = (User)session.getAttribute("user");
- 	
- %>
+	<%User currentUser = (User)session.getAttribute("user");
+	
+ 	%>
 	<div id="container">
 
 		<div class="nav">
@@ -219,7 +225,9 @@ a {
 			<nav class="list">
 				<ul>
 					<li><a>Cart</a></li>
-					<li><a>SignOut</a></li>
+					<li><a href="Index.jsp">SignOut</a></li>
+					<li><a>MyProfile</a></li>
+					<li><a >MyOrders</a></li>
 				</ul>
 				<div class="logo">
 					<img
@@ -228,10 +236,15 @@ a {
 			</nav>
 		</div>
 		<!-- slideshow -->
+		<div id="serachbar">
+		<input type="text" id="searchProduct"  name="searchProduct" required>
+		<a href="AllProducts.jsp"><button>search</button></a>
+		<h2 id="userName">welcome <%=currentUser.getName()%></h2>
+		</div>
 
 
 		<% ProductDaoImpl product= new ProductDaoImpl();
-List<Product> allproduct = product.viewProduts();
+		List<Product> allproduct = product.viewProduts();
 	%>
 		<% for(Product products : allproduct)
 		
@@ -259,7 +272,7 @@ List<Product> allproduct = product.viewProduts();
 				</div>
 				<div id="btn">
 					<button id="buynow">
-						<a href="">Buy Now</a>
+						<a href="BuyProduct.jsp">Buy Now</a>
 					</button>
 					<br>
 					<button id="btn1">

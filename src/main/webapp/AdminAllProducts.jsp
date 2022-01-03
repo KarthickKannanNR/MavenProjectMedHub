@@ -31,7 +31,6 @@
         }
         #navigation{
             background-color: rgb(83, 137, 168);
-            align-items: center;
         }
         #navigation ul li a {
             text-decoration: none;
@@ -52,7 +51,7 @@
         #product{
             position: relative;
             background-color: rgb(158, 202, 207);
-            height: 190px;
+            height: 250px;
             border-radius: 5px;
             width: 1300px;
         }
@@ -105,8 +104,8 @@
 <div id="navigation">
         <ul>
             <li ><a href="AllUser.jsp" >All Users</a></li>
-            <li><a href="">All Products</a></li>
-            <li><a href="">Add Products</a></li>
+            <li><a href="AdminAppProducts.jsp">All Products</a></li>
+            <li><a href="AddProduct.jsp">Add Products</a></li>
         </div>
         </ul>
     </div>
@@ -124,16 +123,16 @@ List<Product> allproduct = product.viewProduts();
             <h3><%=products.getProductName() %></h3>
         </div>
         <div id="details">
+             <h3>Description : <%=products.getProductId() %></h3>
             <h3>Description : <%=products.getDescription() %></h3>
             <h3>price :<%=products.getUnitPrice()+ "rs"%></h3>
             <h3>Offer : <%=products.getOffer() %>%</h3>
             <h3>Points : <%=products.getPoints() %></h3>
+            <h3>Available Quantity : <%=products.getQuantity() %></h3>
         </div>
         <div id="btn">
-        <form action="confirmBuying">
-            <button id="btn1" type="button">Buy Now</button><br>
-         </form>
-            <button>Add To Cart</button>
+            <a href="UpdateProduct.jsp">Update</a>
+            <a href="">Delete</a>
         </div>
 	</div>
 	</form>

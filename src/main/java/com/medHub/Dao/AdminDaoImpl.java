@@ -21,7 +21,7 @@ public class AdminDaoImpl implements AdminDAO{
 
 	public Admin login(Admin admin) throws SQLException
 	{
-		Admin adminmodule=new Admin();
+		Admin adminmodule=null;
 		System.out.println(admin.getAdminMail());
 		System.out.println(admin.getAdminPassword());
 		String check="select * from admin where admin_email=? and admin_password=?";
