@@ -109,7 +109,9 @@
         </div>
         </ul>
     </div>
-<% ProductDaoImpl product= new ProductDaoImpl();
+<%
+
+ProductDaoImpl product= new ProductDaoImpl();
 List<Product> allproduct = product.viewProduts();
 	%>
 	<% for(Product products : allproduct)
@@ -123,7 +125,7 @@ List<Product> allproduct = product.viewProduts();
             <h3><%=products.getProductName() %></h3>
         </div>
         <div id="details">
-             <h3>Description : <%=products.getProductId() %></h3>
+             <h3>Product Id : <%=products.getProductId() %></h3>
             <h3>Description : <%=products.getDescription() %></h3>
             <h3>price :<%=products.getUnitPrice()+ "rs"%></h3>
             <h3>Offer : <%=products.getOffer() %>%</h3>
@@ -131,8 +133,8 @@ List<Product> allproduct = product.viewProduts();
             <h3>Available Quantity : <%=products.getQuantity() %></h3>
         </div>
         <div id="btn">
-            <a href="UpdateProduct.jsp">Update</a>
-            <a href="">Delete</a>
+            <a href="UpdateProduct.jsp?productId=<%=products.getProductId() %>" name="updateProduct" >Update</a><br><br>
+            <a href="" name="deleteProduct" value="<%=products.getProductId() %>">Delete</a>
         </div>
 	</div>
 	</form>

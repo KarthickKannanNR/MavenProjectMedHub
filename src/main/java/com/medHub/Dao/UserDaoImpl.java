@@ -249,10 +249,10 @@ public List<User> ViewAllUser()
 			
 		}
 	
-		public void updateWalletMoney(Order order,double userPayableAmtForBuying)
+		public void updateWalletMoney(Order order)
 		{
 			
-			String query="update users set user_wallet='"+userPayableAmtForBuying+"' where user_id = '"+order.getUser().getUserId()+"'";
+			String query="update users set user_wallet='"+order.getUser().getWallet()+"' where user_id = '"+order.getUser().getUserId()+"'";
 			Connection con = ConnectionUtil.getDBconnect();
 			try {
 				PreparedStatement ps  = con.prepareStatement(query);

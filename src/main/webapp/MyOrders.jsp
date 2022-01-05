@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Userhome</title>
+<title>My Orders</title>
 <style>
 * {
 	margin: 0;
@@ -225,7 +225,7 @@ left: 1100px;
 					<li><a>Cart</a></li>
 					<li><a href="Index.jsp">SignOut</a></li>
 					<li><a href="UserProfile.jsp">MyProfile</a></li>
-					<li><a href="MyOrders.jsp">MyOrders</a></li>
+					<li><a >MyOrders</a></li>
 				</ul>
 				<div class="logo">
 					<img
@@ -261,16 +261,19 @@ left: 1100px;
 					<h3>
 						price :<%=products.getUnitPrice()+ "rs"%></h3>
 					<h3>
-						Offer :
+						Offer Applied:
 						<%=products.getOffer() %>%
 					</h3>
 					<h3>
 						Points :
 						<%=products.getPoints() %></h3>
+					<h3>
+						Total Amt :
+						<%=products.getPoints() %></h3>
 				</div>
 				<div id="btn">
 					<button>
-						<a id="buynow" href="BuyProduct.jsp?pid=<%=products.getProductId()%>">Buy Now</a>
+						<a id="buynow" href="BuyProduct.jsp?pid=<%=products.getProductId()%>">Cancel Order</a>
 					</button>
 					<br>
 					<button>

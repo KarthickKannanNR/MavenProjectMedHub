@@ -22,7 +22,7 @@ import com.medHub.model.*;
 public class LoginServlet extends HttpServlet {
 	@Override
 	public void service(HttpServletRequest req,HttpServletResponse res) throws IOException, ServletException {
-		HttpSession session = req.getSession();
+		HttpSession session = req.getSession(); 
 		String email = req.getParameter("loginMail").toLowerCase();
 		String password = req.getParameter("loginPassword");
 		User user;

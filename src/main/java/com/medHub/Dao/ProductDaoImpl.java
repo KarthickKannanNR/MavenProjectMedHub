@@ -41,9 +41,9 @@ public class ProductDaoImpl implements ProductDAO{
 	}
 	
 																		//Insert Product By Admin
-	public void insertProduct(Product productModel) throws SQLException
+	public Boolean insertProduct(Product productModel) throws SQLException
 	{
-	
+		boolean flag=false;
 		String query="insert into products (product_category,product_name,description,price,available_quantity,product_img,points_per_unit,offer) values (?,?,?,?,?,?,?,?)";
 		Connection con=ConnectionUtil.getDBconnect();
 		PreparedStatement pst = con.prepareStatement(query);
@@ -56,14 +56,20 @@ public class ProductDaoImpl implements ProductDAO{
 		pst.setInt(7,productModel.getPoints());
 		pst.setInt(8, productModel.getOffer());
 		int result=pst.executeUpdate();
-		System.out.println(result + " product inserted");
+		if(result>0)
+		{
+			flag=false;
+			return flag;
+		}
+		return flag;
+		
 	}
 
 
 //																				Update Products By ADmin
-	public void updateProducts(int updateProductId, String updateproductcategory, String updateProductName, String updateProductDescription, int updateUnitPrice, int updateQuantity) throws SQLException {
+	public void updateProducts(Product product) throws SQLException {
 		// TODO Auto-generated method stub
-		String updateQwery="update products set product_category=?,product_name=?,description=?,unit_price=?,Quantity=? where product_id=?";
+		String updateQwery="update products set product_category=?,product_name=?,unit_price=?,Quantity=?,product_img=?,points_per_unit=?,offer=?,description=?, where product_id=?";
 		Connection con = ConnectionUtil.getDBconnect();
 		PreparedStatement pst=null;
 		try {
@@ -72,12 +78,15 @@ public class ProductDaoImpl implements ProductDAO{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		pst.setString(1, updateproductcategory);
-		pst.setString(2, updateProductName);
-		pst.setString(3, updateProductDescription);
-		pst.setDouble(4, updateUnitPrice);
-		pst.setInt(5, updateQuantity);
-		pst.setInt(6, updateProductId);
+		pst.setString(1, product.getProductCategory());
+		pst.setString(2, product.getProductName());
+		pst.setDouble(3, product.getUnitPrice());
+		pst.setDouble(4, product.getQuantity());
+		pst.setString(5, product.getProductImg());
+		pst.setInt(6, product.getPoints());
+		pst.setInt(7,product.getOffer());
+		pst.setString(8,product.getDescription());
+		pst.setInt(9, product.getProductId());
 		int result=pst.executeUpdate();
 		if(result>0)
 		{
@@ -166,8 +175,6 @@ public class ProductDaoImpl implements ProductDAO{
 			Product product=null;
 			try {
 				PreparedStatement pst= con.prepareStatement(query);
-				System.out.println(6);
-//				pst.setString(1,productName);
 				ResultSet rs = pst.executeQuery();
 				if(rs.next())
 				{
@@ -205,5 +212,15 @@ public class ProductDaoImpl implements ProductDAO{
 			
 			
 		}
-	
+
+		@Override
+		public void updateProducts(int updateProductId, String updateproductcategory, String updateProductName,
+				String updateProductDescription, int updateUnitPrice, int updateQuantity) throws SQLException {
+			// TODO Auto-generated method stub
+			
+		}
+
+		
+
+		
 }

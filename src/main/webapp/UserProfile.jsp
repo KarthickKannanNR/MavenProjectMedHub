@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@page import="java.util.List"%>
-<%@page import="com.medHub.model.Product"%>
-<%@page import="com.medHub.dao.ProductDaoImpl"%>
+    <%@page import="com.medHub.model.*"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>All Products</title>
+<title>User Profile</title>
 <style>
 * {
 	margin: 0;
@@ -71,10 +70,48 @@ body {
 	width: 60px;
 	margin-left: 20px;
 }
-
+#userProfile td,tr{
+padding: 10px;
+}
 </style>
 </head>
 <body>
+<%User currentUser = (User)session.getAttribute("user");
+%>
+<div class="nav">
 
+		<nav class="list">
+			<ul>
+				<li><a href="Cart.jsp">Cart</a></li>
+				<li><a href="Index.jsp">SignOut</a></li>
+				<li><a href="UserProfile.jsp">MyProfile</a></li>
+				<li><a>MyOrders</a></li>
+			</ul>
+			<div class="logo">
+				<img
+					src="https://uxwing.com/wp-content/themes/uxwing/download/21-medical-science-lab/healthcare.png"
+					alt="logo">
+		</nav>
+	</div>
+	<div id="userProfile">
+	<table>
+	<td>
+	<td>
+	<h3>Name :</h3>
+	<h3>Password :</h3>
+	<h3>Email :</h3>
+	<h3>Mobile No :</h3>
+	</td>
+		<td>
+		<input name="updatedName" value="<%=currentUser.getUsername()%>"><br>
+		<input name="updatedPassword" value="<%=currentUser.getUserPassword()%>"><br>
+		<input name="updatedmail" value="<%=currentUser.getUserMail()%>"><br>
+		<input name="UpdatedMobNum" value="<%=currentUser.getUserMobile()%>"><br>
+		</td>
+	
+	</td>
+	<td></td>
+	</table>
+	</div>
 </body>
 </html>

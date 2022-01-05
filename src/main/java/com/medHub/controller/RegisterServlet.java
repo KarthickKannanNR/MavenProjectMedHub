@@ -11,7 +11,7 @@ import javax.websocket.Session;
 import com.medHub.dao.UserDaoImpl;
 import com.medHub.model.*;
 
-import jakarta.servlet.http.HttpSession;
+
 
 
 

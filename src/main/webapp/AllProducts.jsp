@@ -90,6 +90,7 @@
     </style>
 </head>
 <body>
+
 <% ProductDaoImpl product= new ProductDaoImpl();
 List<Product> allproduct = product.viewProduts();
 	%>

@@ -37,6 +37,9 @@ public class OrderItems extends Order {
 	
 
 	
+	public OrderItems(String productName, int points, int quantity, double unitPrice, double totalPrice, int orderId) {
+		// TODO Auto-generated constructor stub
+	}
 	public User getUser() {
 		return user;
 	}

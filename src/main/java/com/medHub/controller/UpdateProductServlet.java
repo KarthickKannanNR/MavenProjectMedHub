@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.medHub.dao.ProductDaoImpl;
 import com.medHub.model.Product;
 
+@WebServlet("/UpdateProductController")
 
-
-@WebServlet("/AddProductController")
-public class AddProductServlet extends HttpServlet {
+public class UpdateProductServlet extends HttpServlet{
+	
 	public void service(HttpServletRequest req,HttpServletResponse res) throws IOException {
 		
 		String category= req.getParameter("category");
@@ -36,15 +36,11 @@ public class AddProductServlet extends HttpServlet {
 		ProductDaoImpl products = new ProductDaoImpl();
 		
 		try {
-			boolean flag=products.insertProduct(product);
-			if(flag)
-			{
-				System.out.println("product Inserted ");
-			}
+			products.updateProducts(product);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
 
+}
 }

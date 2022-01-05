@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@page import="com.medHub.model.Product"%>
+<%@page import="com.medHub.dao.ProductDaoImpl"%>
+<%@page import="javax.servlet.http.HttpSession"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,7 +78,7 @@ body {
 .buyProduct {
 	position: absolute;
 	top: 150px;
-	left: 210px;
+	left: 170px;
 }
 .buyProduct{
 background-color: rgba(158, 202, 207,0.5);
@@ -84,13 +88,15 @@ border-radius: 5px;
 }
 
 .buyProduct img {
+	position:relative;
+	left:-30px;
 	height: 220px;
 	width: 220px;
 }
 
 #qty {
 	position: relative;
-	left: 80px;
+	left: 20px;
 	top: 74px;
 }
 
@@ -106,16 +112,89 @@ border-radius: 5px;
 
 #qty #qtyBox {
 	position: relative;
-	left: 10px;
+	left: -30px;
 }
+
 .buyProduct td p{
 padding-top: 20px;
 position: relative;
 left:-100px;
 }
+#addToCart a{
+background-color: green;
+text-decoration: none;
+}
+#buyNow a{
+background-color: green;
+color: white;
+text-decoration: none;
+}
+#addToCart:hover{
+cursor: pointer;
+}
+#buyNow:hover{
+cursor: pointer;
+}
+#price{
+position: relative;
+left: -100px;
+top:8px;
+outline: none;
+border: none;
+background-color: rgba(158, 202, 207,0.1); 
+color: black;
+}
+#pImg{
+position: relative;
+height: 200px;
+width: 170px;
+left:10px;
+}
+#pDesc{
+position: relative;
+left: 40px;
+}
+#totalprice{
+position: relative;
+top:-190px;
+left:90px;
+}
+#TotalPriceLabel{
+position: relative;
+top:-170px;
+right: 50px;
+}
+
+#offer{
+position: relative;
+left: -100px;
+top:8px;
+outline: none;
+border: none;
+background-color: rgba(158, 202, 207,0.1); 
+color: black;
+}
+#totalprice{
+position: relative;
+top:-190px;
+left:100px;
+outline: none;
+border: none;
+background-color: rgba(158, 202, 207,0.1); 
+color: black;
+font-weight: 700;
+font-size: 17px;
+}
 </style>
 </head>
 <body>
+<%
+ 
+int pId=Integer.parseInt(request.getParameter("pid").toString());
+ProductDaoImpl productDao = new ProductDaoImpl();
+Product currentProduct = productDao.findProductByProductId(pId);
+session.setAttribute("currentproduct", currentProduct);
+%>
 	<div class="nav">
 
 		<nav class="list">
@@ -136,10 +215,12 @@ left:-100px;
 
 			<tr>
 
-				<td><img
-					src="https://onemg.gumlet.io/image/upload/l_watermark_346,w_690,h_700/a_ignore,w_690,h_700,c_pad,q_auto,f_auto/v1600102416/cropped/lw1c5w1huy1nwbphashp.png"
+				<td><img id="pImg"
+					src="<%currentProduct.getProductImg(); %>"
 					alt=""></td>
-				<td><p>
+				<td>
+				<div id="pDesc">
+				<p>
 						<b>Product category:</b>
 					</p>
 					<p>
@@ -152,7 +233,7 @@ left:-100px;
 						<b>Price:</b>
 					</p>
 					<p>
-						<b>Quantity:</b>
+						<b>Available Quantity:</b>
 					</p>
 					<p>
 						<b>Points:</b>
@@ -161,35 +242,62 @@ left:-100px;
 						<b>Offer:</b>
 					</p></td>
 				<td>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-				</td>
+					<p name="pCategory"><%=currentProduct.getProductCategory() %></p>
+					<p name="pName"><%=currentProduct.getProductName() %></p>
+					<p name="pDescription"><%=currentProduct.getDescription() %></p>
+					<input name="pUnitPrice" id="price" value="<%=currentProduct.getUnitPrice()%>" disabled>
+					<p name="pQuantity"><%=currentProduct.getQuantity() %></p>
+					<p name="pgetPoints"><%=currentProduct.getPoints() %></p>
+					<input name="pOffer" id="offer" value="<%=currentProduct.getOffer()%>" disabled>
+					</td>
 				<td>
 					<div id="qty">
 						<div id="qtyBox">
-							<label for="">Quantity</label> <input type="number" id="quantity"
-								max="" min="0" name="quantity">
+						<form action="prod1">
+							<label for="">Quantity</label> 
+							<input type="number" id="quantity" name="quantity" min="0"  max="<%=currentProduct.getQuantity()%>" onclick="calculateAmt()">
 						</div>
-						<p>
-							<button type="button" onclick="addToCart()">Add to Cart</button>
-							<button type="button" onclick="buyNow()">Buy Now</button>
-						</p>
-						<p name="message" id="message">
-						<p>
+						<h3 id="TotalPriceLabel">Total price : Rs </h3>
+						<input name="totalPrice" id="totalprice">
+						<p name="message" id="message"></p>
+						<button type="submit" onclick="totprice()">Paynow</button>
+						</form>
 					</div>
 				</td>
 			</tr>
+			</div>
 		</tbody>
 	</table>
+<tr>
+<script>
+function calculateAmt() {
+	var price=document.getElementById("price");
+
+	var amount=price.value;
+	console.log(amount);
+	var qty=document.getElementById("quantity");
+	var quanty=qty.value;
+	console.log(quanty);
+	var discount=document.getElementById("offer");
+	var dis=discount.value;
+	var totalAmt;
+/* 	price=Math.floor((price.value*offer.value)/100);
+ * 
+ */
+ 
+ if(discount!=0){
+ 	 totalAmt=Math.floor(( (amount * quanty)-((amount * quanty) * (dis/100))));
+	console.log(totalAmt);
+	document.getElementById("totalprice").value=totalAmt;
+ }
+
+	document.getElementById("totalprice").value=totalAmt;
+	
+}
 
 
-	<tr>
+
+</script>
 </body>
 </html>
 </html>

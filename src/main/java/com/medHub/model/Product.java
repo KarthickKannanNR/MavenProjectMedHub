@@ -17,7 +17,16 @@ public class Product
 	private int points;
 	private String status;
 	private int offer;
+	private int totalPrice;
 	
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
 	public int getPoints() {
 		return points;
 	}
