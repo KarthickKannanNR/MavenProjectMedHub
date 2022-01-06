@@ -170,7 +170,7 @@ position: relative;
 left: -100px;
 top:8px;
 outline: none;
-border: none;
+border:none;
 background-color: rgba(158, 202, 207,0.1); 
 color: black;
 }
@@ -184,6 +184,9 @@ background-color: rgba(158, 202, 207,0.1);
 color: black;
 font-weight: 700;
 font-size: 17px;
+}
+#offer{
+width: 10px;
 }
 </style>
 </head>
@@ -248,7 +251,7 @@ session.setAttribute("currentproduct", currentProduct);
 					<input name="pUnitPrice" id="price" value="<%=currentProduct.getUnitPrice()%>" disabled>
 					<p name="pQuantity"><%=currentProduct.getQuantity() %></p>
 					<p name="pgetPoints"><%=currentProduct.getPoints() %></p>
-					<input name="pOffer" id="offer" value="<%=currentProduct.getOffer()%>" disabled>%
+					<input name="pOffer" id="offer" value="<%=currentProduct.getOffer()%>"  disabled>%
 					</td>
 				<td>
 					<div id="qty">

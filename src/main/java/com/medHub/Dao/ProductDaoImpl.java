@@ -206,12 +206,29 @@ public class ProductDaoImpl implements ProductDAO{
 				System.out.println("Order Placed Sucessfully");	
 				}
 			
-				// TODO Auto-generated catch block
-			
-			
-			
-			
 		}
+		
+		
+		public List<Product> searchProduct(String Productname)
+		{
+			String query ="select * from products where product_name like '"+Productname+"'";
+			List<Product> findedProducts = new ArrayList<Product>();
+
+			try {
+						Connection con = ConnectionUtil.getDBconnect();
+			Statement smt = con.createStatement();
+			ResultSet rs= smt.executeQuery(query);
+			while(rs.next()) {
+				Product product=new Product(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDouble(5),
+						rs.getInt(6),rs.getString(7),rs.getInt(8),rs.getString(9),rs.getInt(10));
+				findedProducts.add(product);	
+				}
+		
+			}catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			return findedProducts;
+			}
 
 		@Override
 		public void updateProducts(int updateProductId, String updateproductcategory, String updateProductName,
@@ -226,6 +243,7 @@ public class ProductDaoImpl implements ProductDAO{
 			
 		}
 
+		
 	
 		
 

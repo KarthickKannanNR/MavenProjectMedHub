@@ -62,10 +62,13 @@ body {
 }
 
 .list li:hover, .list a:hover {
-	color: white;
-	background-color: orange;
+	color: orange;
 	border-radius: 5px;
 	cursor: pointer;
+}
+.list li:hover{
+	transition-duration: 0.3s;
+
 }
 
 body {
@@ -226,6 +229,8 @@ left: 1100px;
 					<li><a href="Index.jsp">SignOut</a></li>
 					<li><a href="UserProfile.jsp">MyProfile</a></li>
 					<li><a href="MyOrders.jsp?orderId=0">MyOrders</a></li>
+					<li><a href="MyOrders.jsp?orderId=0">MyOrders</a></li>
+					
 				</ul>
 				<div class="logo">
 					<img
@@ -241,8 +246,13 @@ left: 1100px;
 		</div>
 
 
-		<% ProductDaoImpl product= new ProductDaoImpl();
+		<% 
+		ProductDaoImpl product= new ProductDaoImpl();
 		List<Product> allproduct = product.viewProduts();
+		String searchProduct=request.getParameter("searchProduct").toLowerCase();
+		Product searchProducts = new Product();
+		searchProducts
+		
 	%>
 		<% for(Product products : allproduct)
 		
