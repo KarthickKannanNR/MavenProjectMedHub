@@ -163,22 +163,18 @@ img {
 
 #product #btn {
 	position: relative;
-	top: -250px;
 	left: 900px;
+	top:-130px;
 }
 
 #product #btn button {
 	height: 30px;
 	width: 90px;
-	background-color: rgb(145, 230, 18);
+	background-color: orange;
 	border: none;
 	border-radius: 5px;
 }
 
-#product #btn {
-	position: relative;
-	top:-90px;
-}
 
 #btn1 {
 	position: relative;
@@ -190,6 +186,7 @@ img {
 	background-color: white;
 	box-shadow: 0 0 5px black;
 	color: green;
+	color: orange;
 }
 
 #product #img h3 {
@@ -198,9 +195,9 @@ img {
 	top:20px;
 }
 
-#btn #buynow {
+#btn  {
 	position: relative;
-	top: -10px;
+	top: -40px;
 }
 
 a {
@@ -211,11 +208,14 @@ a {
 position: relative;
 left: 1100px;
 }
+
 </style>
 </head>
 
 <body>
-	<%User currentUser = (User)session.getAttribute("user");%>
+	<%User currentUser = (User)session.getAttribute("user");
+	OrderDaoImpl currentCancelOrder = new OrderDaoImpl();
+	%>
 	<div id="container">
 
 		<div class="nav">
@@ -234,59 +234,65 @@ left: 1100px;
 			</nav>
 		</div>
 		<!-- slideshow -->
-		<div id="serachbar">
-		<input type="text" id="searchProduct"  name="searchProduct" required>
-		<a href="AllProducts.jsp"><button>search</button></a>
+
 		<h2 id="userName">welcome <%=currentUser.getName()%></h2>
 		</div>
 
-
-		<% ProductDaoImpl product= new ProductDaoImpl();
-		List<Product> allproduct = product.viewProduts();
-	%>
-		<% for(Product products : allproduct)
+		<% OrderItemsDaoImpl myOrder= new OrderItemsDaoImpl();
+		List<OrderItems> myOrderList = myOrder.ViewMyOrders(currentUser);
+		OrderItemsDaoImpl cancelOrder= new OrderItemsDaoImpl();
+		int orderId=Integer.parseInt(request.getParameter("orderId"));
+		OrderDaoImpl orderDao=new OrderDaoImpl();
+		/* orderDao.deleteProduct(myAllOrders.getOrderModel().getOrderId()); */
+		boolean flag;
 		
-	{
-	%>
+		%>
+		<% for(OrderItems myAllOrders : myOrderList)
+			 {
+			flag =orderDao.checkStatus(myAllOrders.getOrderModel().getOrderId());
+			 %>
 		
 			<div id="product">
 				<div id="img">
-					<img src="<%=products.getProductImg() %>" alt="horlicks">
-					<h3><%=products.getProductName() %></h3>
+					<img src="<%=myAllOrders.getProduct().getProductImg()%>" alt="horlicks">
+					<h3><%=myAllOrders.getProduct().getProductName() %></h3>
 				</div>
 				<div id="details">
 					<h3>
 						Description :
-						<%=products.getDescription() %></h3>
+						<%=myAllOrders.getProduct().getDescription() %></h3>
 					<h3>
-						price :<%=products.getUnitPrice()+ "rs"%></h3>
+						price :<%=myAllOrders.getUnitPrice()+ "rs"%></h3>
 					<h3>
 						Offer Applied:
-						<%=products.getOffer() %>%
+						<%=myAllOrders.getProduct().getOffer() %>%
 					</h3>
 					<h3>
 						Points :
-						<%=products.getPoints() %></h3>
+						<%=myAllOrders.getProduct().getPoints() %></h3>
+						<h3>
+						Total Quantity:
+						<%=myAllOrders.getQuantity() %></h3>
 					<h3>
 						Total Amt :
-						<%=products.getPoints() %></h3>
+						<%=myAllOrders.getTotalPrice() %></h3>
+						
 				</div>
+				<% if(flag){%>
 				<div id="btn">
 					<button>
-						<a id="buynow" href="BuyProduct.jsp?pid=<%=products.getProductId()%>">Cancel Order</a>
+						<a id="cancel" href="MyOrders.jsp?orderId=<%=myAllOrders.getOrderModel().getOrderId()%>">Cancel Order</a>
 					</button>
 					<br>
-					<button>
-						<a id="btn1" href="">Add To Cart</a>
-					</button>
 					</button>
 				</div>
+				<% }%>
 			</div>
 		
 		<br>
 		<br>
-		<%} %>
-
+		<%}%>
+		
 		
 		<br><br><br><br><br><br><br><br><br><br><br><br>
 		<h2 id="copyrights">© 2021 MedHub.com. All rights reserved.</h2>

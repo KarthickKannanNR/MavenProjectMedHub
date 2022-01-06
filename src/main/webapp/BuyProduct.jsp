@@ -248,7 +248,7 @@ session.setAttribute("currentproduct", currentProduct);
 					<input name="pUnitPrice" id="price" value="<%=currentProduct.getUnitPrice()%>" disabled>
 					<p name="pQuantity"><%=currentProduct.getQuantity() %></p>
 					<p name="pgetPoints"><%=currentProduct.getPoints() %></p>
-					<input name="pOffer" id="offer" value="<%=currentProduct.getOffer()%>" disabled>
+					<input name="pOffer" id="offer" value="<%=currentProduct.getOffer()%>" disabled>%
 					</td>
 				<td>
 					<div id="qty">
@@ -260,7 +260,7 @@ session.setAttribute("currentproduct", currentProduct);
 						<h3 id="TotalPriceLabel">Total price : Rs </h3>
 						<input name="totalPrice" id="totalprice">
 						<p name="message" id="message"></p>
-						<button type="submit" onclick="totprice()">Paynow</button>
+						<button type="submit" >Paynow</button>
 						</form>
 					</div>
 				</td>

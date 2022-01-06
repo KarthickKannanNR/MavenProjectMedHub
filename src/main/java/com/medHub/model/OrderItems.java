@@ -9,11 +9,26 @@ public class OrderItems extends Order {
 
 	private int itemId;
 	private User user;
-	private Product product;
-	private Order orderModel;
+	private Product product=new Product();
+	private Order orderModel = new Order();
 	private int quantity;
 	private double unitPrice;
 	private double totalPrice;
+	private String description;
+	private int offer;
+	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public int getOffer() {
+		return offer;
+	}
+	public void setOffer(int offer) {
+		this.offer = offer;
+	}
 	public int getItemId() {
 		return itemId;
 	}
@@ -37,8 +52,17 @@ public class OrderItems extends Order {
 	
 
 	
-	public OrderItems(String productName, int points, int quantity, double unitPrice, double totalPrice, int orderId) {
-		// TODO Auto-generated constructor stub
+	public OrderItems(String productName, int points, int quantity, double unitPrice, double totalPrice, int orderId,String productImg,String description,int offer,int productId) {
+		this.product.setProductName(productName);
+		this.product.setPoints(points);
+		this.unitPrice=unitPrice;
+		this.quantity=quantity;
+		this.totalPrice=totalPrice;
+		this.orderModel.setOrderId(orderId);
+		this.product.setProductImg(productImg);
+		this.product.setDescription(description);
+		this.product.setOffer(offer);
+		this.product.setProductId(productId);
 	}
 	public User getUser() {
 		return user;

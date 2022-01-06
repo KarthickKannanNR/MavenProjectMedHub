@@ -19,6 +19,12 @@ public class OrderItemsDaoImpl implements OrderItemDAO{
 		// TODO Auto-generated method stub
 		String orderQuery="insert into order_items(user_id,order_id,product_id,quantity,unit_price,total_price) values(?,?,?,?,?,?)";
 		Connection con = ConnectionUtil.getDBconnect();
+System.out.println(oi.getUser().getUserId());
+System.out.println(oi.getOrderModel().getOrderId());
+System.out.println(oi.getProduct().getProductId());
+System.out.println(oi.getQuantity());
+System.out.println( oi.getUnitPrice());
+System.out.println(oi.getTotalPrice());
 
 		try {
 			PreparedStatement pst = con.prepareStatement(orderQuery);
@@ -29,8 +35,6 @@ public class OrderItemsDaoImpl implements OrderItemDAO{
 			pst.setDouble(5, oi.getUnitPrice());
 			pst.setDouble(6, oi.getTotalPrice());
 			pst.executeUpdate();
-	
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
@@ -39,29 +43,34 @@ public class OrderItemsDaoImpl implements OrderItemDAO{
 
 	}
 
-	public void ViewMyOrders(User currentUser) {
+	public List<OrderItems> ViewMyOrders(User currentUser) {
 		// TODO Auto-generated method stub
-		List<OrderItems> myOrders = new ArrayList<OrderItems>();
+		List<OrderItems> myOrderList = new ArrayList<OrderItems>();
 		Order order = new Order();
 		Product product= new Product();
-		OrderItems myOrderList;
-		String qwery="select p.product_name,p.points_per_unit,oi.quantity,oi.unit_price,oi.total_price,oi.order_id\r\n"
+		OrderItems orderItems;
+		String qwery="select p.product_name,p.points_per_unit,oi.quantity,oi.unit_price,oi.total_price,oi.order_id,p.product_img,p.description,p.offer,p.product_id,oi.order_id\r\n"
 				+ "from order_items oi \r\n"
 				+ "inner join orders o on oi.order_id=o.order_id\r\n"
-				+ "inner join products p on oi.product_id=p.product_id where oi.user_id = "+currentUser.getUserId()+"";
+				+ "inner join products p on oi.product_id=p.product_id where oi.user_id = "+currentUser.getUserId()+" order by oi.total_price desc" ;
 		Connection con = ConnectionUtil.getDBconnect();
 		try {
 			PreparedStatement ps = con.prepareStatement(qwery);
 			ResultSet rs = ps.executeQuery();
-			System.out.format("%-15s%-10s%-15s%-15s%-10s\n\n","Product Name","Qty","Unit Price","Total Price","Order Id");
+			int num=0;
 			while(rs.next())
 			{
-				myOrderList = new OrderItems(rs.getString(1),rs.getInt(2),rs.getInt(3),rs.getDouble(4),rs.getDouble(5),rs.getInt(6));
+				orderItems = new OrderItems(rs.getString(1),rs.getInt(2),rs.getInt(3),rs.getDouble(4),rs.getDouble(5),rs.getInt(6),rs.getString(7),rs.getString(8),rs.getInt(9),rs.getInt(10));
+				myOrderList.add(orderItems);
+				num++;
 			}
+			System.out.println(num);
+			return myOrderList;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return myOrderList;
 		
 		
 	}

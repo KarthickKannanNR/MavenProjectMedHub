@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.interfaces.ProductDAO;
+import com.medHub.model.Order;
 import com.medHub.model.Product;
 import com.medHub.util.ConnectionUtil;
 
@@ -190,10 +191,9 @@ public class ProductDaoImpl implements ProductDAO{
 			return product;
 			}
 		
-		public void updateProductQuantity(Product buyProducts) throws SQLException
+		public void updateProductQuantity(Product currentProduct, int qty) throws SQLException
 		{
-		
-			String updateQtyQuery = "update products set available_quantity ="+buyProducts.getQuantity()+" where product_id = "+buyProducts.getProductId()+"";
+			String updateQtyQuery = "update products set available_quantity ="+qty+" where product_id = "+currentProduct.getProductId()+"";
 			
 			Connection con = ConnectionUtil.getDBconnect();
 			
@@ -220,6 +220,16 @@ public class ProductDaoImpl implements ProductDAO{
 			
 		}
 
+		@Override
+		public void updateProductQuantity(Product buyProducts) throws SQLException {
+			// TODO Auto-generated method stub
+			
+		}
+
+	
+		
+
+		
 		
 
 		

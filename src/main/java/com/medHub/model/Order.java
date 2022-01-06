@@ -8,7 +8,7 @@ public class Order {
 	
 	private User user;
 	private int orderId;
-	private Product product;
+	private Product product = new Product();
 	private LocalDate orderDate;
 	private double price;
 	private String orderStatus;
@@ -32,7 +32,6 @@ public class Order {
 		this.product = product;
 	}
 	
-
 	public LocalDate getOrderDate() {
 		return orderDate;
 	}

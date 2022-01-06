@@ -160,64 +160,9 @@ background-color: green;
 					src="https://uxwing.com/wp-content/themes/uxwing/download/21-medical-science-lab/healthcare.png"
 					alt="logo">
 		</nav>
-	</div>
-	<table class="buyProduct">
-		<tbody>
-
-			<tr>
-
-				<td><img
-					src="https://onemg.gumlet.io/image/upload/l_watermark_346,w_690,h_700/a_ignore,w_690,h_700,c_pad,q_auto,f_auto/v1600102416/cropped/lw1c5w1huy1nwbphashp.png"
-					alt=""></td>
-					<div id="productDetails">
-				<td><p>
-						<b>Product Name:</b>
-					</p>
-					<p>
-						<b>Price:</b>
-					</p>
-					<p>
-						<b>Quantity:</b>
-					</p>
-					<p>
-						<b>Points:</b>
-					</p>
-					<p>
-						<b>Offer:</b>%
-					</p>
-					<p>
-						<b>Total Price :</b>
-					</p>
-					</td>
-				<td>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-				</td>
-				</div>
-				<td>
-					<div id="qty">
-						<div id="qtyBox">
-						</div>
-						<p>
-							<a id="addToCart" href="">Add to Cart</a>
-							<a id="buyNow" href="Payment.jsp">Buy Now</a>
-							
-						</p>
-						<p name="message" id="message">
-						<p>
-					</div>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-
-
-	<tr>
+				<p>Payment Sucessfully Completed </p>
+				<a href="UserHome.jsp">BAck To Home</a>
+				
 
 </body>
 <script>

@@ -55,12 +55,59 @@ public class OrderDaoImpl implements OrderDAO{
 		
 	}
 
+	public void deleteProduct(int orderId) throws SQLException
+	{
+		String qwery="update orders set order_status='canceled' where order_id =?";
+		Connection con = ConnectionUtil.getDBconnect();
+		PreparedStatement pst=con.prepareStatement(qwery);
+		pst.setInt(1, orderId);
+		int res=pst.executeUpdate();
+		if(res>0)
+		{
+			System.out.println(res+"Product deleted");
+			
+		}
+		else {
+			System.out.println("product not deleted");
+		}
+		con.close();
+		pst.close();
+		
+	}
+
+	public boolean checkStatus(int orderId)
+	{	
+		try {
+			String status;
+		String qwery="select order_status from orders where order_id='"+orderId+"'";
+		Connection con = ConnectionUtil.getDBconnect();
+		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery(qwery);
+		if(rs.next())
+		{
+			
+		status=rs.getString(1).toLowerCase();
+		System.out.println(status);
+		if(!status.equals("canceled"))
+		{
+			return true;
+
+		}
+
+		}
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getStackTrace());
+		}
+		return false;
+	}
+
 	@Override
 	public void orders(Order order, double totalPrice) {
 		// TODO Auto-generated method stub
 		
 	}
-
 
 
 	

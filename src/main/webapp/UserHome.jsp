@@ -111,6 +111,7 @@ img {
 #copyrights {
 	text-align: center;
 	color: yellow;
+	margin-bottom: 0;
 }
 
 #allproducts a {
@@ -170,20 +171,19 @@ img {
 #product #btn button {
 	height: 30px;
 	width: 90px;
-	background-color: rgb(145, 230, 18);
 	border: none;
 	border-radius: 5px;
+	background-color: none;
 }
 
-#product #btn {
+#product #btn button{
 	position: relative;
-	top:-90px;
+	background-color: yellowgreen;
+	bottom:-150px;
 }
 
 #btn1 {
 	position: relative;
-	left: 120px;
-	top: -40px;
 }
 
 #product #btn button:hover {
@@ -200,7 +200,7 @@ img {
 
 #btn #buynow {
 	position: relative;
-	top: -10px;
+
 }
 
 a {
@@ -225,7 +225,7 @@ left: 1100px;
 					<li><a>Cart</a></li>
 					<li><a href="Index.jsp">SignOut</a></li>
 					<li><a href="UserProfile.jsp">MyProfile</a></li>
-					<li><a href="MyOrders.jsp">MyOrders</a></li>
+					<li><a href="MyOrders.jsp?orderId=0">MyOrders</a></li>
 				</ul>
 				<div class="logo">
 					<img
@@ -272,7 +272,6 @@ left: 1100px;
 					<button>
 						<a id="buynow" href="BuyProduct.jsp?pid=<%=products.getProductId()%>">Buy Now</a>
 					</button>
-					<br>
 					<button>
 						<a id="btn1" href="">Add To Cart</a>
 					</button>

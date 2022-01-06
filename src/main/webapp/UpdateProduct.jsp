@@ -98,6 +98,11 @@ body {
 	border: none;
 	padding: 15px;
 }
+#updateBtn{
+position: relative;
+top: 70px;
+left:150px;
+}
 </style>
 </head>
 <body>
@@ -145,7 +150,7 @@ body {
 			<input class="inputBox" style="max-height: 100px; min-height: 20px; width: 400px; max-width: 200px; min-width: 300px;"
 				required name="description" placeholder="Product Description" value="<%=currentProduct.getDescription()%>"></input>
 			<br>
-			<a href = "UpdateProductController?<%currentProduct.getProductId();%>"></a>
+			<a id="updateBtn"href = "UpdateProductController?<%currentProduct.getProductId();%>">Update</a>
 		</form>
 	</div>
 	</div>

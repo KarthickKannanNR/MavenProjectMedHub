@@ -30,7 +30,7 @@ public class User {
 		return points;
 	}
 	public void setPoints(int points) {
-		this.points = points;
+		 this.points = points;
 	}
 	public long getUserMobile() {
 		return userMobile;
