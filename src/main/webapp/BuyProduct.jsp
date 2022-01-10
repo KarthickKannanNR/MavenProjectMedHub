@@ -227,7 +227,7 @@ session.setAttribute("currentproduct", currentProduct);
 
 			<tr>
 
-				<td><img id="pImg"
+				 <td><img id="pImg"
 					src="<%currentProduct.getProductImg(); %>"
 					alt=""></td>
 				<td>

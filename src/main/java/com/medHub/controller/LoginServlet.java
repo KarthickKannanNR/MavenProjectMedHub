@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.exceptions.UserNotFound;
 import com.medHub.dao.AdminDaoImpl;
 import com.medHub.dao.UserDaoImpl;
 import com.medHub.model.*;
@@ -47,8 +48,10 @@ public class LoginServlet extends HttpServlet {
 			else
 			{
 //				session1.setAttribute("error", "invalid username or password");
-				req.getRequestDispatcher("Index.jsp").forward(req, res);
-				System.out.println("invalid username or password");
+//				req.getRequestDispatcher("Index.jsp").forward(req, res);
+				throw new UserNotFound();
+				
+				
 			}
 		}else
 		{
@@ -62,7 +65,7 @@ public class LoginServlet extends HttpServlet {
 				}
 				else
 				{
-					System.out.println("invalid username or password");
+					throw new UserNotFound();
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -76,6 +79,10 @@ public class LoginServlet extends HttpServlet {
 			} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			} catch (UserNotFound e) {
+				// TODO Auto-generated catch block
+				session.setAttribute("userNotFound", e.getMessage());
+				res.sendRedirect("Index.jsp");
 			}
 		
 	}

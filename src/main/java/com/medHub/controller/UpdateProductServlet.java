@@ -17,22 +17,25 @@ public class UpdateProductServlet extends HttpServlet{
 	
 	public void service(HttpServletRequest req,HttpServletResponse res) throws IOException {
 		
+		int prodId= Integer.parseInt(req.getParameter("currentProdId"));
+		System.out.println(prodId);
 		String category= req.getParameter("category");
-		System.out.println(category);
+		System.out.println("category"+category);
 		String productname= req.getParameter("productName");
 		System.out.println(productname);
 		double price = Double.parseDouble(req.getParameter("price"));
-		System.out.println(price);
+		System.out.println("price"+price);
 		int quantity= Integer.parseInt(req.getParameter("quantity"));
-		System.out.println(quantity);
+		System.out.println("quantity"+quantity);
 		String imageurl= req.getParameter("imageUrl");
+		System.out.println("imageUrl"+imageurl);
 		int points = Integer.parseInt(req.getParameter("points"));
-		System.out.println(points);
+		System.out.println("points"+points);
 		int offer=Integer.parseInt(req.getParameter("offer"));
-		System.out.println(offer);
+		System.out.println("offer"+offer);
 		String description= req.getParameter("description");
 				
-		Product product= new Product(category,productname,price,quantity,imageurl,points,offer,description);
+		Product product= new Product(category,productname,price,quantity,imageurl,points,offer,description,prodId);
 		ProductDaoImpl products = new ProductDaoImpl();
 		
 		try {

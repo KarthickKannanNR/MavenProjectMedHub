@@ -68,11 +68,13 @@ public class ProductDaoImpl implements ProductDAO{
 
 
 //																				Update Products By ADmin
-	public void updateProducts(Product product) throws SQLException {
+	public int updateProducts(Product product) throws SQLException {
 		// TODO Auto-generated method stub
-		String updateQwery="update products set product_category=?,product_name=?,unit_price=?,Quantity=?,product_img=?,points_per_unit=?,offer=?,description=?, where product_id=?";
+		System.out.println("update method called");
+		String updateQwery="update products set product_category=?,product_name=?,price=?,available_Quantity=?,product_img=?,points_per_unit=?,offer=?,description=? where product_id=?";
 		Connection con = ConnectionUtil.getDBconnect();
 		PreparedStatement pst=null;
+		
 		try {
 		 pst = con.prepareStatement(updateQwery);
 		} catch (SQLException e) {
@@ -88,6 +90,7 @@ public class ProductDaoImpl implements ProductDAO{
 		pst.setInt(7,product.getOffer());
 		pst.setString(8,product.getDescription());
 		pst.setInt(9, product.getProductId());
+		
 		int result=pst.executeUpdate();
 		if(result>0)
 		{
@@ -99,27 +102,30 @@ public class ProductDaoImpl implements ProductDAO{
 		}
 		con.close();
 		pst.close();
+		
+		return result;
 		}
 	
 //																				Delete Product by admin
-		public void deleteProduct(int productId) throws SQLException
+		public int deleteProduct(int productId) throws SQLException
 		{
 			String qwery="update products set status='unavailable' where product_id=?";
 			Connection con = ConnectionUtil.getDBconnect();
 			PreparedStatement pst=con.prepareStatement(qwery);
 			pst.setInt(1, productId);
 			int res=pst.executeUpdate();
+			res=pst.executeUpdate("commit");
 			if(res>0)
 			{
-				System.out.println(res+"Product deleted");
-				
+				return res;
+
 			}
 			else {
-				System.out.println("product not deleted");
 			}
 			con.close();
 			pst.close();
-			
+			return res;
+
 		}
 		
 		

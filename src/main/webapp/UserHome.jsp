@@ -213,14 +213,18 @@ a {
 	color: black;
 }
 #userName{
-position: relative;
-left: 1100px;
+position: absolute;
+top:90px;
+left: 55px;
 }
 </style>
 </head>
 
 <body>
-	<%User currentUser = (User)session.getAttribute("user");%>
+	<%User currentUser = (User)session.getAttribute("user");
+	session.setAttribute("userNotFound", null);
+	%>
+	
 	<div id="container">
 
 		<div class="nav">

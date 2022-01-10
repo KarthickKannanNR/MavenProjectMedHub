@@ -110,7 +110,10 @@
 int deletePId= Integer.parseInt(request.getParameter("deleteProductid"));
 ProductDaoImpl product= new ProductDaoImpl();
 List<Product> allproduct = product.viewProduts();
-product.deleteProduct(deletePId);
+int result=product.deleteProduct(deletePId);
+if(result>0){
+response.sendRedirect("AdminAllProducts.jsp");
+}
 	%>
 	<% for(Product products : allproduct)
 		

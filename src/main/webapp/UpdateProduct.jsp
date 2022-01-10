@@ -150,8 +150,9 @@ left:150px;
 			<input class="inputBox" style="max-height: 100px; min-height: 20px; width: 400px; max-width: 200px; min-width: 300px;"
 				required name="description" placeholder="Product Description" value="<%=currentProduct.getDescription()%>"></input>
 			<br>
-			<a id="updateBtn"href = "UpdateProductController?<%currentProduct.getProductId();%>">Update</a>
-		</form>
+			<button name="currentProdId" value="<%=currentProduct.getProductId()%>">Update</button>
+<%-- 			<a id="updateBtn"href = "UpdateProductController?<%currentProduct.getProductId();%>">Update</a>
+ --%>		</form>
 	</div>
 	</div>
 	</div>

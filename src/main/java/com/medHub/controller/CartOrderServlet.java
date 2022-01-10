@@ -95,8 +95,6 @@ public class CartOrderServlet extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
-
 			}
 			else {
 				System.out.println("Not Enough Money");

@@ -40,7 +40,7 @@
     width: 1372px;
    }
    .list ul{
-       padding-right: 0px;
+       padding-right: 45px;
    }
 
 
@@ -58,8 +58,7 @@
 .list li:hover,
 .list a:hover{
  
-    color: white;
-    background-color: orange;
+    color: orange;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -272,7 +271,7 @@ left:60px;
                 <ul>
                     
                     <!-- <li> <a>SignOut</a></li> -->
-                    <li onclick="getRegisterForm()"> <a id="register">Signup</a></li>
+                    <li onclick="getRegisterForm()"> <a id="register">SignUp</a></li>
                     <li onclick="getLoginForm()"> <a id="login">Login</a></li>
                 </ul>
             </nav>
@@ -287,6 +286,13 @@ left:60px;
 
         <!-- login screen default hidden -->
         <div class="loginscreen" id="loginform">
+      <%  String errorMessage= (String)session.getAttribute("userNotFound"); 
+      	
+      if(errorMessage!=null)
+      { %>
+    	<h2><%=errorMessage%></h2>  
+     <%}
+      %>
             <form action="LoginController" class="formcontent" method="post">
                 <h2>Login Here</h2>
                 <label for="fullName">Email*</label><br>
@@ -297,8 +303,8 @@ left:60px;
                     title="Minimum eight and Minimum 8 and maximum 15 characters, at least one uppercase letter, one lowercase letter, one number and one special character"><br><br>
                 <button id="loginbtn">Login</button><br><br><br>
                 <a onclick="getRegisterForm()" id="register" >Not Registered Yet ?</a> 
-<!--                 <a id="forgetpassword"
-                    href="ForgetPassword.html">Forget Password</a><br> -->
+                <!--  <a id="forgetpassword"
+                    href="ForgetPassword.html">Forget Password</a><br> --> 
                     <% String error=(String)session.getAttribute("error");
             if(error!=null) {%>
            <p><%=session.getAttribute("error") %></p>

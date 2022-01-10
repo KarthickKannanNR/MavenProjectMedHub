@@ -120,24 +120,24 @@ bottom: 450px;
 	<div id="userProfile">
 	<form action="ProfileUpdate">
 		<label>Name :</label>
-				<input name="updatedName" value="<%=currentUser.getUsername()%>"><br>
+				<input id="" name="updatedName" value="<%=currentUser.getUsername()%>"><br>
 		
 		<label>Password :</label>
-				<input name="updatedPassword"  value="<%=currentUser.getUserPassword()%>"><br>
+				<input id="" name="updatedPassword"  value="<%=currentUser.getUserPassword()%>"><br>
 		
 		<label>Mobile No :</label>
-				<input name="UpdatedMobNum"  value="<%=currentUser.getUserMobile()%>"><br>
+				<input id="" name="UpdatedMobNum"  value="<%=currentUser.getUserMobile()%>"><br>
 		
 		<label>Delivery Address :</label>
 	
-		<input   id="UpdateDeliveryAddress"  value="<%=currentUser.getAddress()%>"><br>
+		<input   id="UpdateDeliveryAddress"   name="UpdateDeliveryAddress"value="<%=currentUser.getAddress()%>"><br>
 						<button>Save Changes</button>
 		</form>
 </div>
 	
 	<div id="walletMoneyUpdateForm">
 	<form action="walletUpdate">
-		<input name="UpdateWallet" value="<%=currentUser.getWallet()%>">
+		<input type="number" name="UpdateWallet" "UpdateWallet" min="1" max="5000" value="<%=currentUser.getWallet()%>">
 		<button>Add Money</button>
 	</form>
 	</div>

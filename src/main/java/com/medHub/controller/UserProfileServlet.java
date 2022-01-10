@@ -24,6 +24,10 @@ public class UserProfileServlet extends HttpServlet{
 		String address = req.getParameter("UpdateDeliveryAddress");
 		
 		User user = new User(name,password,mobileNo,address);
+		currentUser.setName(name);
+		currentUser.setUserPassword(password);
+		currentUser.setUserMobile(mobileNo);
+		currentUser.setAddress(address);
 		UserDaoImpl userDao = new UserDaoImpl();
 		int updateStatus = userDao.update(currentUser);
 		

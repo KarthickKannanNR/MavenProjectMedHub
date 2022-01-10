@@ -203,6 +203,7 @@ public int addMoneyInWallet(double walletAmount,User currentUser) {
 			
 			String walletQuery="update users set user_wallet ="+walletAmount+" where user_email ='"+currentUser.getUserMail()+"'";
 			int result=0;
+			User user = new User();
 			Connection con = ConnectionUtil.getDBconnect();
 			try {
 				PreparedStatement ps = con.prepareStatement(walletQuery);
@@ -211,7 +212,8 @@ public int addMoneyInWallet(double walletAmount,User currentUser) {
 				if(result>0)
 				{
 					UserDaoImpl userDao = new UserDaoImpl();
-					
+					currentUser.setWallet(walletAmount);
+					user.setWallet(walletAmount);
 				}
 				
 			} catch (SQLException e) {

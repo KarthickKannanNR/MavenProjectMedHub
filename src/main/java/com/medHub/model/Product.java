@@ -149,7 +149,7 @@ public class Product
 		this.offer=offer;
 	}
 	
-	public Product(String category,String productname,double price,int quantity,String imageurl,int points,int offer,String description)
+	public Product(String category,String productname,double price,int quantity,String imageurl,int points,int offer,String description,int productId)
 	{
 		this.productCategory=category;
 		this.productName=productname;
@@ -159,6 +159,7 @@ public class Product
 		this.points=points;
 		this.offer=offer;
 		this.description=description;
+		this.productId=productId;
 		}
 	
 
