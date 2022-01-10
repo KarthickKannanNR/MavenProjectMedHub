@@ -15,31 +15,33 @@ import com.medHub.util.ConnectionUtil;
 
 public class OrderItemsDaoImpl implements OrderItemDAO{
 //	currentUser,buyProducts,buyProductQuantity, totalPrice
-	public  void  insertOrders(OrderItems oi) {
+	public  int  insertOrders(OrderItems oi) {
 		// TODO Auto-generated method stub
 		String orderQuery="insert into order_items(user_id,order_id,product_id,quantity,unit_price,total_price) values(?,?,?,?,?,?)";
 		Connection con = ConnectionUtil.getDBconnect();
-System.out.println(oi.getUser().getUserId());
-System.out.println(oi.getOrderModel().getOrderId());
-System.out.println(oi.getProduct().getProductId());
-System.out.println(oi.getQuantity());
-System.out.println( oi.getUnitPrice());
-System.out.println(oi.getTotalPrice());
-
+		System.out.println(oi.getUser().getUserId());
+		System.out.println(oi.getOrderModel().getOrderId());
+		System.out.println(oi.getProduct().getProductId());
+		System.out.println(oi.getQuantity());
+		System.out.println( oi.getUnitPrice());
+		System.out.println(oi.getTotalPrice());
+		int res=0;
 		try {
 			PreparedStatement pst = con.prepareStatement(orderQuery);
 			pst.setInt(1, oi.getUser().getUserId());
-			pst.setInt(2, oi.getOrderModel().getOrderId());
+			pst.setInt(2, oi.getOrderId());
 			pst.setInt(3, oi.getProduct().getProductId());
 			pst.setInt(4, oi.getQuantity());
 			pst.setDouble(5, oi.getUnitPrice());
 			pst.setDouble(6, oi.getTotalPrice());
-			pst.executeUpdate();
+			res =pst.executeUpdate();
+			pst.executeUpdate("commit");
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 		}
-	
+			return res;
 
 	}
 

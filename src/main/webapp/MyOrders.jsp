@@ -62,8 +62,7 @@ body {
 }
 
 .list li:hover, .list a:hover {
-	color: white;
-	background-color: orange;
+	color: orange;
 	border-radius: 5px;
 	cursor: pointer;
 }
@@ -111,6 +110,7 @@ img {
 #copyrights {
 	text-align: center;
 	color: yellow;
+	margin-bottom: 0%;
 }
 
 #allproducts a {
@@ -222,10 +222,13 @@ left: 1100px;
 
 			<nav class="list">
 				<ul>
-					<li><a>Cart</a></li>
+					<li><a href="Cart.jsp">Cart</a></li>
 					<li><a href="Index.jsp">SignOut</a></li>
 					<li><a href="UserProfile.jsp">MyProfile</a></li>
-					<li><a >MyOrders</a></li>
+					<li><a href="MyOrders.jsp?orderId=0">MyOrders</a></li>
+					<li><a href="MyOrders.jsp?orderId=0">About-Us</a></li>
+					<li><a href="UserHome.jsp">Home</a></li>
+					
 				</ul>
 				<div class="logo">
 					<img
@@ -240,9 +243,11 @@ left: 1100px;
 
 		<% OrderItemsDaoImpl myOrder= new OrderItemsDaoImpl();
 		List<OrderItems> myOrderList = myOrder.ViewMyOrders(currentUser);
-		OrderItemsDaoImpl cancelOrder= new OrderItemsDaoImpl();
 		int orderId=Integer.parseInt(request.getParameter("orderId"));
-		OrderDaoImpl orderDao=new OrderDaoImpl();
+		OrderDaoImpl orderDao=new OrderDaoImpl();	
+		currentCancelOrder.deleteProduct(orderId);
+
+		
 		/* orderDao.deleteProduct(myAllOrders.getOrderModel().getOrderId()); */
 		boolean flag;
 		
@@ -286,7 +291,8 @@ left: 1100px;
 					<br>
 					</button>
 				</div>
-				<% }%>
+				<% }
+				%>
 			</div>
 		
 		<br>

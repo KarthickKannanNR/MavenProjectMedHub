@@ -53,8 +53,7 @@
             background-color: rgb(158, 202, 207);
             height: 250px;
             border-radius: 5px;
-            width: 1300px;
-        }
+            }
         #product img{
             height: 100px;
             width: 90px;
@@ -82,9 +81,7 @@
             border: none;
             border-radius: 5px;
         }
-        #product #btn{
-            position: relative;
-            }
+     
          #btn1{
              position: relative;
              left: 120px;
@@ -110,9 +107,10 @@
         </ul>
     </div>
 <%
-
+int deletePId= Integer.parseInt(request.getParameter("deleteProductid"));
 ProductDaoImpl product= new ProductDaoImpl();
 List<Product> allproduct = product.viewProduts();
+product.deleteProduct(deletePId);
 	%>
 	<% for(Product products : allproduct)
 		
@@ -134,7 +132,7 @@ List<Product> allproduct = product.viewProduts();
         </div>
         <div id="btn">
             <a href="UpdateProduct.jsp?productId=<%=products.getProductId() %>" name="updateProduct" >Update</a><br><br>
-            <a href="" name="deleteProduct" value="<%=products.getProductId() %>">Delete</a>
+            <a href="AdminAllProducts.jsp?deleteProductid=<%=products.getProductId() %>"  name="deleteProduct" >Delete</a>
         </div>
 	</div>
 	</form>

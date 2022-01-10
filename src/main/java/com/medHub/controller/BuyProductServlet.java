@@ -34,9 +34,7 @@ public class BuyProductServlet extends HttpServlet {
 //				currentproduct.getDescription(),currentproduct.getUnitPrice(),currentproduct.getQuantity(),currentproduct.getProductImg(),currentproduct.getPoints(),currentproduct.getStatus(),currentproduct.getOffer());
 
 		int qty = Integer.parseInt(req.getParameter("quantity"));
-		System.out.println("ordered qty " + qty);
 		double price = Double.parseDouble(req.getParameter("totalPrice"));
-		System.out.println("total price " + price);
 		int offer = 0;
 		Order order = new Order();
 		OrderDaoImpl orderDao = new OrderDaoImpl();
@@ -50,11 +48,9 @@ public class BuyProductServlet extends HttpServlet {
 				try {
 					int updateQty = currentproduct.getQuantity() - qty;
 					productDao.updateProductQuantity(currentproduct, updateQty);
-					System.out.println("dfghjklkjhgfdfghj");
 					System.out.println(currentproduct.getQuantity());
 					System.out.println(qty);
 					System.out.println(currentproduct.getQuantity() - qty);
-					System.out.println("dfghjklkjhgfdfghj");
 
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -79,32 +75,33 @@ public class BuyProductServlet extends HttpServlet {
 				orderItems.setTotalPrice(price);
 				orderItemsDaoImpl.insertOrders(orderItems);
 				res.getWriter().println("order placed!!");
-				if (currentUser.getPoints() > 500) {
-					System.out.println(currentUser.getPoints());
-
-					int points = currentUser.getPoints();
-
-					System.out.println(points);
-					// int finalPoints=currentUser.getPoints();
-
-					int convert = (int) Math.round(points * .10);
-
-					System.out.println("fghhgh" + convert);
-
-					order.getUser().setWallet(order.getUser().getWallet() + convert);
-					user.updateWalletMoney(order);
-					order.getUser().setPoints(0);
-					user.updateUserPoints(order);
-
-				}
+				/*
+				 * if (currentUser.getPoints() > 500) {
+				 * System.out.println(currentUser.getPoints());
+				 * 
+				 * int points = currentUser.getPoints();
+				 * 
+				 * System.out.println(points); // int finalPoints=currentUser.getPoints();
+				 * 
+				 * int convert = (int) Math.round(points * .10);
+				 * 
+				 * System.out.println("fghhgh" + convert);
+				 * 
+				 * order.getUser().setWallet(order.getUser().getWallet() + convert);
+				 * user.updateWalletMoney(order); order.getUser().setPoints(0);
+				 * user.updateUserPoints(order);
+				 * 
+				 * }
+				 */
 				res.sendRedirect("Payment.jsp");
 			} else {
-				System.out.println("Current this product is out of stock");
+				res.sendRedirect("UserProfile.jsp");
+
 			}
 
 		} catch (Exception e) {
 			// TODO: handle exception
-			e.getMessage();
+			System.out.println(e.getMessage());
 		}
 
 	}

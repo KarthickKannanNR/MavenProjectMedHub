@@ -56,8 +56,7 @@
 }
 
 .list li:hover, .list a:hover {
-	color: white;
-	background-color: orange;
+	color: orange;
 	border-radius: 5px;
 	cursor: pointer;
 }
@@ -188,12 +187,19 @@ font-size: 17px;
 #offer{
 width: 10px;
 }
+#cartQuantity,#cartTotalPrice{
+visibility: hidden;
+}
+#cartForm #addToCart{
+position: relative;
+left:-150px;
+}
 </style>
 </head>
 <body>
 <%
  
-int pId=Integer.parseInt(request.getParameter("pid").toString());
+int pId=Integer.parseInt(request.getParameter("pid"));
 ProductDaoImpl productDao = new ProductDaoImpl();
 Product currentProduct = productDao.findProductByProductId(pId);
 session.setAttribute("currentproduct", currentProduct);
@@ -202,10 +208,13 @@ session.setAttribute("currentproduct", currentProduct);
 
 		<nav class="list">
 			<ul>
-				<li><a>Cart</a></li>
-				<li><a>SignOut</a></li>
-				<li><a>MyProfile</a></li>
-				<li><a>MyOrders</a></li>
+					<li><a href="Cart.jsp">Cart</a></li>
+					<li><a href="Index.jsp">SignOut</a></li>
+					<li><a href="UserProfile.jsp">MyProfile</a></li>
+					<li><a href="MyOrders.jsp?orderId=0">MyOrders</a></li>
+					<li><a href="MyOrders.jsp?orderId=0">About-Us</a></li>
+					<li><a href="UserHome.jsp">Home</a></li>
+					
 			</ul>
 			<div class="logo">
 				<img
@@ -265,6 +274,11 @@ session.setAttribute("currentproduct", currentProduct);
 						<p name="message" id="message"></p>
 						<button type="submit" >Paynow</button>
 						</form>
+						<form action = "cartserv" id="cartForm">
+						<input name="cartQuanity" type = "text" id = "cartQuantity">
+						<input name="cartTotalPrice" type = "text" id = "cartTotalPrice">
+						<button type="submit" id="addToCart">Add To Cart</button>
+						</form>
 					</div>
 				</td>
 			</tr>
@@ -295,10 +309,18 @@ function calculateAmt() {
  }
 
 	document.getElementById("totalprice").value=totalAmt;
-	
+	cartfn();
 }
 
 
+function cartfn(){
+	let quant = document.getElementById("quantity").value;
+	let totprice = document.getElementById("totalprice").value;
+	let cartquant = document.getElementById("cartQuantity");
+	let carttot = document.getElementById("cartTotalPrice");
+cartquant.value = quant;
+carttot.value = totprice;
+}
 
 </script>
 </body>

@@ -65,7 +65,7 @@
 }
 body{
     
-    background-image:url("Images/homepage_img.jpg");
+    background-image: url("Assets/homepage_img.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
@@ -201,6 +201,10 @@ body{
     font-size: 18px;
     
 }
+#register{
+position: relative;
+left:60px;
+}
 
 #registerScreenContent button{
     height: 30px;
@@ -245,7 +249,7 @@ body{
 #companyname{
     position: absolute;
     text-align: center;
-    left: 100px;
+    left: 100px; 
     top: 0px;
     
 }
@@ -273,10 +277,10 @@ body{
                 </ul>
             </nav>
             <div class="logo">
-                <img src="Images/medhublogo.png"
-                    alt="logo">
+                <img src="Assets/medhublogo.png" alt="logo">
+                    
                       <div id="companyname">
-                        <img   src="https://d1hbpr09pwz0sk.cloudfront.net/logo_url/medhub-f6c08b33" alt="">
+                        <img   src="https://d1hbpr09pwz0sk.cloudfront.net/logo_url/medhub-f6c08b33" alt="logo">
                     </div>
             </div>
         </div>
@@ -292,8 +296,9 @@ body{
                     pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%?&]{8,15}$"
                     title="Minimum eight and Minimum 8 and maximum 15 characters, at least one uppercase letter, one lowercase letter, one number and one special character"><br><br>
                 <button id="loginbtn">Login</button><br><br><br>
-                <a onclick="getRegisterForm()" id="register" >Not Registered Yet ?</a> <a id="forgetpassword"
-                    href="ForgetPassword.html">Forget Password</a><br>
+                <a onclick="getRegisterForm()" id="register" >Not Registered Yet ?</a> 
+<!--                 <a id="forgetpassword"
+                    href="ForgetPassword.html">Forget Password</a><br> -->
                     <% String error=(String)session.getAttribute("error");
             if(error!=null) {%>
            <p><%=session.getAttribute("error") %></p>

@@ -1,17 +1,13 @@
-<%@page import="javax.swing.plaf.metal.MetalBorders.Flush3DBorder"%>
-<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@page import="java.util.List"%>
 <%@page import="com.medHub.model.*"%>
 <%@page import="com.medHub.dao.*"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cart</title>
+<meta charset="ISO-8859-1">
+<title>Filtered products</title>
 <style>
 * {
 	margin: 0;
@@ -66,6 +62,10 @@ body {
 	border-radius: 5px;
 	cursor: pointer;
 }
+.list li:hover{
+	transition-duration: 0.3s;
+
+}
 
 body {
 	/* background: linear-gradient(rgba(26,176,156,0.7),rgba(239,78,28,0.5)) ,url(Images/homepage_img.jpg); */
@@ -110,7 +110,7 @@ img {
 #copyrights {
 	text-align: center;
 	color: yellow;
-	margin-bottom: 0%;
+	margin-bottom: 0;
 }
 
 #allproducts a {
@@ -163,30 +163,32 @@ img {
 
 #product #btn {
 	position: relative;
+	top: -250px;
 	left: 900px;
-	top:-130px;
 }
 
 #product #btn button {
 	height: 30px;
 	width: 90px;
-	background-color: orange;
 	border: none;
 	border-radius: 5px;
+	background-color: none;
 }
 
+#product #btn button{
+	position: relative;
+	background-color: yellowgreen;
+	bottom:-150px;
+}
 
 #btn1 {
 	position: relative;
-	left: 120px;
-	top: -40px;
 }
 
 #product #btn button:hover {
 	background-color: white;
 	box-shadow: 0 0 5px black;
 	color: green;
-	color: orange;
 }
 
 #product #img h3 {
@@ -195,9 +197,9 @@ img {
 	top:20px;
 }
 
-#btn  {
+#btn #buynow {
 	position: relative;
-	top: -40px;
+
 }
 
 a {
@@ -208,26 +210,23 @@ a {
 position: relative;
 left: 1100px;
 }
-
 </style>
-</head>
 
+</head>
 <body>
-	<%User currentUser = (User)session.getAttribute("user");
-	
-	%>
-	<div id="container">
+	<%User currentUser = (User)session.getAttribute("user");%>
+
+<div id="container">
 
 		<div class="nav">
 
 			<nav class="list">
 				<ul>
-					<li><a href="Cart.jsp">Cart</a></li>
+					<li><a>Cart</a></li>
 					<li><a href="Index.jsp">SignOut</a></li>
 					<li><a href="UserProfile.jsp">MyProfile</a></li>
 					<li><a href="MyOrders.jsp?orderId=0">MyOrders</a></li>
 					<li><a href="MyOrders.jsp?orderId=0">About-Us</a></li>
-					<li><a href="UserHome.jsp">Home</a></li>
 					
 				</ul>
 				<div class="logo">
@@ -237,61 +236,61 @@ left: 1100px;
 			</nav>
 		</div>
 		<!-- slideshow -->
-
+		<div id="serachbar">
+		<form action="FilteredProduct.jsp">
+		<input type="text" id="searchProduct"  name="searchProduct" required>
+		<a href="AllProducts.jsp"><button type="submit">search</button></a>
+		</form>
 		<h2 id="userName">welcome <%=currentUser.getName()%></h2>
 		</div>
-		<% OrderItemsDaoImpl myOrder= new OrderItemsDaoImpl();
-		CartDaoImpl cartDao = new CartDaoImpl();
-		List<Cart> cartItems = cartDao.viewCart(currentUser);
-		/* orderDao.deleteProduct(myAllOrders.getOrderModel().getOrderId()); */		
-		%>
-		<% for(Cart cartList : cartItems)
-			 {
-			 %>
+
+<%
+ProductDaoImpl product= new ProductDaoImpl();
+List<Product> allproduct = product.viewProduts();
+
+String searchProduct = request.getParameter("productName");
+searchProduct=request.getParameter("searchProduct").toLowerCase();
+List<Product> searchedproduct = product.searchProduct(searchProduct); 
+%>
+<% for(Product products : allproduct)
+		
+	{
+	%>
 		
 			<div id="product">
 				<div id="img">
-					<img src="<%=cartList.getProduct().getProductImg()%>" alt="horlicks">
-					<h3><%=cartList.getProduct().getProductName() %></h3>
+					<img src="<%=products.getProductImg() %>" alt="horlicks">
+					<h3><%=products.getProductName() %></h3>
 				</div>
 				<div id="details">
 					<h3>
 						Description :
-						<%=cartList.getProduct().getDescription() %></h3>
-					<h3 name="unitPrice">
-						price :<%=cartList.getUnitPrice()+ "rs"%></h3>
+						<%=products.getDescription() %></h3>
 					<h3>
-						Offer Applied:
-						<%=cartList.getProduct().getOffer() %>%
+						price :<%=products.getUnitPrice()+ "rs"%></h3>
+					<h3>
+						Offer :
+						<%=products.getOffer() %>%
 					</h3>
-					<h3 name="cartpoints">
+					<h3>
 						Points :
-						<%=cartList.getProduct().getPoints() %></h3>
-						<h3 name="cartQuantity">
-						Total Quantity:
-						<%=cartList.getQty() %></h3>
-					<h3 name="totalPrice">
-						Total Amt :
-						<%=cartList.getTotalPrice() %></h3>
-						
-						
+						<%=products.getPoints() %></h3>
 				</div>
 				<div id="btn">
 					<button>
-						<a id="BuyNow" href="cartOrder?CartproductId=<%=cartList.getProduct().getProductId()%>&unitPrice=<%=cartList.getUnitPrice()%>&cartpoints=<%=cartList.getProduct().getPoints() %>&cartQuantity=<%=cartList.getQty()%>&totalPrice=<%=cartList.getTotalPrice() %>">Buy Now</a>
+						<a id="buynow" href="BuyProduct.jsp?pid=<%=products.getProductId()%>">Buy Now</a>
 					</button>
-					<br>
 					<button>
-						<a id="Remove" href="removeCartItem?CartproductId=<%=cartList.getProduct().getProductId()%>">Remove</a>
+						<a id="btn1" href="">Add To Cart</a>
+					</button>
 					</button>
 				</div>
-				
 			</div>
 		
 		<br>
 		<br>
-		<%}%>
-		
+		<%} %>
+
 		
 		<br><br><br><br><br><br><br><br><br><br><br><br>
 		<h2 id="copyrights">© 2021 MedHub.com. All rights reserved.</h2>
@@ -303,5 +302,4 @@ left: 1100px;
 
 
 </body>
-
 </html>

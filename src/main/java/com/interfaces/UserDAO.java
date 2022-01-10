@@ -8,11 +8,11 @@ import com.medHub.model.User;
 public interface UserDAO {
 
 	public void insert(User user);
-	public User login(String email,String password);
 	public List<User> ViewAllUser();
 	public int update (User currentUser);
 	public User getUserById(int userId);
 	public boolean deleteUser(int userId);
-	public void addMoneyInWallet(double walletAmount,User currentUser);
+	public int addMoneyInWallet(double walletAmount,User currentUser);
 	public void updateUserPoints(Order order);
+	public User login(User user);
 }

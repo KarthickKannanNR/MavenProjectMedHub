@@ -18,7 +18,6 @@ public class UserDaoImpl implements UserDAO{
 	
 	
 public void insert(User user) {
-		System.out.println(user.getName()+""+user.getUserPassword()+""+user.getUserMail()+user.getUserMobile());
 	try {
 		String ins="insert into users (full_name,user_mobile,user_password,user_email) values(?,?,?,?)";
 		String commit="commit";
@@ -33,7 +32,7 @@ public void insert(User user) {
 		smt.execute();
 		pst.close();
 		con.close();
-		System.out.println( "SUCESSFULLY REGISTERED");}
+	}
 	catch(Exception e)
 	{
 		System.out.println(e.getMessage());
@@ -45,8 +44,7 @@ public void insert(User user) {
 
 public User login(User user)
 {
-	System.out.println(user.getUserMail());
-	System.out.println(user.getUserPassword());
+	
 	User loginUser=null;
 	try {
 	
@@ -64,9 +62,7 @@ public User login(User user)
 	{	
 		user=new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDouble(5),rs.getString(6),
 		rs.getLong(7),rs.getString(8),rs.getInt(9));
-		System.out.println(rs.getString(4));
-		System.out.println(rs.getDouble(5));
-		System.out.println("login sucessfulls");
+		
 		return user;
 	}
 	
@@ -111,36 +107,33 @@ public List<User> ViewAllUser()
 	
 
 
-	public int update (User currentUser) {
-		System.out.println(currentUser);
+public int update (User currentUser) {
 		String update = null;
 		try {
-			update = "update users set full_name=?,user_password=?,user_mobile=? where user_email='"+currentUser.getUserMail()+"'";
+			update = "update users set full_name=?,user_password=?,user_mobile=?,delivery_address=? where user_email='"+currentUser.getUserMail()+"'";
 			Connection con=ConnectionUtil.getDBconnect();
 			PreparedStatement pst=con.prepareStatement(update);
 			pst.setString(1, currentUser.getName());
 			pst.setString(2, currentUser.getUserPassword());
 			pst.setLong(3,currentUser.getUserMobile());
+			pst.setString(4, currentUser.getAddress());
 			int res=pst.executeUpdate();
-			pst=con.prepareStatement("commit");
-			res=pst.executeUpdate();
+			System.out.println(res);
+			res=pst.executeUpdate("commit");
+			
 			if(res>0)
 			{
-			System.out.println("Profile Updated Sucessfully");
 			}
 			else
 			{
-				
 			}
-			pst.close();
-			con.close();
+		
 			return res;
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(update);
 				
 	 return 0;
 	}
@@ -157,20 +150,17 @@ public List<User> ViewAllUser()
 			pstatement = con.prepareStatement(getuserId);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
 		}
 		 try {
 			pstatement.setInt(1, userModule.getUserId());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
 
 		}
 		 try {
 			ResultSet rs = pstatement.executeQuery(getuserId);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
 
 		}
 		
@@ -209,27 +199,26 @@ public List<User> ViewAllUser()
 
 //														ADD MONEY TO WALLET
 	
-		public void addMoneyInWallet(double walletAmount,User currentUser) {
+public int addMoneyInWallet(double walletAmount,User currentUser) {
 			
-			System.out.println("old amount"+currentUser.getWallet());
-			double addAmount=currentUser.getWallet()+walletAmount;
-			currentUser.setWallet(addAmount);
-			System.out.println("new amount"+addAmount);
-			String walletQuery="update users set user_wallet ="+addAmount+" where user_email ='"+currentUser.getUserMail()+"'";
+			String walletQuery="update users set user_wallet ="+walletAmount+" where user_email ='"+currentUser.getUserMail()+"'";
+			int result=0;
 			Connection con = ConnectionUtil.getDBconnect();
 			try {
 				PreparedStatement ps = con.prepareStatement(walletQuery);
-				ps.executeUpdate();
-				con.prepareStatement("commit");
-				ps.executeUpdate();
-				System.out.println("Money added to wallet");
+				 result=ps.executeUpdate();
+				ps.executeUpdate("commit");
+				if(result>0)
+				{
+					UserDaoImpl userDao = new UserDaoImpl();
+					
+				}
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				System.out.println(e.getMessage());
 			}
 			
-		
+		return result;
 			}
 		
 		public void updateUserPoints(Order order)
@@ -256,7 +245,8 @@ public List<User> ViewAllUser()
 			Connection con = ConnectionUtil.getDBconnect();
 			try {
 				PreparedStatement ps  = con.prepareStatement(query);
-				ps.executeUpdate();
+				int result = ps.executeUpdate();
+				ps.executeUpdate("commit");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -306,13 +296,8 @@ public List<User> ViewAllUser()
 		}
 
 
-		@Override
-		public User login(String email, String password) {
-			// TODO Auto-generated method stub
-			return null;
-		}
 	
-	
+
 }
 	
 

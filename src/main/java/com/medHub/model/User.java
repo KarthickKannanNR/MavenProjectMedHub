@@ -111,6 +111,13 @@ public class User {
 		this.userMail=email;
 		this.userPassword=password;
 	}
+	public User(String name, String password, Long mobileNo, String address) {
+		// TODO Auto-generated constructor stub
+		this.Username= name;
+		this.userPassword=password;
+		this.userMobile=mobileNo;
+		this.address=address;
+	}
 	public String getUserPassword() {
 		return userPassword;
 	}

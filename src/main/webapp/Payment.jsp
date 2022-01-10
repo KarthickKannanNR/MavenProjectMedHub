@@ -53,8 +53,7 @@
 }
 
 .list li:hover, .list a:hover {
-	color: white;
-	background-color: orange;
+	color: orange;
 	border-radius: 5px;
 	cursor: pointer;
 }
@@ -150,10 +149,11 @@ background-color: green;
 
 		<nav class="list">
 			<ul>
-				<li><a>Cart</a></li>
-				<li><a>SignOut</a></li>
-				<li><a>MyProfile</a></li>
-				<li><a>MyOrders</a></li>
+					<li><a href="Cart.jsp">Cart</a></li>
+					<li><a href="Index.jsp">SignOut</a></li>
+					<li><a href="UserProfile.jsp">MyProfile</a></li>
+					<li><a href="MyOrders.jsp?orderId=0">MyOrders</a></li>
+					<li><a href="MyOrders.jsp?orderId=0">About-Us</a></li>
 			</ul>
 			<div class="logo">
 				<img

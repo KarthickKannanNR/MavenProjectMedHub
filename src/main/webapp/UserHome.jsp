@@ -183,6 +183,7 @@ img {
 	position: relative;
 	background-color: yellowgreen;
 	bottom:-150px;
+	
 }
 
 #btn1 {
@@ -190,9 +191,10 @@ img {
 }
 
 #product #btn button:hover {
-	background-color: white;
 	box-shadow: 0 0 5px black;
 	color: green;
+	transition-duration: 0.3s;
+	
 }
 
 #product #img h3 {
@@ -225,23 +227,23 @@ left: 1100px;
 
 			<nav class="list">
 				<ul>
-					<li><a>Cart</a></li>
+					<li><a href="Cart.jsp">Cart</a></li>
 					<li><a href="Index.jsp">SignOut</a></li>
 					<li><a href="UserProfile.jsp">MyProfile</a></li>
 					<li><a href="MyOrders.jsp?orderId=0">MyOrders</a></li>
-					<li><a href="MyOrders.jsp?orderId=0">MyOrders</a></li>
+					<li><a href="MyOrders.jsp?orderId=0">About-Us</a></li>
+					<li><a href="UserHome.jsp">Home</a></li>
+					
+					
 					
 				</ul>
 				<div class="logo">
 					<img
-						src="https://uxwing.com/wp-content/themes/uxwing/download/21-medical-science-lab/healthcare.png"
+						src="Assets/medhublogo.png"
 						alt="logo">
 			</nav>
 		</div>
 		<!-- slideshow -->
-		<div id="serachbar">
-		<input type="text" id="searchProduct"  name="searchProduct" required>
-		<a href="AllProducts.jsp"><button>search</button></a>
 		<h2 id="userName">welcome <%=currentUser.getName()%></h2>
 		</div>
 
@@ -249,9 +251,8 @@ left: 1100px;
 		<% 
 		ProductDaoImpl product= new ProductDaoImpl();
 		List<Product> allproduct = product.viewProduts();
-		String searchProduct=request.getParameter("searchProduct").toLowerCase();
-		Product searchProducts = new Product();
-		searchProducts
+		 Product searchProducts = new Product(); 
+		/* searchProducts.searchProduct(searchProduct);  */
 		
 	%>
 		<% for(Product products : allproduct)
@@ -282,9 +283,9 @@ left: 1100px;
 					<button>
 						<a id="buynow" href="BuyProduct.jsp?pid=<%=products.getProductId()%>">Buy Now</a>
 					</button>
-					<button>
-						<a id="btn1" href="">Add To Cart</a>
-					</button>
+					<%--  <button>
+						<a id="btn1" href="AddToCart.jsp?cartpId<%=products.getProductId()%>">Add To Cart</a>
+					</button> --%>
 					</button>
 				</div>
 			</div>
@@ -292,7 +293,6 @@ left: 1100px;
 		<br>
 		<br>
 		<%} %>
-
 		
 		<br><br><br><br><br><br><br><br><br><br><br><br>
 		<h2 id="copyrights">© 2021 MedHub.com. All rights reserved.</h2>

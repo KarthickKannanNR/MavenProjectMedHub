@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
 		User currentuser;	
 		try {
 			
-		if(email.endsWith("gmail.com"))
+		if(!email.endsWith("medhub.com"))
 		{
 			user=new User(email,password);
 			currentuser= userDao.login(user);

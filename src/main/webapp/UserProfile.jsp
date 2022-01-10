@@ -52,8 +52,7 @@
 }
 
 .list li:hover, .list a:hover {
-	color: white;
-	background-color: orange;
+	color: orange;
 	border-radius: 5px;
 	cursor: pointer;
 }
@@ -70,9 +69,30 @@ body {
 	width: 60px;
 	margin-left: 20px;
 }
-#userProfile td,tr{
-padding: 10px;
+#userProfile{
+position: absolute;
+left:90px;
 }
+
+#userProfile td,tr{
+padding: 20px;
+}
+#userProfile input{
+margin-top: 42.5px;
+}
+#userProfile label{
+margin-top: 50px;
+}
+#userProfile input{
+height: 30px;
+width: 200px;
+}
+#walletMoneyUpdateForm{
+position: absolute;
+left: 500px;
+bottom: 450px;
+}
+
 </style>
 </head>
 <body>
@@ -82,10 +102,12 @@ padding: 10px;
 
 		<nav class="list">
 			<ul>
-				<li><a href="Cart.jsp">Cart</a></li>
-				<li><a href="Index.jsp">SignOut</a></li>
-				<li><a href="UserProfile.jsp">MyProfile</a></li>
-				<li><a>MyOrders</a></li>
+					<li><a href="Cart.jsp">Cart</a></li>
+					<li><a href="Index.jsp">SignOut</a></li>
+					<li><a href="UserProfile.jsp">MyProfile</a></li>
+					<li><a href="MyOrders.jsp?orderId=0">MyOrders</a></li>
+					<li><a href="MyOrders.jsp?orderId=0">About-Us</a></li>
+					<li><a href="UserHome.jsp">Home</a></li>
 			</ul>
 			<div class="logo">
 				<img
@@ -93,25 +115,32 @@ padding: 10px;
 					alt="logo">
 		</nav>
 	</div>
-	<div id="userProfile">
-	<table>
-	<td>
-	<td>
-	<h3>Name :</h3>
-	<h3>Password :</h3>
-	<h3>Email :</h3>
-	<h3>Mobile No :</h3>
-	</td>
-		<td>
-		<input name="updatedName" value="<%=currentUser.getUsername()%>"><br>
-		<input name="updatedPassword" value="<%=currentUser.getUserPassword()%>"><br>
-		<input name="updatedmail" value="<%=currentUser.getUserMail()%>"><br>
-		<input name="UpdatedMobNum" value="<%=currentUser.getUserMobile()%>"><br>
-		</td>
 	
-	</td>
-	<td></td>
-	</table>
+	<!-- User Profile -->
+	<div id="userProfile">
+	<form action="ProfileUpdate">
+		<label>Name :</label>
+				<input name="updatedName" value="<%=currentUser.getUsername()%>"><br>
+		
+		<label>Password :</label>
+				<input name="updatedPassword"  value="<%=currentUser.getUserPassword()%>"><br>
+		
+		<label>Mobile No :</label>
+				<input name="UpdatedMobNum"  value="<%=currentUser.getUserMobile()%>"><br>
+		
+		<label>Delivery Address :</label>
+	
+		<input   id="UpdateDeliveryAddress"  value="<%=currentUser.getAddress()%>"><br>
+						<button>Save Changes</button>
+		</form>
+</div>
+	
+	<div id="walletMoneyUpdateForm">
+	<form action="walletUpdate">
+		<input name="UpdateWallet" value="<%=currentUser.getWallet()%>">
+		<button>Add Money</button>
+	</form>
 	</div>
+	
 </body>
 </html>

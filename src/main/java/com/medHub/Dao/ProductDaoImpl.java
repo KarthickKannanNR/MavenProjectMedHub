@@ -20,7 +20,7 @@ public class ProductDaoImpl implements ProductDAO{
 //																		Show All Products
 	public List<Product> viewProduts()
 	{
-		String viewQuery="select * from products";
+		String viewQuery="select * from products where status='available'";
 		Connection con=ConnectionUtil.getDBconnect();
 		List<Product> productList=new ArrayList<Product>();
 		try {
@@ -104,7 +104,7 @@ public class ProductDaoImpl implements ProductDAO{
 //																				Delete Product by admin
 		public void deleteProduct(int productId) throws SQLException
 		{
-			String qwery="delete from products where product_id=?";
+			String qwery="update products set status='unavailable' where product_id=?";
 			Connection con = ConnectionUtil.getDBconnect();
 			PreparedStatement pst=con.prepareStatement(qwery);
 			pst.setInt(1, productId);
@@ -211,7 +211,7 @@ public class ProductDaoImpl implements ProductDAO{
 		
 		public List<Product> searchProduct(String Productname)
 		{
-			String query ="select * from products where product_name like '"+Productname+"'";
+			String query ="select * from products where product_name like '"+Productname+"%'";
 			List<Product> findedProducts = new ArrayList<Product>();
 
 			try {
@@ -234,8 +234,7 @@ public class ProductDaoImpl implements ProductDAO{
 		public void updateProducts(int updateProductId, String updateproductcategory, String updateProductName,
 				String updateProductDescription, int updateUnitPrice, int updateQuantity) throws SQLException {
 			// TODO Auto-generated method stub
-			
-		}
+			}
 
 		@Override
 		public void updateProductQuantity(Product buyProducts) throws SQLException {

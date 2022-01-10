@@ -33,7 +33,9 @@ public class OrderDaoImpl implements OrderDAO{
 	
 	public int  getByOrderId()
 	{
+		System.out.println("1");
 		String qwery="select max(order_id) from orders";
+		System.out.println(2);
 		Connection con = ConnectionUtil.getDBconnect();
 		Order order= null;
 		int orderId=0;
@@ -44,7 +46,7 @@ public class OrderDaoImpl implements OrderDAO{
 			if(rs.next())
 			{
 			orderId=rs.getInt(1);
-			System.out.println(orderId);
+			System.out.println("getbyorderId"+orderId);
 			}
 			
 		} catch (SQLException e) {
@@ -57,6 +59,7 @@ public class OrderDaoImpl implements OrderDAO{
 
 	public void deleteProduct(int orderId) throws SQLException
 	{
+		System.out.println("cancel metghod called");
 		String qwery="update orders set order_status='canceled' where order_id =?";
 		Connection con = ConnectionUtil.getDBconnect();
 		PreparedStatement pst=con.prepareStatement(qwery);
@@ -65,11 +68,13 @@ public class OrderDaoImpl implements OrderDAO{
 		if(res>0)
 		{
 			System.out.println(res+"Product deleted");
+			System.out.println("order cancelled");
 			
 		}
 		else {
 			System.out.println("product not deleted");
 		}
+		
 		con.close();
 		pst.close();
 		
@@ -103,11 +108,7 @@ public class OrderDaoImpl implements OrderDAO{
 		return false;
 	}
 
-	@Override
-	public void orders(Order order, double totalPrice) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 
 	
