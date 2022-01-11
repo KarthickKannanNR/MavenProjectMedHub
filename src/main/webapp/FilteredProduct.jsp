@@ -1,13 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@page import="java.util.List"%>
+<%@page import="javax.swing.plaf.metal.MetalBorders.Flush3DBorder"%>
+<%@page import="java.util.List"%>
 <%@page import="com.medHub.model.*"%>
 <%@page import="com.medHub.dao.*"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Filtered products</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel = "icon" type = "" href = "Assets/medhublogo.png">
+
+<title>Userhome</title>
 <style>
 * {
 	margin: 0;
@@ -16,15 +22,17 @@
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
-	overflow-x: hidden;
-}
-
 .list ul li {
 	list-style: none;
 	display: inline-block;
 }
 
+.nav{
+   background: linear-gradient(to right, rgb(200, 47, 58) 0%,rgb(44, 169, 207) 100%);
+   position: fixed;
+   width: 100%;
+   z-index: 1;
+}
 .list li {
 	float: right;
 	padding: 20px;
@@ -32,12 +40,11 @@ body {
 
 .list ul {
 	/* background-color: #10847E;*/
-	height: 70px;
 	position: absolute;
 	margin-right: 0%;
 	position: absolute;
 	top: 0;
-	background-color: rgba(255, 255, 255, 0.603);
+	
 	box-shadow: 0 5 black;
 	/* margin-top: 0%; */
 	right: 0px;
@@ -50,7 +57,7 @@ body {
 
 .list ul, .list li, .list a {
 	text-decoration: none;
-	color: black;
+	color: white;
 	font-family: monospace;
 	font-size: 25px;
 	font-weight: 500;
@@ -63,15 +70,17 @@ body {
 	cursor: pointer;
 }
 .list li:hover{
-	transition-duration: 0.3s;
+	transition-duration: 0.2s;
 
 }
 
 body {
 	/* background: linear-gradient(rgba(26,176,156,0.7),rgba(239,78,28,0.5)) ,url(Images/homepage_img.jpg); */
-	background-image: url(Images/homepage_img.jpg);
+	background-image: url(Assets/homepage_img.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
+	overflow-x: hidden;
+	height: 300%;
 }
 
 .logo img {
@@ -179,6 +188,7 @@ img {
 	position: relative;
 	background-color: yellowgreen;
 	bottom:-150px;
+	
 }
 
 #btn1 {
@@ -186,9 +196,10 @@ img {
 }
 
 #product #btn button:hover {
-	background-color: white;
 	box-shadow: 0 0 5px black;
 	color: green;
+	transition-duration: 0.2s;
+	
 }
 
 #product #img h3 {
@@ -207,52 +218,58 @@ a {
 	color: black;
 }
 #userName{
+position: absolute;
+top:90px;
+left: 55px;
+}
+.prodSearch{
 position: relative;
-left: 1100px;
+top: 100px;
+left:200px;
 }
 </style>
-
 </head>
+
 <body>
-	<%User currentUser = (User)session.getAttribute("user");%>
-
-<div id="container">
-
+	<%User currentUser = (User)session.getAttribute("user");
+	session.setAttribute("userNotFound", null);
+	%>
+	
+	<div id="container">
+	<div class="container-fluid p-0" >
 		<div class="nav">
 
 			<nav class="list">
 				<ul>
-					<li><a>Cart</a></li>
+					<li><a href="Cart.jsp">Cart</a></li>
 					<li><a href="Index.jsp">SignOut</a></li>
 					<li><a href="UserProfile.jsp">MyProfile</a></li>
 					<li><a href="MyOrders.jsp?orderId=0">MyOrders</a></li>
 					<li><a href="MyOrders.jsp?orderId=0">About-Us</a></li>
-					
+					<li><a href="UserHome.jsp">Home</a></li>
 				</ul>
+				<div>
 				<div class="logo">
 					<img
-						src="https://uxwing.com/wp-content/themes/uxwing/download/21-medical-science-lab/healthcare.png"
+						src="Assets/medhublogo.png"
 						alt="logo">
 			</nav>
 		</div>
-		<!-- slideshow -->
-		<div id="serachbar">
-		<form action="FilteredProduct.jsp">
-		<input type="text" id="searchProduct"  name="searchProduct" required>
-		<a href="AllProducts.jsp"><button type="submit">search</button></a>
-		</form>
 		<h2 id="userName">welcome <%=currentUser.getName()%></h2>
 		</div>
 
-<%
-ProductDaoImpl product= new ProductDaoImpl();
-List<Product> allproduct = product.viewProduts();
-
-String searchProduct = request.getParameter("productName");
-searchProduct=request.getParameter("searchProduct").toLowerCase();
-List<Product> searchedproduct = product.searchProduct(searchProduct); 
-%>
-<% for(Product products : allproduct)
+		<form action="" class="prodSearch" >
+		<input type="text" name="ProductName" required="required" placeholder="Search Products">
+		<button>Search</button>
+		</form>
+		<% 
+		ProductDaoImpl product= new ProductDaoImpl();
+		List<Product> allproduct = product.viewProduts();
+		 Product searchProducts = new Product(); 
+/* 		 searchProducts.searchProduct(searchProduct); 
+ */		
+	%>
+		<% for(Product products : allproduct)
 		
 	{
 	%>
@@ -280,9 +297,9 @@ List<Product> searchedproduct = product.searchProduct(searchProduct);
 					<button>
 						<a id="buynow" href="BuyProduct.jsp?pid=<%=products.getProductId()%>">Buy Now</a>
 					</button>
-					<button>
-						<a id="btn1" href="">Add To Cart</a>
-					</button>
+					<%--  <button>
+						<a id="btn1" href="AddToCart.jsp?cartpId<%=products.getProductId()%>">Add To Cart</a>
+					</button> --%>
 					</button>
 				</div>
 			</div>
@@ -290,9 +307,7 @@ List<Product> searchedproduct = product.searchProduct(searchProduct);
 		<br>
 		<br>
 		<%} %>
-
 		
-		<br><br><br><br><br><br><br><br><br><br><br><br>
 		<h2 id="copyrights">© 2021 MedHub.com. All rights reserved.</h2>
 
 	</div>
@@ -302,4 +317,5 @@ List<Product> searchedproduct = product.searchProduct(searchProduct);
 
 
 </body>
+
 </html>

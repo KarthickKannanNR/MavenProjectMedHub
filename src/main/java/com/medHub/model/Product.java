@@ -162,6 +162,18 @@ public class Product
 		this.productId=productId;
 		}
 	
+	public Product(String category,String productname,double price,int quantity,String imageurl,int points,int offer,String description)
+	{
+		this.productCategory=category;
+		this.productName=productname;
+		this.unitPrice=price;
+		this.quantity=quantity;
+		this.productImg=imageurl;
+		this.points=points;
+		this.offer=offer;
+		this.description=description;
+		}
+	
 
 	public Product() {
 		// TODO Auto-generated constructor stub

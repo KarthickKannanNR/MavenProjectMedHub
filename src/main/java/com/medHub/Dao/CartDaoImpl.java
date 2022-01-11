@@ -19,22 +19,18 @@ public class CartDaoImpl {
 
 	public void insertProduct(Cart cart) {
 		// TODO Auto-generated method stub
-		System.out.println("cart method called");
 		Connection con = ConnectionUtil.getDBconnect();
 		try {
 		String insertProduct ="insert into cart (product_id,user_id,unit_price,qty,total_price) values (?,?,?,?,?)"; 
 		PreparedStatement pst;
 		try {
 			pst = con.prepareStatement(insertProduct);
-			System.out.println(cart.getProduct().getProductId());
-			System.out.println(cart.getProduct().getUnitPrice());
 			pst.setInt(1,cart.getProduct().getProductId());
 			pst.setInt(2, cart.getUser().getUserId());
 			pst.setDouble(3, cart.getProduct().getUnitPrice());
 			pst.setInt(4, cart.getQty());
 			pst.setDouble(5, cart.getTotalPrice());
 			int result=pst.executeUpdate();
-			System.out.println(result + " products added to cart");
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

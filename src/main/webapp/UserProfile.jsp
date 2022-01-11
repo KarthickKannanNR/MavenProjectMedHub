@@ -6,6 +6,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+ <link rel = "icon" type = "" href = "Assets/medhublogo.png">
+
 <title>User Profile</title>
 <style>
 * {
@@ -31,7 +33,6 @@
 	margin-right: 0%;
 	position: absolute;
 	top: 0;
-	background-color: rgba(255, 255, 255, 0.603);
 	box-shadow: 0 5 black;
 	/* margin-top: 0%; */
 	right: 0px;
@@ -44,7 +45,7 @@
 
 .list ul, .list li, .list a {
 	text-decoration: none;
-	color: black;
+	color: white;
 	font-family: monospace;
 	font-size: 25px;
 	font-weight: 500;
@@ -56,10 +57,12 @@
 	border-radius: 5px;
 	cursor: pointer;
 }
-
+.list{
+   background: linear-gradient(to right, rgb(200, 47, 58) 0%,rgb(44, 169, 207) 100%);
+}
 body {
 	/* background: linear-gradient(rgba(26,176,156,0.7),rgba(239,78,28,0.5)) ,url(Images/homepage_img.jpg); */
-	background-image: url(Images/homepage_img.jpg);
+	background-image: url(Assets/homepage_img.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
 }
@@ -100,7 +103,7 @@ bottom: 450px;
 %>
 <div class="nav">
 
-		<nav class="list">
+		<nav class="list" class="container-fluid p-0">
 			<ul>
 					<li><a href="Cart.jsp">Cart</a></li>
 					<li><a href="Index.jsp">SignOut</a></li>

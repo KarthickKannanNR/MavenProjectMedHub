@@ -39,7 +39,12 @@ public class UpdateProductServlet extends HttpServlet{
 		ProductDaoImpl products = new ProductDaoImpl();
 		
 		try {
-			products.updateProducts(product);
+			int result=products.updateProducts(product);
+			if(result>0)
+			{
+				res.sendRedirect("AdminAllProducts.jsp?deleteProductid=0");
+				product= new Product(category,productname,price,quantity,imageurl,points,offer,description,prodId);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,153 +1,82 @@
-<%@page import="com.medHub.model.*" %>
-<%@page import="com.medHub.dao.*" %>
-<%@page import="java.util.*" %>
+<%@page import="com.medHub.model.*"%>
+<%@page import="com.medHub.dao.*"%>
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AdminHome</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-     #allusers{
-       position: absolute;
-       top:20px;
-       left:200px;
-       } 
-       
-    	body{
-            background-color: white;
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel = "icon" type = "" href = "Assets/medhublogo.png">
 
-            }
-       #navigation ul li {
-            
-            list-style: none;
-            padding: 20px;
-            display: inline-block;
-            margin-left: 60px;
+<link rel="stylesheet" href="NavStyle.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" ></script>
+<title>AdminHome</title>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Arial, Helvetica, sans-serif;
+}
 
-        }
-        #navigation{
-            background-color: rgb(83, 137, 168);
-            align-items: center;
-        }
-        #navigation ul li a {
-            text-decoration: none;
-            color: whitesmoke;
-            display: inline;
-            
-        }
-        #navigation ul li a:hover{
-        color: black;        
-    	}
-        #allusers table,th,tr,td{
-        border: 1px solid black;
-        border:none;
-        padding: 15px;
-        }
-        #allproducts table img{
-        height:80px;
-        width: 80px;
-        }
-        #navigation #logout a{
-        position:relative;
-        right: 10px;
-        }
-    </style>
+body {
+	background-color: white;
+	background-image: url("Assets/homepage_img.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#navigation ul li {
+	list-style: none;
+	padding: 20px;
+	display: inline-block;
+	margin-right: 0%;
+}
+
+#navigation {
+   background: linear-gradient(to right, rgb(200, 47, 58) 0%,rgb(44, 169, 207) 100%);
+   margin-top: 0%;
+}
+
+#navigation ul li a {
+	text-decoration: none;
+	color: whitesmoke;
+	display: inline;
+		float:right;
+	
+}
+
+#navigation ul li a:hover {
+	color: black;
+}
+
+
+#navigation #logout a {
+	position: relative;
+	right: 10px;
+}
+
+</style>
 </head>
 
 <body>
-    <div class="container">
-    <div id="navigation">
-        <ul>
-            <li ><a href="AllUser.jsp" >All Users</a></li>
-            <li><a href="AdminAllProducts.jsp?deleteProductid=0">All Products</a></li>
-            <li><a href="">Add Products</a></li>
-            <li id="logout"><a href="Index.jsp">Logout</a></li>
-        </div>
-        </ul>
-    </div>
-       
-<%-- <div>
-<% UserDaoImpl userdao = new UserDaoImpl();
-List<User> userList = new ArrayList<User>();
-userList=userdao.ViewAllUser();%>
-<div id="allusers">
-<table>
-<thead>
-<tr>
-<th>User id</th>
-<th>Full Name</th>
-<th>Address</th>
-<th>Email</th>
-<th>mobile</th>
-<th>Status</th>
-</tr>
-</thead>
-<tbody>
-<%for(User user:userList){ %>
-<tr>
-<td><%=user.getUserId() %></td>
-<td><%=user.getName()%></td>
-<td><%=user.getAddress() %></td>
-<td><%=user.getUserMail() %></td>
-<td><%=user.getUserMobile()%></td>
-<td><%=user.getAccountStatus()%></td>
-</tr>
-<%} %>
-</tbody>
-</table>
-</div>
- --%>
- <%-- <%	ProductDaoImpl productDao = new ProductDaoImpl();
-List<Product> productList = new ArrayList<Product>();
-productList=productDao.viewProduts();%>
-<div id="allproducts">
-<table>
-<thead>
-<tr>
-<th>Product id</th>
-<th>Category</th>
-<th>Name</th>
-<th>Description</th>
-<th>Unit_price</th>
-<th>Available_qty</th>
-<th>Image</th>
-<th>Points</th>
-<th>Status</th>
-<th>Offer</th>
-</tr>
-</thead>
-<tbody>
-<%for(Product product:productList){ %>
-<tr>
-<td><%=product.getProductId() %></td>
-<td><%=product.getProductCategory()%></td>
-<td><%=product.getProductName() %></td>
-<td><%=product.getDescription() %></td>
-<td><%=product.getUnitPrice()%></td>
-<td><%=product.getQuantity()%></td>
-<td ><img alt="img" src="<%=product.getProductImg()%>"></td>
-<td><%=product.getPoints()%></td>
-</tr>
-<%} %>
-</tbody>
-</table>
-</div>
- --%>
-</div>
-<script>
-
-</script>
+	<div class="container-fluid p-0" >
+		<div id="navigation" >
+			<ul >
+				<li><a  class="navbar-brand" href="AllUser.jsp">All Users</a></li>
+				<li><a class="navbar-brand" href="AdminAllProducts.jsp?deleteProductid=0">All
+						Products</a></li>
+				<li><a class="navbar-brand" href="AddProduct.jsp">Add Products</a></li>
+				<li id="logout"><a class="navbar-brand" href="Index.jsp">Logout</a></li>
+		</div>
+		</ul>
+	</div>
+	
 </body>
 
 </html>

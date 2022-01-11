@@ -11,6 +11,8 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel = "icon" type = "" href = "Assets/medhublogo.png">
+
 <title>My Orders</title>
 <style>
 * {
@@ -18,10 +20,6 @@
 	padding: 0;
 	box-sizing: border-box;
 	font-family: Arial, Helvetica, sans-serif;
-}
-
-body {
-	overflow-x: hidden;
 }
 
 .list ul li {
@@ -41,7 +39,6 @@ body {
 	margin-right: 0%;
 	position: absolute;
 	top: 0;
-	background-color: rgba(255, 255, 255, 0.603);
 	box-shadow: 0 5 black;
 	/* margin-top: 0%; */
 	right: 0px;
@@ -54,7 +51,7 @@ body {
 
 .list ul, .list li, .list a {
 	text-decoration: none;
-	color: black;
+	color: white;
 	font-family: monospace;
 	font-size: 25px;
 	font-weight: 500;
@@ -67,11 +64,21 @@ body {
 	cursor: pointer;
 }
 
+.list{
+   background: linear-gradient(to right, rgb(200, 47, 58) 0%,rgb(44, 169, 207) 100%);
+    position: fixed;
+   width: 100%;
+   z-index: 1;
+
+}
 body {
 	/* background: linear-gradient(rgba(26,176,156,0.7),rgba(239,78,28,0.5)) ,url(Images/homepage_img.jpg); */
-	background-image: url(Images/homepage_img.jpg);
+	background-image: url(Assets/homepage_img.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
+	height:100vh;
+	overflow-x:hidden; 
+	
 }
 
 .logo img {
@@ -110,7 +117,8 @@ img {
 #copyrights {
 	text-align: center;
 	color: yellow;
-	margin-bottom: 0%;
+	position: relative;
+	top:300px;	
 }
 
 #allproducts a {
@@ -183,10 +191,9 @@ img {
 }
 
 #product #btn button:hover {
-	background-color: white;
+	background-color: red;
 	box-shadow: 0 0 5px black;
-	color: green;
-	color: orange;
+	color: white;
 }
 
 #product #img h3 {
@@ -204,9 +211,11 @@ a {
 	text-decoration: none;
 	color: black;
 }
+
 #userName{
-position: relative;
-left: 1100px;
+position: absolute;
+top:90px;
+left: 55px;
 }
 
 </style>
@@ -218,7 +227,7 @@ left: 1100px;
 	%>
 	<div id="container">
 
-		<div class="nav">
+		<div class="nav" class="container-fluid p-0">
 
 			<nav class="list">
 				<ul>
@@ -238,8 +247,8 @@ left: 1100px;
 		</div>
 		<!-- slideshow -->
 
-		<h2 id="userName">welcome <%=currentUser.getName()%></h2>
-		</div>
+<%-- 		<h2 id="userName">welcome <%=currentUser.getName()%></h2>
+ --%>		</div>
 
 		<% OrderItemsDaoImpl myOrder= new OrderItemsDaoImpl();
 		List<OrderItems> myOrderList = myOrder.ViewMyOrders(currentUser);
@@ -300,7 +309,7 @@ left: 1100px;
 		<%}%>
 		
 		
-		<br><br><br><br><br><br><br><br><br><br><br><br>
+	
 		<h2 id="copyrights">© 2021 MedHub.com. All rights reserved.</h2>
 
 	</div>

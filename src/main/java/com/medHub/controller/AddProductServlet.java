@@ -7,7 +7,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.exceptions.ProductExists;
 import com.medHub.dao.ProductDaoImpl;
 import com.medHub.model.Product;
 
@@ -17,6 +19,7 @@ import com.medHub.model.Product;
 public class AddProductServlet extends HttpServlet {
 	public void service(HttpServletRequest req,HttpServletResponse res) throws IOException {
 		
+		HttpSession session = req.getSession(); 
 		String category= req.getParameter("category");
 		System.out.println(category);
 		String productname= req.getParameter("productName");
@@ -41,9 +44,18 @@ public class AddProductServlet extends HttpServlet {
 			{
 				System.out.println("product Inserted ");
 			}
+			else {
+				System.out.println("product exists");
+				throw new ProductExists();
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ProductExists e) {
+			// TODO Auto-generated catch block
+			e.getMessage();
+			session.setAttribute("productExists", e.getMessage());
+			res.sendRedirect("AddProduct.jsp");
 		}
 	}
 

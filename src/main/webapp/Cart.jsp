@@ -11,6 +11,8 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel = "icon" type = "" href = "Assets/medhublogo.png">
+
 <title>Cart</title>
 <style>
 * {
@@ -41,7 +43,6 @@ body {
 	margin-right: 0%;
 	position: absolute;
 	top: 0;
-	background-color: rgba(255, 255, 255, 0.603);
 	box-shadow: 0 5 black;
 	/* margin-top: 0%; */
 	right: 0px;
@@ -67,9 +68,15 @@ body {
 	cursor: pointer;
 }
 
+.list{
+   background: linear-gradient(to right, rgb(200, 47, 58) 0%,rgb(44, 169, 207) 100%);
+    position: fixed;
+   width: 100%;
+   z-index: 1;
+}
 body {
 	/* background: linear-gradient(rgba(26,176,156,0.7),rgba(239,78,28,0.5)) ,url(Images/homepage_img.jpg); */
-	background-image: url(Images/homepage_img.jpg);
+	background-image: url(Assets/homepage_img.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
 }
@@ -238,7 +245,7 @@ left: 1100px;
 		</div>
 		<!-- slideshow -->
 
-		<h2 id="userName">welcome <%=currentUser.getName()%></h2>
+	<%-- 	<h2 id="userName">welcome <%=currentUser.getName()%></h2> --%>
 		</div>
 		<% OrderItemsDaoImpl myOrder= new OrderItemsDaoImpl();
 		CartDaoImpl cartDao = new CartDaoImpl();

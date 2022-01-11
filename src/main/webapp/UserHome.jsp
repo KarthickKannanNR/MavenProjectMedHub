@@ -11,6 +11,11 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel = "icon" type = "" href = "Assets/medhublogo.png">
+<meta name="theme-color" content="#FF08" >
+<meta name="theme-color" content="#ffffff">
+
+
 <title>Userhome</title>
 <style>
 * {
@@ -20,15 +25,17 @@
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
-	overflow-x: hidden;
-}
-
 .list ul li {
 	list-style: none;
 	display: inline-block;
 }
 
+.nav{
+   background: linear-gradient(to right, rgb(200, 47, 58) 0%,rgb(44, 169, 207) 100%);
+   position: fixed;
+   width: 100%;
+   z-index: 1;
+}
 .list li {
 	float: right;
 	padding: 20px;
@@ -36,12 +43,11 @@ body {
 
 .list ul {
 	/* background-color: #10847E;*/
-	height: 70px;
 	position: absolute;
 	margin-right: 0%;
 	position: absolute;
 	top: 0;
-	background-color: rgba(255, 255, 255, 0.603);
+	
 	box-shadow: 0 5 black;
 	/* margin-top: 0%; */
 	right: 0px;
@@ -54,7 +60,7 @@ body {
 
 .list ul, .list li, .list a {
 	text-decoration: none;
-	color: black;
+	color: white;
 	font-family: monospace;
 	font-size: 25px;
 	font-weight: 500;
@@ -67,15 +73,17 @@ body {
 	cursor: pointer;
 }
 .list li:hover{
-	transition-duration: 0.3s;
+	transition-duration: 0.2s;
 
 }
 
 body {
 	/* background: linear-gradient(rgba(26,176,156,0.7),rgba(239,78,28,0.5)) ,url(Images/homepage_img.jpg); */
-	background-image: url(Images/homepage_img.jpg);
+	background-image: url(Assets/homepage_img.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
+	overflow-x: hidden;
+	height: 300%;
 }
 
 .logo img {
@@ -193,7 +201,7 @@ img {
 #product #btn button:hover {
 	box-shadow: 0 0 5px black;
 	color: green;
-	transition-duration: 0.3s;
+	transition-duration: 0.2s;
 	
 }
 
@@ -217,6 +225,11 @@ position: absolute;
 top:90px;
 left: 55px;
 }
+.prodSearch{
+position: relative;
+top: 100px;
+left:200px;
+}
 </style>
 </head>
 
@@ -226,7 +239,7 @@ left: 55px;
 	%>
 	
 	<div id="container">
-
+	<div class="container-fluid p-0" >
 		<div class="nav">
 
 			<nav class="list">
@@ -236,28 +249,28 @@ left: 55px;
 					<li><a href="UserProfile.jsp">MyProfile</a></li>
 					<li><a href="MyOrders.jsp?orderId=0">MyOrders</a></li>
 					<li><a href="MyOrders.jsp?orderId=0">About-Us</a></li>
-					<li><a href="UserHome.jsp">Home</a></li>
-					
-					
-					
+					<li><a href="UserHome.jsp">Home</a></li>					
 				</ul>
+				<div>
 				<div class="logo">
 					<img
 						src="Assets/medhublogo.png"
 						alt="logo">
 			</nav>
 		</div>
-		<!-- slideshow -->
 		<h2 id="userName">welcome <%=currentUser.getName()%></h2>
 		</div>
 
-
+		<form action="" class="prodSearch" >
+		<input type="text" name="ProductName" required="required" placeholder="Search Products">
+		<button>Search</button>
+		</form>
 		<% 
 		ProductDaoImpl product= new ProductDaoImpl();
 		List<Product> allproduct = product.viewProduts();
 		 Product searchProducts = new Product(); 
-		/* searchProducts.searchProduct(searchProduct);  */
-		
+/* 		 searchProducts.searchProduct(searchProduct); 
+ */		
 	%>
 		<% for(Product products : allproduct)
 		
@@ -298,7 +311,6 @@ left: 55px;
 		<br>
 		<%} %>
 		
-		<br><br><br><br><br><br><br><br><br><br><br><br>
 		<h2 id="copyrights">© 2021 MedHub.com. All rights reserved.</h2>
 
 	</div>

@@ -10,6 +10,8 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel = "icon" type = "" href = "Assets/medhublogo.png">
+
 <title>BuyProduct</title>
 <style>
 * {
@@ -35,7 +37,6 @@
 	margin-right: 0%;
 	position: absolute;
 	top: 0;
-	background-color: rgba(255, 255, 255, 0.603);
 	box-shadow: 0 5 black;
 	/* margin-top: 0%; */
 	right: 0px;
@@ -63,7 +64,7 @@
 
 body {
 	/* background: linear-gradient(rgba(26,176,156,0.7),rgba(239,78,28,0.5)) ,url(Images/homepage_img.jpg); */
-	background-image: url(Images/homepage_img.jpg);
+	background-image: url(Assets/homepage_img.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
 }
@@ -188,7 +189,7 @@ font-size: 17px;
 width: 10px;
 }
 #cartQuantity,#cartTotalPrice{
-visibility: hidden;
+
 }
 #cartForm #addToCart{
 position: relative;
@@ -206,7 +207,7 @@ session.setAttribute("currentproduct", currentProduct);
 %>
 	<div class="nav">
 
-		<nav class="list">
+		<nav class="list" class="container-fluid p-0">
 			<ul>
 					<li><a href="Cart.jsp">Cart</a></li>
 					<li><a href="Index.jsp">SignOut</a></li>

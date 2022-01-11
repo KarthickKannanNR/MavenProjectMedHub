@@ -1,103 +1,115 @@
-<%@page import="com.medHub.model.*" %>
-<%@page import="com.medHub.dao.*" %>
-<%@page import="java.util.*" %>
+<%@page import="com.medHub.model.*"%>
+<%@page import="com.medHub.dao.*"%>
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
+ <link rel = "icon" type = "" href = "Assets/medhublogo.png">
+
 <title>All Users</title>
 <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Arial, Helvetica, sans-serif;
+}
 
-        body{
-            background-color: white;
+body {
+	background-color: white;
+}
 
-            }
-        #navigation ul li {
-            
-            list-style: none;
-            padding: 20px;
-            display: inline-block;
-            margin-left: 60px;
+#navigation ul li {
+	list-style: none;
+	padding: 20px;
+	display: inline-block;
+	margin-left: 60px;
+}
 
-        }
-        #navigation{
-            background-color: rgb(83, 137, 168);
-            align-items: center;
-        }
-        #navigation ul li a {
-            text-decoration: none;
-            color: whitesmoke;
-            display: inline;
-            
-        }
-        #navigation ul li a:hover{
-        color: black;        
-    	}
-        #allusers table,th,tr,td{
-        border: 2px solid black;
-        border-collapse: collapse;
-        padding: 10px;
-        }
-        #allusers table th{
-        border: 2px solid blue;
-        }
-        #allusers{
-        position: absolute;
-        left:330px;
-        top:100px;
-        }
-    </style>
+#navigation {
+	background-color: rgb(83, 137, 168);
+	align-items: center;
+}
+
+#navigation ul li a {
+	text-decoration: none;
+	color: whitesmoke;
+	display: inline;
+}
+
+#navigation ul li a:hover {
+	color: black;
+}
+
+#navigation #logout a {
+	position: relative;
+	right: 10px;
+}
+
+#allusers table, th, tr, td {
+	border: 2px solid black;
+	border-collapse: collapse;
+	padding: 10px;
+}
+
+#allusers table th {
+	border: 2px solid blue;
+}
+
+#allusers {
+	position: absolute;
+	left: 18%;
+	top: 100px;
+}
+
+</style>
 </head>
 <body>
-<div id="container">
-<div id="navigation">
-        <ul>
-            <li ><a href="AllUser.jsp" >All Users</a></li>
-            <li><a href="AdminAllProducts.jsp">All Products</a></li>
-            <li><a href="AddProduct.jsp">Add Products</a></li>
-        </div>
-        </ul>
-    </div>
-<div>
-<% UserDaoImpl userdao = new UserDaoImpl();
+	<div id="container">
+		<div id="navigation">
+			<ul>
+				<li><a href="AllUser.jsp">All Users</a></li>
+				<li><a href="AdminAllProducts.jsp?deleteProductid=0">All Products</a></li>
+				<li><a href="AddProduct.jsp">Add Products</a></li>
+				<li id="logout"><a href="Index.jsp">Logout</a></li>
+		</div>
+		</ul>
+	</div>
+	<div>
+		<% UserDaoImpl userdao = new UserDaoImpl();
 List<User> userList = new ArrayList<User>();
 userList=userdao.ViewAllUser();%>
-<div id="allusers">
-<table>
-<thead>
-<tr>
-<th>User id</th>
-<th>Full Name</th>
-<th>Address</th>
-<th>Email</th>
-<th>mobile</th>
-<th>Status</th>
-</tr>
-</thead>
+		<div id="allusers">
+			<table>
+				<thead>
+					<tr>
+						<th>User id</th>
+						<th>Full Name</th>
+						<th>Address</th>
+						<th>Email</th>
+						<th>mobile</th>
+						<th>Status</th>
+					</tr>
+				</thead>
 
-<tbody>
-<%for(User user:userList){ %>
-<tr>
-<td><%=user.getUserId() %></td>
-<td><%=user.getName()%></td>
-<td><%=user.getAddress() %></td>
-<td><%=user.getUserMail() %></td>
-<td><%=user.getUserMobile()%></td>
-<td><%=user.getAccountStatus()%></td>
-</tr>
-<%} %>
-</tbody>
-</table>
-</div>
+				<tbody>
+					<%for(User user:userList){ %>
+					<tr>
+						<td><%=user.getUserId() %></td>
+						<td><%=user.getName()%></td>
+						<td><%=user.getAddress() %></td>
+						<td><%=user.getUserMail() %></td>
+						<td><%=user.getUserMobile()%></td>
+						<td><%=user.getAccountStatus()%></td>
+					</tr>
+					<%} %>
+				</tbody>
+			</table>
+		</div>
 
-</div>
+	</div>
 </body>
 </html>
