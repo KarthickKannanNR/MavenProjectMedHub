@@ -7,7 +7,6 @@
 <head>
 <meta charset="ISO-8859-1">
  <link rel = "icon" type = "" href = "Assets/medhublogo.png">
-
 <title>User Profile</title>
 <style>
 * {
@@ -24,6 +23,8 @@
 .list li {
 	float: right;
 	padding: 20px;
+	transition: transform 0.4s;
+	
 }
 
 .list ul {
@@ -56,6 +57,8 @@
 	color: orange;
 	border-radius: 5px;
 	cursor: pointer;
+	transform:translatey(-10px);
+	
 }
 .list{
    background: linear-gradient(to right, rgb(200, 47, 58) 0%,rgb(44, 169, 207) 100%);
@@ -99,7 +102,10 @@ bottom: 450px;
 </style>
 </head>
 <body>
-<%User currentUser = (User)session.getAttribute("user");
+<%
+String InsuffiendMoney = (String)session.getAttribute("InsuffientMoney");
+User currentUser = (User)session.getAttribute("user");
+String AddressNotFound = (String)session.getAttribute("AddressNotFound");
 %>
 <div class="nav">
 
@@ -119,29 +125,72 @@ bottom: 450px;
 		</nav>
 	</div>
 	
+	<% 
+	if(InsuffiendMoney!=null)
+	{ %>
+		<div class="InsuffiendMoney">
+		<h3><%=InsuffiendMoney %></h3>
+		</div>
+		
+	<%} 		session.removeAttribute("InsuffientMoney");%>
+	<% 
+	if(AddressNotFound!=null)
+	{ %>
+		<div class="addressNull">
+		<h3><%=AddressNotFound %></h3>
+		</div>
+		
+	<%}		session.removeAttribute("AddressNotFound");
+	%>
+	
+	
 	<!-- User Profile -->
 	<div id="userProfile">
 	<form action="ProfileUpdate">
-		<label>Name :</label>
-				<input id="" name="updatedName" value="<%=currentUser.getUsername()%>"><br>
+	<table border="1px">
+		<tr>
+			<td><label>Name :</label>
+			<td><input id="" name="updatedName" pattern="[A-Za-z]{3,}" title="name should be minimum 3 letters and maximum 30 letters" required min="3" max="10" value="<%=currentUser.getUsername()%>"><br></td>
+		</tr>
 		
-		<label>Password :</label>
-				<input id="" name="updatedPassword"  value="<%=currentUser.getUserPassword()%>"><br>
-		
-		<label>Mobile No :</label>
-				<input id="" name="UpdatedMobNum"  value="<%=currentUser.getUserMobile()%>"><br>
-		
-		<label>Delivery Address :</label>
+	<tr>
+		<td><label>Password :</label></td>
+		<td><input id="" name="updatedPassword"  required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%?&]{8,15}$"
+		title="Minimum eight and Minimum 8 and maximum 15 characters, at least one uppercase letter, one lowercase letter, one number and one special character" value="<%=currentUser.getUserPassword()%>"><br></td>
+	</tr>
 	
-		<input   id="UpdateDeliveryAddress"   name="UpdateDeliveryAddress"value="<%=currentUser.getAddress()%>"><br>
-						<button>Save Changes</button>
+	
+	<tr>
+		<td><label>Mobile No :</label></td>
+		<td><input id="" name="UpdatedMobNum"  pattern="[6-9][0-9]{9}"
+		title="MObile Number Must Have 10 Digits" required  value="<%=currentUser.getUserMobile()%>"><br><td>
+	</tr>	
+	
+	<tr>
+		<td><label>Delivery Address :</label></td>
+		<td><textarea   id="UpdateDeliveryAddress"   name="UpdateDeliveryAddress" required rows="5" cols="33" style="max-width: 300px;max-height: 100px;"><%=currentUser.getAddress()%></textarea><br></td>
+	</tr>	
+			<tr>
+			<td > 
+			<button>Save Changes</button>
+			</td>
+			</tr>
+				
 		</form>
+		</table>
 </div>
 	
 	<div id="walletMoneyUpdateForm">
 	<form action="walletUpdate">
 		<input type="number" name="UpdateWallet" "UpdateWallet" min="1" max="5000" value="<%=currentUser.getWallet()%>">
 		<button>Add Money</button>
+	</form>
+	</div>
+	
+	<div id="pointMoney">
+	<form action="ConvertMoney">
+	<input type="number" name="pointsMoney" "UpdateWallet" min="1" max="5000" value="<%=currentUser.getPoints()%>" readonly>
+		<button>Convert to Cash</button>
 	</form>
 	</div>
 	

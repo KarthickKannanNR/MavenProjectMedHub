@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.*;
 
 import com.interfaces.OrderItemDAO;
@@ -19,12 +20,7 @@ public class OrderItemsDaoImpl implements OrderItemDAO{
 		// TODO Auto-generated method stub
 		String orderQuery="insert into order_items(user_id,order_id,product_id,quantity,unit_price,total_price) values(?,?,?,?,?,?)";
 		Connection con = ConnectionUtil.getDBconnect();
-		System.out.println(oi.getUser().getUserId());
-		System.out.println(oi.getOrderModel().getOrderId());
-		System.out.println(oi.getProduct().getProductId());
-		System.out.println(oi.getQuantity());
-		System.out.println( oi.getUnitPrice());
-		System.out.println(oi.getTotalPrice());
+		
 		int res=0;
 		try {
 			PreparedStatement pst = con.prepareStatement(orderQuery);
@@ -51,7 +47,7 @@ public class OrderItemsDaoImpl implements OrderItemDAO{
 		Order order = new Order();
 		Product product= new Product();
 		OrderItems orderItems;
-		String qwery="select p.product_name,p.points_per_unit,oi.quantity,oi.unit_price,oi.total_price,oi.order_id,p.product_img,p.description,p.offer,p.product_id,oi.order_id\r\n"
+		String qwery="select p.product_name,p.points_per_unit,oi.quantity,oi.unit_price,oi.total_price,oi.order_id,p.product_img,p.description,p.offer,p.product_id,oi.order_id,o.order_date\r\n"
 				+ "from order_items oi \r\n"
 				+ "inner join orders o on oi.order_id=o.order_id\r\n"
 				+ "inner join products p on oi.product_id=p.product_id where oi.user_id = "+currentUser.getUserId()+" order by oi.total_price desc" ;
@@ -62,11 +58,10 @@ public class OrderItemsDaoImpl implements OrderItemDAO{
 			int num=0;
 			while(rs.next())
 			{
-				orderItems = new OrderItems(rs.getString(1),rs.getInt(2),rs.getInt(3),rs.getDouble(4),rs.getDouble(5),rs.getInt(6),rs.getString(7),rs.getString(8),rs.getInt(9),rs.getInt(10));
+				orderItems = new OrderItems(rs.getString(1),rs.getInt(2),rs.getInt(3),rs.getDouble(4),rs.getDouble(5),rs.getInt(6),rs.getString(7),rs.getString(8),rs.getInt(9),rs.getInt(10), rs.getDate(11).toLocalDate());
 				myOrderList.add(orderItems);
 				num++;
 			}
-			System.out.println(num);
 			return myOrderList;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

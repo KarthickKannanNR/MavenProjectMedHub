@@ -43,35 +43,32 @@ public class ProductDaoImpl implements ProductDAO {
 	public Boolean insertProduct(Product productModel) throws SQLException {
 		boolean flag = false;
 		try {
-		String query = "insert into products (product_category,product_name,description,price,available_quantity,product_img,points_per_unit,offer) values (?,?,?,?,?,?,?,?)";
-		Connection con = ConnectionUtil.getDBconnect();
-		PreparedStatement pst = con.prepareStatement(query);
-		pst.setString(1, productModel.getProductCategory());
-		pst.setString(2, productModel.getProductName());
-		pst.setString(3, productModel.getDescription());
-		pst.setDouble(4, productModel.getUnitPrice());
-		pst.setInt(5, productModel.getQuantity());
-		pst.setString(6, productModel.getProductImg());
-		pst.setInt(7, productModel.getPoints());
-		pst.setInt(8, productModel.getOffer());
-		int result = pst.executeUpdate();
-		
-		if (result > 0) {
-			flag = true;
-			return flag;
+			String query = "insert into products (product_category,product_name,description,price,available_quantity,product_img,points_per_unit,offer) values (?,?,?,?,?,?,?,?)";
+			Connection con = ConnectionUtil.getDBconnect();
+			PreparedStatement pst = con.prepareStatement(query);
+			pst.setString(1, productModel.getProductCategory());
+			pst.setString(2, productModel.getProductName());
+			pst.setString(3, productModel.getDescription());
+			pst.setDouble(4, productModel.getUnitPrice());
+			pst.setInt(5, productModel.getQuantity());
+			pst.setString(6, productModel.getProductImg());
+			pst.setInt(7, productModel.getPoints());
+			pst.setInt(8, productModel.getOffer());
+			int result = pst.executeUpdate();
+
+			if (result > 0) {
+				flag = true;
+				return flag;
+			}
+
 		}
-		
-	}
-		
-		catch(Exception e)
-		{
+
+		catch (Exception e) {
 			System.out.println(e.getMessage());
 			return false;
-			}
+		}
 		return false;
-}
-
-	
+	}
 
 //																				Update Products By ADmin
 	public int updateProducts(Product product) throws SQLException {
@@ -199,9 +196,8 @@ public class ProductDaoImpl implements ProductDAO {
 	}
 
 	public List<Product> searchProduct(String Productname) {
-		String query = "select * from products where product_name like '" + Productname + "%'";
+		String query = "select * from products where product_name like '" + Productname+ "%'  OR product_category like '" + Productname + "%' ";
 		List<Product> findedProducts = new ArrayList<Product>();
-
 		try {
 			Connection con = ConnectionUtil.getDBconnect();
 			Statement smt = con.createStatement();
@@ -218,16 +214,8 @@ public class ProductDaoImpl implements ProductDAO {
 		return findedProducts;
 	}
 
-	@Override
-	public void updateProducts(int updateProductId, String updateproductcategory, String updateProductName,
-			String updateProductDescription, int updateUnitPrice, int updateQuantity) throws SQLException {
-		// TODO Auto-generated method stub
-	}
 
-	@Override
-	public void updateProductQuantity(Product buyProducts) throws SQLException {
-		// TODO Auto-generated method stub
-
-	}
+	
+	
 
 }

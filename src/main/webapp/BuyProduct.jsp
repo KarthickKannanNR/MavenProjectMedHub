@@ -195,6 +195,10 @@ width: 10px;
 position: relative;
 left:-150px;
 }
+#ErrorMsg{
+visibility: hidden;
+}
+}
 </style>
 </head>
 <body>
@@ -229,9 +233,10 @@ session.setAttribute("currentproduct", currentProduct);
 			<tr>
 
 				 <td><img id="pImg"
-					src="<%currentProduct.getProductImg(); %>"
+					src="<%=currentProduct.getProductImg()%>"
 					alt=""></td>
-				<td>
+					
+				<td> 
 				<div id="pDesc">
 				<p>
 						<b>Product category:</b>
@@ -266,19 +271,20 @@ session.setAttribute("currentproduct", currentProduct);
 				<td>
 					<div id="qty">
 						<div id="qtyBox">
-						<form action="prod1">
+						<form action="prod1" onsubmit="chechQuantity()">
 							<label for="">Quantity</label> 
-							<input type="number" id="quantity" name="quantity" min="0"  max="<%=currentProduct.getQuantity()%>" onclick="calculateAmt()">
+							<input type="number" id="quantity" name="quantity" min="1"  max="<%=currentProduct.getQuantity()%>" onclick="calculateAmt()" required>
 						</div>
 						<h3 id="TotalPriceLabel">Total price : Rs </h3>
-						<input name="totalPrice" id="totalprice">
+						<input name="totalPrice" id="totalprice" >
 						<p name="message" id="message"></p>
 						<button type="submit" >Paynow</button>
 						</form>
 						<form action = "cartserv" id="cartForm">
-						<input name="cartQuanity" type = "text" id = "cartQuantity">
-						<input name="cartTotalPrice" type = "text" id = "cartTotalPrice">
+						<input name="cartQuanity" type = "text" id = "cartQuantity" required>
+						<input name="cartTotalPrice" type = "text" id = "cartTotalPrice" >
 						<button type="submit" id="addToCart">Add To Cart</button>
+						<h4 id="ErrorMsg" >Please Select Quantity</h4>
 						</form>
 					</div>
 				</td>
@@ -321,6 +327,15 @@ function cartfn(){
 	let carttot = document.getElementById("cartTotalPrice");
 cartquant.value = quant;
 carttot.value = totprice;
+}
+
+function chechQuantity() {
+	let quantity=document.getElementById("quantity").value;
+	if(quantity==null)
+	{
+		document.getElementById("ErrorMsg").style.visibility="visible";
+		}
+	
 }
 
 </script>

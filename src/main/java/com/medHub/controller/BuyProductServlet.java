@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.exceptions.AddressNotFound;
+import com.exceptions.InsuffientMoney;
 import com.medHub.dao.OrderDaoImpl;
 import com.medHub.dao.OrderItemsDaoImpl;
 import com.medHub.dao.ProductDaoImpl;
@@ -39,70 +41,65 @@ public class BuyProductServlet extends HttpServlet {
 		Order order = new Order();
 		OrderDaoImpl orderDao = new OrderDaoImpl();
 		OrderItemsDaoImpl orderItemsDaoImpl = new OrderItemsDaoImpl();
-		try {
+		
 
-			System.out.println("Current user" + currentUser.getWallet());
-			if (currentUser.getWallet() >= price) {
-
-				order.getProduct().setQuantity((order.getProduct().getQuantity() - qty));
-				try {
-					int updateQty = currentproduct.getQuantity() - qty;
-					productDao.updateProductQuantity(currentproduct, updateQty);
-					System.out.println(currentproduct.getQuantity());
-					System.out.println(qty);
-					System.out.println(currentproduct.getQuantity() - qty);
-
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+		if (currentUser.getWallet() >= price) 
+			{
+					if(currentUser.getAddress()!=null) 
+					{
+					order.getProduct().setQuantity((order.getProduct().getQuantity() - qty));
+					try {
+							int updateQty = currentproduct.getQuantity() - qty;
+							productDao.updateProductQuantity(currentproduct, updateQty);
+						} catch (SQLException e) 
+							{
+								e.printStackTrace();
+							}
+						order.setUser(currentUser);
+						orderItems.setUser(currentUser);
+						order.setPrice(price);
+						order.getUser().setPoints(order.getUser().getPoints() + (currentproduct.getPoints() * qty));
+						order.getUser().setWallet(order.getUser().getWallet() - price);
+						user.updateUserPoints(order);
+						user.updateWalletMoney(order);
+						orderDao.orders(order, currentUser);
+						int orderId = orderDao.getByOrderId();
+						order.setOrderId(orderId);
+						orderItems.setOrderModel(order);
+						orderItems.setProduct(currentproduct);
+						orderItems.setOrderId(orderId);
+						orderItems.getProduct().setProductId(currentproduct.getProductId());
+						orderItems.setQuantity(qty);
+						orderItems.setUnitPrice(currentproduct.getUnitPrice());
+						orderItems.setTotalPrice(price);
+						orderItemsDaoImpl.insertOrders(orderItems);
+						res.getWriter().println("order placed!!");
+						res.sendRedirect("Payment.jsp");
+					}else {
+						try {
+						throw new AddressNotFound();
+						}
+						catch(AddressNotFound e)
+						{
+							session.setAttribute("AddressNotFound", e.getMessage());
+							res.sendRedirect("UserProfile.jsp");
+						}
+					}
+			} else 
+				{
+						try {
+							throw new InsuffientMoney();
+							}
+						catch(InsuffientMoney IM) 
+							{
+								session.setAttribute("InsuffientMoney", IM.getMessage());
+								res.sendRedirect("UserProfile.jsp");
+							}
+				
+				
 				}
-				order.setUser(currentUser);
-				orderItems.setUser(currentUser);
-				order.setPrice(price);
-				order.getUser().setPoints(order.getUser().getPoints() + (currentproduct.getPoints() * qty));
-				order.getUser().setWallet(order.getUser().getWallet() - price);
-				user.updateUserPoints(order);
-				user.updateWalletMoney(order);
-				orderDao.orders(order, currentUser);
-				int orderId = orderDao.getByOrderId();
-				order.setOrderId(orderId);
-				orderItems.setOrderModel(order);
-				orderItems.setProduct(currentproduct);
-				orderItems.setOrderId(orderId);
-				orderItems.getProduct().setProductId(currentproduct.getProductId());
-				orderItems.setQuantity(qty);
-				orderItems.setUnitPrice(currentproduct.getUnitPrice());
-				orderItems.setTotalPrice(price);
-				orderItemsDaoImpl.insertOrders(orderItems);
-				res.getWriter().println("order placed!!");
-				/*
-				 * if (currentUser.getPoints() > 500) {
-				 * System.out.println(currentUser.getPoints());
-				 * 
-				 * int points = currentUser.getPoints();
-				 * 
-				 * System.out.println(points); // int finalPoints=currentUser.getPoints();
-				 * 
-				 * int convert = (int) Math.round(points * .10);
-				 * 
-				 * System.out.println("fghhgh" + convert);
-				 * 
-				 * order.getUser().setWallet(order.getUser().getWallet() + convert);
-				 * user.updateWalletMoney(order); order.getUser().setPoints(0);
-				 * user.updateUserPoints(order);
-				 * 
-				 * }
-				 */
-				res.sendRedirect("Payment.jsp");
-			} else {
-				res.sendRedirect("UserProfile.jsp");
+		
 
-			}
-
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e.getMessage());
-		}
 
 	}
 

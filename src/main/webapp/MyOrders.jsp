@@ -30,6 +30,8 @@
 .list li {
 	float: right;
 	padding: 20px;
+	transition: transform 0.4s;
+	
 }
 
 .list ul {
@@ -62,6 +64,8 @@
 	color: orange;
 	border-radius: 5px;
 	cursor: pointer;
+	transform: translateY(-10px);
+	
 }
 
 .list{
@@ -254,14 +258,23 @@ left: 55px;
 		List<OrderItems> myOrderList = myOrder.ViewMyOrders(currentUser);
 		int orderId=Integer.parseInt(request.getParameter("orderId"));
 		OrderDaoImpl orderDao=new OrderDaoImpl();	
-		currentCancelOrder.deleteProduct(orderId);
+		boolean deleteStatus=currentCancelOrder.deleteProduct(orderId);
+		if(deleteStatus)
+		{%>
+			<script>
+			alert("Ordered Cancelled Sucessfully");
+			</script>
+			
+		<% }%>
+		
 
 		
 		/* orderDao.deleteProduct(myAllOrders.getOrderModel().getOrderId()); */
-		boolean flag;
 		
-		%>
-		<% for(OrderItems myAllOrders : myOrderList)
+		
+	
+		<% boolean flag;
+		for(OrderItems myAllOrders : myOrderList)
 			 {
 			flag =orderDao.checkStatus(myAllOrders.getOrderModel().getOrderId());
 			 %>

@@ -24,6 +24,7 @@ public class OrderDaoImpl implements OrderDAO{
 			pst.setInt(1,currentUser.getUserId() );
 			pst.setDouble(2, order.getPrice());
 			pst.executeUpdate();
+			pst.executeUpdate("commit");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.getMessage();
@@ -46,7 +47,6 @@ public class OrderDaoImpl implements OrderDAO{
 			if(rs.next())
 			{
 			orderId=rs.getInt(1);
-			System.out.println("getbyorderId"+orderId);
 			}
 			
 		} catch (SQLException e) {
@@ -57,26 +57,24 @@ public class OrderDaoImpl implements OrderDAO{
 		
 	}
 
-	public void deleteProduct(int orderId) throws SQLException
+	public boolean deleteProduct(int orderId) throws SQLException
 	{
-		System.out.println("cancel metghod called");
+		boolean flag=false;
 		String qwery="update orders set order_status='canceled' where order_id =?";
 		Connection con = ConnectionUtil.getDBconnect();
 		PreparedStatement pst=con.prepareStatement(qwery);
 		pst.setInt(1, orderId);
 		int res=pst.executeUpdate();
+		pst.executeUpdate("commit");
+
 		if(res>0)
 		{
-			System.out.println(res+"Product deleted");
-			System.out.println("order cancelled");
-			
+			flag=true;
+			return flag;
 		}
-		else {
-			System.out.println("product not deleted");
-		}
-		
 		con.close();
 		pst.close();
+		return flag;
 		
 	}
 
@@ -92,7 +90,6 @@ public class OrderDaoImpl implements OrderDAO{
 		{
 			
 		status=rs.getString(1).toLowerCase();
-		System.out.println(status);
 		if(!status.equals("canceled"))
 		{
 			return true;

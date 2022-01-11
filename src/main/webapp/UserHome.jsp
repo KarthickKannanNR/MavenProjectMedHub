@@ -12,9 +12,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <link rel = "icon" type = "" href = "Assets/medhublogo.png">
-<meta name="theme-color" content="#FF08" >
-<meta name="theme-color" content="#ffffff">
-
+<meta name="theme-color" content="#ba8f88" >
 
 <title>Userhome</title>
 <style>
@@ -39,6 +37,7 @@
 .list li {
 	float: right;
 	padding: 20px;
+	transition: transform 0.4s;
 }
 
 .list ul {
@@ -47,7 +46,6 @@
 	margin-right: 0%;
 	position: absolute;
 	top: 0;
-	
 	box-shadow: 0 5 black;
 	/* margin-top: 0%; */
 	right: 0px;
@@ -74,6 +72,7 @@
 }
 .list li:hover{
 	transition-duration: 0.2s;
+	transform: translateY(-10px);
 
 }
 
@@ -260,17 +259,16 @@ left:200px;
 		</div>
 		<h2 id="userName">welcome <%=currentUser.getName()%></h2>
 		</div>
-
-		<form action="" class="prodSearch" >
+		
+<!-- 					Search Products		
+ -->		<form action="FilteredProduct.jsp" class="prodSearch" >
 		<input type="text" name="ProductName" required="required" placeholder="Search Products">
-		<button>Search</button>
+		<button type="submit">&#128269;</button>
 		</form>
 		<% 
 		ProductDaoImpl product= new ProductDaoImpl();
 		List<Product> allproduct = product.viewProduts();
-		 Product searchProducts = new Product(); 
-/* 		 searchProducts.searchProduct(searchProduct); 
- */		
+		 Product searchProducts = new Product(); 	
 	%>
 		<% for(Product products : allproduct)
 		

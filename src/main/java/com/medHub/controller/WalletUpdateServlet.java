@@ -17,6 +17,8 @@ public class WalletUpdateServlet extends HttpServlet{
 	public void service(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		
 		HttpSession session = req.getSession();
+		session.setAttribute("InsuffientMoney",null);
+
 		User currentUser = (User) session.getAttribute("user");
 		double wallet = Long.parseLong(req.getParameter("UpdateWallet"));
 		wallet=wallet+currentUser.getWallet();

@@ -233,6 +233,7 @@ left:200px;
 <body>
 	<%User currentUser = (User)session.getAttribute("user");
 	session.setAttribute("userNotFound", null);
+	String Pname = request.getParameter("ProductName");
 	%>
 	
 	<div id="container">
@@ -264,10 +265,11 @@ left:200px;
 		</form>
 		<% 
 		ProductDaoImpl product= new ProductDaoImpl();
-		List<Product> allproduct = product.viewProduts();
 		 Product searchProducts = new Product(); 
-/* 		 searchProducts.searchProduct(searchProduct); 
- */		
+		List<Product> allproduct = product.searchProduct(Pname);
+		
+		 
+ 	
 	%>
 		<% for(Product products : allproduct)
 		

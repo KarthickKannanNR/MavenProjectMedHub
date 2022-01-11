@@ -14,15 +14,23 @@
 	box-sizing: border-box;
 	font-family: Arial, Helvetica, sans-serif;
 }
-
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+  transition: background-color 5000s;
+  -webkit-text-fill-color: #fff !important;
+}
 .list ul li {
 	list-style: none;
 	display: inline-block;
 }
 
+
 .list li {
 	float: right;
 	padding: 15px;
+	transition: transform 0.4s;
 }
 
 .list ul {
@@ -56,6 +64,8 @@
 	color: orange;
 	border-radius: 5px;
 	cursor: pointer;
+	transform: translateY(-10px);
+	
 }
 
 body {
@@ -317,14 +327,14 @@ body {
 				<form action="RegisterController" class="registerform" method="post">
 					<label for="fullName" class="reglab"">FullName*</label><br>
 					<br> <input type="text" name="regfullName" id="fullname"
-						placeholder="Enter fullname" required><br>
+						placeholder="Enter fullname" required ><br>
 					<br> <label for="mail" class="reglab">Mail Id</label><br>
 					<br> <input type="email" name="regMail"
 						placeholder="Enter Mail Id" required><br>
 					<BR> <label for="phone" class="reglab">Mobile Number*</label><br>
 					<br> <input type="text" name="regMobile" required
 						placeholder="Enter Mobile Number" pattern="[0-9]{10}"
-						title="MObile Number Must Have 10 Digits" required min="3" max="3"><br>
+						title="MObile Number Must Have 10 Digits" required min="3" max="10"><br>
 					<br> <label for="password" class="reglab">Password*</label><br>
 					<br> <input type="password" input="password"
 						placeholder="Password" name="regPassword" value="" required
