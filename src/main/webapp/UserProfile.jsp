@@ -98,6 +98,9 @@ position: absolute;
 left: 500px;
 bottom: 450px;
 }
+textarea {
+  resize: none;
+}
 
 </style>
 </head>
@@ -151,6 +154,13 @@ String AddressNotFound = (String)session.getAttribute("AddressNotFound");
 		<tr>
 			<td><label>Name :</label>
 			<td><input id="" name="updatedName" pattern="[A-Za-z]{3,}" title="name should be minimum 3 letters and maximum 30 letters" required min="3" max="10" value="<%=currentUser.getUsername()%>"><br></td>
+			<td rowspan="2" colspan="2" width="700px">
+			<div id="walletMoneyUpdateForm">
+	<form action="walletUpdate">
+		<input type="number" name="UpdateWallet" "UpdateWallet" min="1" max="5000" value="<%=currentUser.getWallet()%>">
+		<button>Add Money</button>
+	</form>
+	</div></td>
 		</tr>
 		
 	<tr>
@@ -162,8 +172,14 @@ String AddressNotFound = (String)session.getAttribute("AddressNotFound");
 	
 	<tr>
 		<td><label>Mobile No :</label></td>
-		<td><input id="" name="UpdatedMobNum"  pattern="[6-9][0-9]{9}"
-		title="MObile Number Must Have 10 Digits" required  value="<%=currentUser.getUserMobile()%>"><br><td>
+		<td><input id="" name="UpdatedMobNum"  pattern="[6-9][0-9]{9}" title="MObile Number Must Have 10 Digits" required  value="<%=currentUser.getUserMobile()%>"></td>
+	    	<td rowspan="2" colspan="2" width="700px">
+	    	<div id="pointMoney">
+	<form action="ConvertMoney">
+	<input type="number" name="pointsMoney" "UpdateWallet" min="1" max="5000" value="<%=currentUser.getPoints()%>" readonly>
+		<button>Convert to Cash</button>
+	</form>
+	</div></td>
 	</tr>	
 	
 	<tr>
@@ -171,7 +187,7 @@ String AddressNotFound = (String)session.getAttribute("AddressNotFound");
 		<td><textarea   id="UpdateDeliveryAddress"   name="UpdateDeliveryAddress" required rows="5" cols="33" style="max-width: 300px;max-height: 100px;"><%=currentUser.getAddress()%></textarea><br></td>
 	</tr>	
 			<tr>
-			<td > 
+			<td colspan="2"> 
 			<button>Save Changes</button>
 			</td>
 			</tr>
@@ -179,20 +195,7 @@ String AddressNotFound = (String)session.getAttribute("AddressNotFound");
 		</form>
 		</table>
 </div>
-	
-	<div id="walletMoneyUpdateForm">
-	<form action="walletUpdate">
-		<input type="number" name="UpdateWallet" "UpdateWallet" min="1" max="5000" value="<%=currentUser.getWallet()%>">
-		<button>Add Money</button>
-	</form>
-	</div>
-	
-	<div id="pointMoney">
-	<form action="ConvertMoney">
-	<input type="number" name="pointsMoney" "UpdateWallet" min="1" max="5000" value="<%=currentUser.getPoints()%>" readonly>
-		<button>Convert to Cash</button>
-	</form>
-	</div>
+
 	
 </body>
 </html>

@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalDate"%>
 <%@page import="javax.swing.plaf.metal.MetalBorders.Flush3DBorder"%>
 <%@page import="java.util.List"%>
 <%@page import="com.medHub.model.*"%>
@@ -80,9 +81,7 @@ body {
 	background-image: url(Assets/homepage_img.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
-	height:100vh;
 	overflow-x:hidden; 
-	
 }
 
 .logo img {
@@ -226,8 +225,14 @@ left: 55px;
 </head>
 
 <body>
-	<%User currentUser = (User)session.getAttribute("user");
+	<%
+	OrderItemsDaoImpl myOrder= new OrderItemsDaoImpl();User currentUser = (User)session.getAttribute("user");
+	List<OrderItems> myOrderList = myOrder.ViewMyOrders(currentUser);
 	OrderDaoImpl currentCancelOrder = new OrderDaoImpl();
+	OrderItemsDaoImpl orderItem = new OrderItemsDaoImpl();
+/* 	LocalDate date =  orderItem.getCurrentDate().toLocaleString();
+	Date localDepartureDate = java.sql.Date.valueOf(date); */
+	
 	%>
 	<div id="container">
 
@@ -254,8 +259,8 @@ left: 55px;
 <%-- 		<h2 id="userName">welcome <%=currentUser.getName()%></h2>
  --%>		</div>
 
-		<% OrderItemsDaoImpl myOrder= new OrderItemsDaoImpl();
-		List<OrderItems> myOrderList = myOrder.ViewMyOrders(currentUser);
+		<% 
+		
 		int orderId=Integer.parseInt(request.getParameter("orderId"));
 		OrderDaoImpl orderDao=new OrderDaoImpl();	
 		boolean deleteStatus=currentCancelOrder.deleteProduct(orderId);
@@ -277,6 +282,9 @@ left: 55px;
 		for(OrderItems myAllOrders : myOrderList)
 			 {
 			flag =orderDao.checkStatus(myAllOrders.getOrderModel().getOrderId());
+			System.out.println(myAllOrders.getOrderdate());
+			boolean cancel = orderItem.cancelDate(myAllOrders.getOrderdate(),myAllOrders.getOrderModel().getOrderId());
+			System.out.println(cancel);
 			 %>
 		
 			<div id="product">
@@ -286,8 +294,12 @@ left: 55px;
 				</div>
 				<div id="details">
 					<h3>
-						Description :
-						<%=myAllOrders.getProduct().getDescription() %></h3>
+						Order Date :
+						<%=myAllOrders.getOrderdate()%></h3>
+					<h3>
+					Description :
+					<%=myAllOrders.getDescription()%>
+					</h3>
 					<h3>
 						price :<%=myAllOrders.getUnitPrice()+ "rs"%></h3>
 					<h3>
@@ -305,7 +317,9 @@ left: 55px;
 						<%=myAllOrders.getTotalPrice() %></h3>
 						
 				</div>
-				<% if(flag){%>
+				<% if(flag && cancel)
+				{%>
+					<h3>Ordered Cancelled</h3>
 				<div id="btn">
 					<button>
 						<a id="cancel" href="MyOrders.jsp?orderId=<%=myAllOrders.getOrderModel().getOrderId()%>">Cancel Order</a>
@@ -313,8 +327,7 @@ left: 55px;
 					<br>
 					</button>
 				</div>
-				<% }
-				%>
+				<% }%>
 			</div>
 		
 		<br>
@@ -323,8 +336,8 @@ left: 55px;
 		
 		
 	
-		<h2 id="copyrights">© 2021 MedHub.com. All rights reserved.</h2>
-
+<!-- 		<h2 id="copyrights">© 2021 MedHub.com. All rights reserved.</h2>
+ -->
 	</div>
 
 	</div>

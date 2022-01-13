@@ -32,8 +32,10 @@
    background: linear-gradient(to right, rgb(200, 47, 58) 0%,rgb(44, 169, 207) 100%);
    position: fixed;
    width: 100%;
+   box-shadow:0 0 10px black;
    z-index: 1;
 }
+
 .list li {
 	float: right;
 	padding: 20px;
@@ -70,10 +72,10 @@
 	border-radius: 5px;
 	cursor: pointer;
 }
+
 .list li:hover{
 	transition-duration: 0.2s;
 	transform: translateY(-10px);
-
 }
 
 body {
@@ -82,7 +84,7 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 	overflow-x: hidden;
-	height: 300%;
+	height: 3500px;
 }
 
 .logo img {
@@ -96,22 +98,9 @@ body {
 	position: absolute;
 	top: 120px;
 }
-/* progress */
-.products {
-	margin-top: 330px;
-	border-spacing: 0 200px;
-}
-
-.slide img {
-	box-shadow: 0 0 10px black;
-}
 
 .products tr td {
 	padding-left: 220px;
-}
-
-img {
-	box-shadow: 0 0 10px black;
 }
 
 .logo img {
@@ -120,8 +109,7 @@ img {
 
 #copyrights {
 	text-align: center;
-	color: yellow;
-	margin-bottom: 0;
+	color: yellow;	
 }
 
 #allproducts a {
@@ -138,19 +126,21 @@ img {
 	text-align: center;
 }
 
+
 #product {
 	position: relative;
 	top: 30px;
 	left: 50px;
-}
-
-#product {
-	position: relative;
 	background-color: rgba(158, 202, 207, 0.5);
 	height: 190px;
 	border-radius: 5px;
 	width: 1200px;
 	top:150px;
+}
+
+#product:hover{
+box-shadow: 0 0 10px black;
+transition-duration:0.3s;
 }
 
 #product img {
@@ -168,7 +158,7 @@ img {
 
 #product #details {
 	position: relative;
-	left: 220px;
+	left: 250px;
 	top: -90px;
 }
 
@@ -210,25 +200,58 @@ img {
 	top:20px;
 }
 
-#btn #buynow {
+/* #btn #buynow {
 	position: relative;
 
-}
+} */
 
 a {
 	text-decoration: none;
 	color: black;
 }
+
 #userName{
 position: absolute;
 top:90px;
 left: 55px;
 }
+
 .prodSearch{
-position: relative;
-top: 100px;
+position: fixed;
 left:200px;
+z-index: 1;
+top:18px;
 }
+
+#searchBar{
+height: 30px;
+width:250px;
+outline: none;
+border: none;
+border-top-left-radius: 2px;
+border-bottom-left-radius: 2px;
+}
+
+#searchBtn{
+position:absolute;
+height:30px;
+width: 40px;
+border: none;
+border-top-right-radius: 2px;
+border-bottom-right-radius: 2px;
+}
+
+#searchBtn:hover{
+cursor: pointer;
+background-color: rgb(173, 238, 120);
+box-shadow: 0 0 5px black;
+transition-duration:0.2s;
+}
+
+#searchBar:Hover{
+box-shadow: 0 0 10px black;
+}
+
 </style>
 </head>
 
@@ -262,8 +285,8 @@ left:200px;
 		
 <!-- 					Search Products		
  -->		<form action="FilteredProduct.jsp" class="prodSearch" >
-		<input type="text" name="ProductName" required="required" placeholder="Search Products">
-		<button type="submit">&#128269;</button>
+		<input id="searchBar" type="text" name="ProductName" required="required" placeholder="Search Products & categories">
+		<button type="submit" id="searchBtn">&#128269;</button>
 		</form>
 		<% 
 		ProductDaoImpl product= new ProductDaoImpl();
@@ -295,9 +318,9 @@ left:200px;
 						<%=products.getPoints() %></h3>
 				</div>
 				<div id="btn">
-					<button>
+					<a><button>
 						<a id="buynow" href="BuyProduct.jsp?pid=<%=products.getProductId()%>">Buy Now</a>
-					</button>
+					</button></a>
 					<%--  <button>
 						<a id="btn1" href="AddToCart.jsp?cartpId<%=products.getProductId()%>">Add To Cart</a>
 					</button> --%>
@@ -309,12 +332,13 @@ left:200px;
 		<br>
 		<%} %>
 		
-		<h2 id="copyrights">© 2021 MedHub.com. All rights reserved.</h2>
 
 	</div>
 
 	</div>
-	<div id="footer"></div>
+	<div id="footer">
+			
+	</div>
 
 
 </body>

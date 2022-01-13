@@ -1,9 +1,12 @@
 package com.medHub.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -47,7 +50,7 @@ public class OrderItemsDaoImpl implements OrderItemDAO{
 		Order order = new Order();
 		Product product= new Product();
 		OrderItems orderItems;
-		String qwery="select p.product_name,p.points_per_unit,oi.quantity,oi.unit_price,oi.total_price,oi.order_id,p.product_img,p.description,p.offer,p.product_id,oi.order_id,o.order_date\r\n"
+		String qwery="select p.product_name,p.points_per_unit,oi.quantity,oi.unit_price,oi.total_price,oi.order_id,p.product_img,p.description,p.offer,p.product_id,o.order_date\r\n"
 				+ "from order_items oi \r\n"
 				+ "inner join orders o on oi.order_id=o.order_id\r\n"
 				+ "inner join products p on oi.product_id=p.product_id where oi.user_id = "+currentUser.getUserId()+" order by oi.total_price desc" ;
@@ -55,22 +58,59 @@ public class OrderItemsDaoImpl implements OrderItemDAO{
 		try {
 			PreparedStatement ps = con.prepareStatement(qwery);
 			ResultSet rs = ps.executeQuery();
-			int num=0;
+			
 			while(rs.next())
+
 			{
-				orderItems = new OrderItems(rs.getString(1),rs.getInt(2),rs.getInt(3),rs.getDouble(4),rs.getDouble(5),rs.getInt(6),rs.getString(7),rs.getString(8),rs.getInt(9),rs.getInt(10), rs.getDate(11).toLocalDate());
+				System.out.println(rs.getDate(11).toLocalDate());
+				orderItems = new OrderItems(rs.getString(1),rs.getInt(2),rs.getInt(3),rs.getDouble(4),rs.getDouble(5),rs.getInt(6),rs.getString(7),rs.getString(8),rs.getInt(9),rs.getInt(10),rs.getDate(11).toLocalDate());
 				myOrderList.add(orderItems);
-				num++;
 			}
-			return myOrderList;
-		} catch (SQLException e) {
+				return myOrderList;
+			} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		return myOrderList;
+			}
+			return myOrderList;
 		
 		
-	}
+			}
+	// to get current date
+			public  LocalDate getCurrentDate() {
+//					java.util.Date today = new java.util.Date();
+//					 Date dateStr = new java.sql.Date(today.getTime());
+				Date date = (Date) Calendar.getInstance().getTime();  
+				DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");  
+				String strDate = dateFormat.format(date);	
+			    LocalDate todayDate = LocalDate.parse(strDate);
+					return todayDate;
+				} 
+			
+			public boolean cancelDate(LocalDate date,int orderid) {
+				// TODO Auto-generated method stub
+				String query = "select * from orders where order_id=? and ?+1 >= sysdate";
+				Connection con = ConnectionUtil.getDBconnect();
+				boolean flag = false;
+				try {
+					PreparedStatement ps = con.prepareStatement(query);
+					ps.setInt(1, orderid);
+					ps.setDate(2, java.sql.Date.valueOf(date));
+					ResultSet rs = ps.executeQuery();
+					
+					if(rs.next())
+
+					{
+						flag = true;
+					}
+						
+					} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					}
+					return flag;
+				
+				
+					}
 }
 
 

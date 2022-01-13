@@ -20,6 +20,15 @@
 	box-sizing: border-box;
 	font-family: Arial, Helvetica, sans-serif;
 }
+/* Nav is named as List
+ */
+ 
+.list{
+background: linear-gradient(to right, rgb(200, 47, 58) 0%,rgb(44, 169, 207) 100%);
+   position: fixed;
+   width: 100%;
+   z-index: 1;
+}
 .list ul li {
 	list-style: none;
 	display: inline-block;
@@ -28,6 +37,9 @@
 .list li {
 	float: right;
 	padding: 20px;
+	transition: transform 0.4s;
+	color: white;
+	
 }
 
 .list ul {
@@ -60,6 +72,11 @@
 	color: orange;
 	border-radius: 5px;
 	cursor: pointer;
+}
+.list li:hover{
+	transition-duration: 0.2s;
+	transform: translateY(-10px);
+
 }
 
 body {
@@ -116,7 +133,7 @@ border-radius: 5px;
 }
 
 .buyProduct td p{
-padding-top: 20px;
+padding-top: 30px;
 position: relative;
 left:-100px;
 }
@@ -138,7 +155,6 @@ cursor: pointer;
 #price{
 position: relative;
 left: -100px;
-top:8px;
 outline: none;
 border: none;
 background-color: rgba(158, 202, 207,0.1); 
@@ -152,7 +168,8 @@ left:10px;
 }
 #pDesc{
 position: relative;
-left: 40px;
+left: 110px;
+bottom: 15px;
 }
 #totalprice{
 position: relative;
@@ -168,7 +185,7 @@ right: 50px;
 #offer{
 position: relative;
 left: -100px;
-top:8px;
+top:30px;
 outline: none;
 border:none;
 background-color: rgba(158, 202, 207,0.1); 
@@ -185,9 +202,7 @@ color: black;
 font-weight: 700;
 font-size: 17px;
 }
-#offer{
-width: 10px;
-}
+
 #cartQuantity,#cartTotalPrice{
 
 }
@@ -198,7 +213,36 @@ left:-150px;
 #ErrorMsg{
 visibility: hidden;
 }
+#cartQuantity{
+visibility: hidden;
 }
+#cartTotalPrice{
+visibility: hidden;
+}
+#detail{
+position: relative;
+left:50px;
+bottom:15px;
+}
+
+#detail p:nth-child(1) {
+  position: relative;
+  bottom: 29px;
+}
+
+#detail p:nth-child(2) {
+  position: relative;
+  bottom: 29px;
+}
+#detail p:nth-child(3) {
+  position: relative;
+  bottom: 29px;
+}
+#detail p:nth-child(4) {
+  position: relative;
+  bottom: -50px;
+}
+
 </style>
 </head>
 <body>
@@ -232,9 +276,6 @@ session.setAttribute("currentproduct", currentProduct);
 
 			<tr>
 
-				 <td><img id="pImg"
-					src="<%=currentProduct.getProductImg()%>"
-					alt=""></td>
 					
 				<td> 
 				<div id="pDesc">
@@ -258,32 +299,35 @@ session.setAttribute("currentproduct", currentProduct);
 					</p>
 					<p>
 						<b>Offer:</b>
-					</p></td>
-				<td>
+					</p>
+					</td>
+				<td id="detail">
 					<p name="pCategory"><%=currentProduct.getProductCategory() %></p>
 					<p name="pName"><%=currentProduct.getProductName() %></p>
 					<p name="pDescription"><%=currentProduct.getDescription() %></p>
 					<input name="pUnitPrice" id="price" value="<%=currentProduct.getUnitPrice()%>" disabled>
 					<p name="pQuantity"><%=currentProduct.getQuantity() %></p>
 					<p name="pgetPoints"><%=currentProduct.getPoints() %></p>
-					<input name="pOffer" id="offer" value="<%=currentProduct.getOffer()%>"  disabled>%
+					<input name="pOffer" id="offer" value="<%=currentProduct.getOffer()%>%"  disabled>
 					</td>
 				<td>
 					<div id="qty">
 						<div id="qtyBox">
-						<form action="prod1" onsubmit="chechQuantity()">
+						<form action="prod1" onsubmit="return chechQuantity()">
 							<label for="">Quantity</label> 
-							<input type="number" id="quantity" name="quantity" min="1"  max="<%=currentProduct.getQuantity()%>" onclick="calculateAmt()" required>
+							<input type="number" id="quantity" name="quantity" min="1"  max="<%=currentProduct.getQuantity()%>" onclick="calculateAmt();makeHidden()" >
 						</div>
 						<h3 id="TotalPriceLabel">Total price : Rs </h3>
 						<input name="totalPrice" id="totalprice" >
 						<p name="message" id="message"></p>
 						<button type="submit" >Paynow</button>
 						</form>
-						<form action = "cartserv" id="cartForm">
+						
+						
+						<form action = "cartserv" id="cartForm" onsubmit="return chechQuantity()">
 						<input name="cartQuanity" type = "text" id = "cartQuantity" required>
 						<input name="cartTotalPrice" type = "text" id = "cartTotalPrice" >
-						<button type="submit" id="addToCart">Add To Cart</button>
+						<button type="submit" id="addToCart" >Add To Cart</button>
 						<h4 id="ErrorMsg" >Please Select Quantity</h4>
 						</form>
 					</div>
@@ -304,6 +348,7 @@ function calculateAmt() {
 	console.log(quanty);
 	var discount=document.getElementById("offer");
 	var dis=discount.value;
+
 	var totalAmt;
 /* 	price=Math.floor((price.value*offer.value)/100);
  * 
@@ -330,12 +375,20 @@ carttot.value = totprice;
 }
 
 function chechQuantity() {
-	let quantity=document.getElementById("quantity").value;
-	if(quantity==null)
-	{
-		document.getElementById("ErrorMsg").style.visibility="visible";
-		}
 	
+	
+	if(document.getElementById("quantity").value==0 || document.getElementById("cartQuanity").value==0)
+		
+	{
+		
+		document.getElementById("ErrorMsg").style.visibility="visible";
+		
+		return false;
+		}
+	return true; 	
+}
+function makeHidden() {
+	document.getElementById("ErrorMsg").style.visibility="hidden";	
 }
 
 </script>

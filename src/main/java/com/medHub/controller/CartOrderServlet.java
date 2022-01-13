@@ -25,10 +25,10 @@ import com.medHub.model.User;
 public class CartOrderServlet extends HttpServlet {
 
 	public void service(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		
 		HttpSession session = req.getSession();
 		System.out.println("cart servlet called");
 		UserDaoImpl user = new UserDaoImpl();
-		System.out.println("1");
 		ProductDaoImpl productDao = new ProductDaoImpl();
 		Product product = new Product();
 		OrderItems orderItems = new OrderItems();
@@ -43,8 +43,6 @@ public class CartOrderServlet extends HttpServlet {
 		User currentUser = (User) session.getAttribute("user");
 
 		int CartproductId = Integer.parseInt(req.getParameter("CartproductId"));
-		System.out.println(req.getParameter("cartQuantity"));
-		System.out.println("4");
 		int cartQuantity = Integer.parseInt(req.getParameter("cartQuantity"));
 		double unitPrice = Double.parseDouble(req.getParameter("unitPrice"));
 		double totalPrice = Double.parseDouble(req.getParameter("totalPrice"));
@@ -60,11 +58,8 @@ public class CartOrderServlet extends HttpServlet {
 		if (currentProduct.getQuantity() != 0 && (currentProduct.getQuantity() - cartQuantity) > 0) {
 
 			if ((currentUser.getWallet() - totalPrice) >= 0) {
-				System.out.println();
 				order.setProduct(currentProduct);
 				int updateQty = currentProduct.getQuantity() - cartQuantity;
-				System.out.println(currentProduct.getQuantity());
-				System.out.println(cartQuantity);
 
 				try {
 					productDao.updateProductQuantity(currentProduct, updateQty);

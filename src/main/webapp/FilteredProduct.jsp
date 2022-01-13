@@ -33,20 +33,19 @@
    width: 100%;
    z-index: 1;
 }
+
 .list li {
 	float: right;
 	padding: 20px;
+	transition: transform 0.4s;
 }
 
 .list ul {
-	/* background-color: #10847E;*/
 	position: absolute;
 	margin-right: 0%;
 	position: absolute;
 	top: 0;
-	
 	box-shadow: 0 5 black;
-	/* margin-top: 0%; */
 	right: 0px;
 	width: 1372px;
 }
@@ -61,18 +60,15 @@
 	font-family: monospace;
 	font-size: 25px;
 	font-weight: 500;
-	/* margin-right: 20px; */
 }
 
-.list li:hover, .list a:hover {
-	color: orange;
-	border-radius: 5px;
-	cursor: pointer;
-}
+
+
 .list li:hover{
 	transition-duration: 0.2s;
-
-}
+	transform: translateY(-10px);
+	color: orange;
+	}
 
 body {
 	/* background: linear-gradient(rgba(26,176,156,0.7),rgba(239,78,28,0.5)) ,url(Images/homepage_img.jpg); */
@@ -94,6 +90,7 @@ body {
 	position: absolute;
 	top: 120px;
 }
+
 /* progress */
 .products {
 	margin-top: 330px;
@@ -176,6 +173,11 @@ img {
 	left: 900px;
 }
 
+#product:hover{
+box-shadow: 0 0 10px black;
+transition-duration:0.3s;
+}
+
 #product #btn button {
 	height: 30px;
 	width: 90px;
@@ -210,30 +212,62 @@ img {
 
 #btn #buynow {
 	position: relative;
-
 }
 
 a {
 	text-decoration: none;
 	color: black;
 }
+
 #userName{
 position: absolute;
 top:90px;
 left: 55px;
 }
+
 .prodSearch{
-position: relative;
-top: 100px;
+position: fixed;
 left:200px;
+z-index: 1;
+top:18px;
 }
+
+#searchBar{
+height: 30px;
+width:250px;
+border: none;
+outline:none;
+border-top-left-radius: 2px;
+border-bottom-left-radius: 2px;
+}
+
+#searchBtn{
+position:absolute;
+height:30px;
+width: 40px;
+border: none;
+border-top-right-radius: 2px;
+border-bottom-right-radius: 2px;
+outline: none;
+}
+
+#searchBtn:hover{
+cursor: pointer;
+background-color:yellowgreen;
+box-shadow: 0 0 5px black;
+transition-duration:0.2s;
+}
+
+#searchBar:Hover{
+box-shadow: 0 0 10px black;
+
 </style>
 </head>
 
 <body>
 	<%User currentUser = (User)session.getAttribute("user");
 	session.setAttribute("userNotFound", null);
-	String Pname = request.getParameter("ProductName");
+	String Pname = request.getParameter("ProductName").toLowerCase();
 	%>
 	
 	<div id="container">
@@ -256,19 +290,19 @@ left:200px;
 						alt="logo">
 			</nav>
 		</div>
-		<h2 id="userName">welcome <%=currentUser.getName()%></h2>
-		</div>
+		</div>		
 
 		<form action="" class="prodSearch" >
-		<input type="text" name="ProductName" required="required" placeholder="Search Products">
-		<button>Search</button>
+		<input id="searchBar" type="text" name="ProductName" required placeholder="Search Products & categories">
+		<button id="searchBtn" >&#128269;</button>
 		</form>
 		<% 
 		ProductDaoImpl product= new ProductDaoImpl();
 		 Product searchProducts = new Product(); 
 		List<Product> allproduct = product.searchProduct(Pname);
 		
-		 
+		if(allproduct!=null)
+		{
  	
 	%>
 		<% for(Product products : allproduct)
@@ -308,14 +342,18 @@ left:200px;
 		
 		<br>
 		<br>
+		<%} 
+		}
+		else{
+		%>
+			<h1>NO Products Matches</h1>
 		<%} %>
-		
-		<h2 id="copyrights">© 2021 MedHub.com. All rights reserved.</h2>
-
 	</div>
 
 	</div>
-	<div id="footer"></div>
+	<div id="footer">
+	
+	</div>
 
 
 </body>

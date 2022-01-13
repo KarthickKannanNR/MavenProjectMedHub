@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
- <link rel = "icon" type = "" href = "Assets/medhublogo.png">
+<link rel = "icon" type = "" href = "Assets/medhublogo.png">
 
 <title>Home</title>
 <style>
@@ -21,16 +21,16 @@ input:-webkit-autofill:active  {
   transition: background-color 5000s;
   -webkit-text-fill-color: #fff !important;
 }
-.list ul li {
-	list-style: none;
-	display: inline-block;
-}
-
 
 .list li {
+	list-style: none;
+	display: inline-block;
 	float: right;
 	padding: 15px;
 	transition: transform 0.4s;
+}
+.list li a{
+	padding: -10px;
 }
 
 .list ul {
@@ -41,8 +41,7 @@ input:-webkit-autofill:active  {
 	position: absolute;
 	top: 0;
 	background-color: rgba(255, 255, 255, 0.603);
-	box-shadow: 0 5 black;
-	/* margin-top: 0%; */
+	box-shadow: 0  0 5px black;
 	right: 0px;
 	width: 1372px;
 }
@@ -72,7 +71,6 @@ body {
 	background-image: url("Assets/homepage_img.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
-	height: 100vh;
 	overflow-x: hidden;
 }
 
@@ -223,7 +221,7 @@ body {
 #regbtn:hover {
 	/* color: white; */
 	font-weight: 800;
-	background-color: grey;
+	background-color: yellowgreen;
 	cursor: pointer;
 }
 
@@ -257,6 +255,19 @@ body {
 #companyname img {
 	width: 120px;
 }
+#errorMsg{
+position: relative;
+left: 60px;
+}
+
+.loginHere{
+position: relative;
+left:45px;
+top: -60px;
+}
+.label{
+font-weight: 600;
+}
 </style>
 </head>
 <body>
@@ -270,7 +281,6 @@ body {
 
 			<nav class="list">
 				<ul>
-
 					<!-- <li> <a>SignOut</a></li> -->
 					<li onclick="getRegisterForm()"><a id="register">SignUp</a></li>
 					<li onclick="getLoginForm()"><a id="login">Login</a></li>
@@ -287,24 +297,25 @@ body {
 			</div>
 		</div>
 
-		<!-- login screen default hidden -->
+							<!-- login Form default hidden -->
 		<div class="loginscreen" id="loginform">
-			<%  String errorMessage= (String)session.getAttribute("userNotFound"); 
+			 <%  String errorMessage= (String)session.getAttribute("userNotFound"); 
       	
       if(errorMessage!=null)
       { %>
-			<h3><%=errorMessage%></h3>
+			<h3 id="errorMsg" ><%=errorMessage%></h3>
 			<%} session.removeAttribute("userNotFound");%>
-			<form action="LoginController?" class="formcontent" method="post">
-				<h3>Login Here</h3>
-				<label for="fullName">Email*</label><br> <input type="text"
-					name="loginMail" required placeholder="Enter Email"><br>
+			<form action="LoginController?" class="formcontent" method="post" >
+				<h1 class="loginHere">Login Here</h1>
+				<label class="label" for="fullName">Email*</label><br> 
+				<input type="text"
+					name="loginMail" required placeholder="Enter Email" onmouseover="hideMsg()"><br>
 				<br>
-				<br> <label for="password">Password *</label><br> <input
-					type="password" name="loginPassword" placeholder="Password" name=""
-					value="" required
+				<br> <label class="label" for="password">Password *</label><br> 
+				<input type="password" name="loginPassword" placeholder="Password" name=""
+					value="" required 
 					pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%?&]{8,15}$"
-					title="Minimum eight and Minimum 8 and maximum 15 characters, at least one uppercase letter, one lowercase letter, one number and one special character"><br>
+					title="Minimum eight and Minimum 8 and maximum 15 characters, at least one uppercase letter, one lowercase letter, one number and one special character" onmouseover="hideMsg()"><br>
 				<br>
 				<button id="loginbtn">Login</button>
 				<br>
@@ -321,7 +332,8 @@ body {
 			</form>
 		</div>
 
-		<!-- sign/register form -->
+										<!-- sign/register form -->
+										
 		<div id="registerScreen">
 			<div id="registerScreenContent">
 				<form action="RegisterController" class="registerform" method="post">
@@ -374,6 +386,11 @@ function getRegisterForm()
     document.getElementById("loginform").style.visibility="hidden";
     // document.getElementById("loginform").style.visibility="hidden";
 }
+function hideMsg()
+{
+	document.getElementById("errorMsg").style.visibility="hidden";
+	
+	}
 
 
 </script>

@@ -21,6 +21,10 @@
 body {
 	background-color: white;
 }
+#navigation{
+   background: linear-gradient(to right, rgb(200, 47, 58) 0%,rgb(44, 169, 207) 100%);
+
+}
 
 #navigation ul li {
 	list-style: none;

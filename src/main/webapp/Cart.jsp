@@ -31,6 +31,13 @@ body {
 	display: inline-block;
 }
 
+.nav{
+   background: linear-gradient(to right, rgb(200, 47, 58) 0%,rgb(44, 169, 207) 100%);
+   position: fixed;
+   width: 100%;
+   z-index: 1;
+}
+
 .list li {
 	float: right;
 	padding: 20px;
@@ -55,25 +62,19 @@ body {
 
 .list ul, .list li, .list a {
 	text-decoration: none;
-	color: black;
+	color: white;
 	font-family: monospace;
 	font-size: 25px;
 	font-weight: 500;
 	/* margin-right: 20px; */
 }
 
-.list li:hover, .list a:hover {
-	color: orange;
-	border-radius: 5px;
-	cursor: pointer;
+.list li:hover{
+	transition-duration: 0.2s;
+
 }
 
-.list{
-   background: linear-gradient(to right, rgb(200, 47, 58) 0%,rgb(44, 169, 207) 100%);
-    position: fixed;
-   width: 100%;
-   z-index: 1;
-}
+
 body {
 	/* background: linear-gradient(rgba(26,176,156,0.7),rgba(239,78,28,0.5)) ,url(Images/homepage_img.jpg); */
 	background-image: url(Assets/homepage_img.jpg);
@@ -269,7 +270,7 @@ left: 1100px;
 						price :<%=cartList.getUnitPrice()+ "rs"%></h3>
 					<h3>
 						Offer Applied:
-						<%=cartList.getProduct().getOffer() %>%
+						<%=cartList.getProduct().getOffer()+"%" %>
 					</h3>
 					<h3 name="cartpoints">
 						Points :
@@ -291,10 +292,8 @@ left: 1100px;
 					<button>
 						<a id="Remove" href="removeCartItem?CartproductId=<%=cartList.getProduct().getProductId()%>">Remove</a>
 					</button>
-				</div>
-				
+				</div>	
 			</div>
-		
 		<br>
 		<br>
 		<%}%>
