@@ -175,12 +175,23 @@ img {
 	top:-130px;
 }
 
-#product #btn button {
+#product #btn button:nth-of-type(1) {
+	height: 30px;
+	width: 90px;
+	background-color: yellowgreen;
+	border: none;
+	border-radius: 5px;
+}
+
+#product #btn button:nth-of-type(2) {
 	height: 30px;
 	width: 90px;
 	background-color: orange;
 	border: none;
 	border-radius: 5px;
+	position: relative;
+	left:105px;
+	bottom: 30px;
 }
 
 
@@ -190,11 +201,15 @@ img {
 	top: -40px;
 }
 
-#product #btn button:hover {
-	background-color: white;
+#product #btn button:nth-of-type(1):hover {
 	box-shadow: 0 0 5px black;
-	color: green;
-	color: orange;
+	transition-duration:0.2s;
+}
+
+#product #btn button:nth-of-type(2):hover {
+	box-shadow: 0 0 5px black;
+	transition-duration:0.2s;
+	background-color: red;
 }
 
 #product #img h3 {
@@ -299,9 +314,7 @@ left: 1100px;
 		<%}%>
 		
 		
-		<br><br><br><br><br><br><br><br><br><br><br><br>
-		<h2 id="copyrights">© 2021 MedHub.com. All rights reserved.</h2>
-
+		
 	</div>
 
 	</div>

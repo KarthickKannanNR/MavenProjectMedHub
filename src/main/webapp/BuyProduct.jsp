@@ -14,14 +14,16 @@
 
 <title>BuyProduct</title>
 <style>
-* {
+
+/* Nav is named as List
+ */
+ 
+ * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 	font-family: Arial, Helvetica, sans-serif;
 }
-/* Nav is named as List
- */
  
 .list{
 background: linear-gradient(to right, rgb(200, 47, 58) 0%,rgb(44, 169, 207) 100%);
@@ -97,6 +99,7 @@ body {
 	top: 150px;
 	left: 170px;
 }
+
 .buyProduct{
 background-color: rgba(158, 202, 207,0.5);
 width: 900px;
@@ -129,7 +132,7 @@ border-radius: 5px;
 
 #qty #qtyBox {
 	position: relative;
-	left: -30px;
+	left:30px;
 }
 
 .buyProduct td p{
@@ -137,21 +140,26 @@ padding-top: 30px;
 position: relative;
 left:-100px;
 }
+
 #addToCart a{
 background-color: green;
 text-decoration: none;
 }
+
 #buyNow a{
 background-color: green;
 color: white;
 text-decoration: none;
 }
+
 #addToCart:hover{
 cursor: pointer;
 }
+
 #buyNow:hover{
 cursor: pointer;
 }
+
 #price{
 position: relative;
 left: -100px;
@@ -160,25 +168,23 @@ border: none;
 background-color: rgba(158, 202, 207,0.1); 
 color: black;
 }
+
 #pImg{
 position: relative;
 height: 200px;
 width: 170px;
 left:10px;
 }
+
 #pDesc{
 position: relative;
 left: 110px;
 bottom: 15px;
 }
-#totalprice{
-position: relative;
-top:-190px;
-left:90px;
-}
+
 #TotalPriceLabel{
 position: relative;
-top:-170px;
+top:-150px;
 right: 50px;
 }
 
@@ -191,6 +197,7 @@ border:none;
 background-color: rgba(158, 202, 207,0.1); 
 color: black;
 }
+
 #totalprice{
 position: relative;
 top:-190px;
@@ -203,22 +210,28 @@ font-weight: 700;
 font-size: 17px;
 }
 
-#cartQuantity,#cartTotalPrice{
-
+#totalPriceDiv{
+position: relative;
+top:20px;
 }
+
 #cartForm #addToCart{
 position: relative;
 left:-150px;
 }
+
 #ErrorMsg{
 visibility: hidden;
 }
+
 #cartQuantity{
 visibility: hidden;
 }
+
 #cartTotalPrice{
 visibility: hidden;
 }
+
 #detail{
 position: relative;
 left:50px;
@@ -234,20 +247,61 @@ bottom:15px;
   position: relative;
   bottom: 29px;
 }
+
 #detail p:nth-child(3) {
   position: relative;
   bottom: 29px;
 }
+
 #detail p:nth-child(4) {
   position: relative;
   bottom: -50px;
+}
+
+.payNow button{
+height: 28px;
+width: 80px;
+background-color: yellowgreen;
+outline: none;
+border: none;
+border-radius: 5px;
+}
+
+.payNow{
+position: relative;
+right: 22px;
+}
+
+.addToCart button{
+height: 28px;
+width: 80px;
+position: relative;
+background-color:rgb(43, 180, 235);
+outline: none;
+border: none;
+border-radius: 5px;
+}
+
+.addToCart{
+position: relative;
+bottom: 47px;
+left:100px;
+}
+
+.payNow button:hover{
+box-shadow: 0 0 5px black;
+transition-duration:0.2s;
+}
+
+.addToCart button:hover{
+box-shadow: 0 0 5px black;
+transition-duration:0.2s;
 }
 
 </style>
 </head>
 <body>
 <%
- 
 int pId=Integer.parseInt(request.getParameter("pid"));
 ProductDaoImpl productDao = new ProductDaoImpl();
 Product currentProduct = productDao.findProductByProductId(pId);
@@ -255,7 +309,7 @@ session.setAttribute("currentproduct", currentProduct);
 %>
 	<div class="nav">
 
-		<nav class="list" class="container-fluid p-0">
+		<nav class="list" >
 			<ul>
 					<li><a href="Cart.jsp">Cart</a></li>
 					<li><a href="Index.jsp">SignOut</a></li>
@@ -308,26 +362,32 @@ session.setAttribute("currentproduct", currentProduct);
 					<input name="pUnitPrice" id="price" value="<%=currentProduct.getUnitPrice()%>" disabled>
 					<p name="pQuantity"><%=currentProduct.getQuantity() %></p>
 					<p name="pgetPoints"><%=currentProduct.getPoints() %></p>
-					<input name="pOffer" id="offer" value="<%=currentProduct.getOffer()%>%"  disabled>
+					<input name="pOffer" id="offer" value="<%=currentProduct.getOffer()%>" disabled> 
 					</td>
 				<td>
 					<div id="qty">
 						<div id="qtyBox">
 						<form action="prod1" onsubmit="return chechQuantity()">
 							<label for="">Quantity</label> 
-							<input type="number" id="quantity" name="quantity" min="1"  max="<%=currentProduct.getQuantity()%>" onclick="calculateAmt();makeHidden()" >
+							<input type="number" id="quantity" name="quantity" min="1"  max="<%=currentProduct.getQuantity()%>" onclick="calculateamt()">
 						</div>
 						<h3 id="TotalPriceLabel">Total price : Rs </h3>
+						<div id="totalPriceDiv">
 						<input name="totalPrice" id="totalprice" >
+						</div>
 						<p name="message" id="message"></p>
+						<div class="payNow">
 						<button type="submit" >Paynow</button>
+						</div>
 						</form>
 						
 						
 						<form action = "cartserv" id="cartForm" onsubmit="return chechQuantity()">
 						<input name="cartQuanity" type = "text" id = "cartQuantity" required>
 						<input name="cartTotalPrice" type = "text" id = "cartTotalPrice" >
+						<div class="addToCart">
 						<button type="submit" id="addToCart" >Add To Cart</button>
+						</div>
 						<h4 id="ErrorMsg" >Please Select Quantity</h4>
 						</form>
 					</div>
@@ -338,30 +398,32 @@ session.setAttribute("currentproduct", currentProduct);
 	</table>
 <tr>
 <script>
-function calculateAmt() {
-	var price=document.getElementById("price");
 
+function calculateamt(){
+var price=document.getElementById("price");
+	
 	var amount=price.value;
-	console.log(amount);
+	console.log("unitprice"+amount);
 	var qty=document.getElementById("quantity");
 	var quanty=qty.value;
 	console.log(quanty);
 	var discount=document.getElementById("offer");
 	var dis=discount.value;
+	console.log("discount"+dis);
+	let totalAmt = 0;
 
-	var totalAmt;
-/* 	price=Math.floor((price.value*offer.value)/100);
- * 
- */
  
  if(discount!=0){
- 	 totalAmt=Math.floor(( (amount * quanty)-((amount * quanty) * (dis/100))));
-	console.log(totalAmt);
+ 	 totalAmt=Math.round(amount * quanty)-(amount * quanty)*dis/100;
+ 	 console.log(totalAmt);
+ 	
 	document.getElementById("totalprice").value=totalAmt;
- }
+ }else{
 
 	document.getElementById("totalprice").value=totalAmt;
-	cartfn();
+	
+ }
+ cartfn();
 }
 
 
@@ -372,6 +434,7 @@ function cartfn(){
 	let carttot = document.getElementById("cartTotalPrice");
 cartquant.value = quant;
 carttot.value = totprice;
+
 }
 
 function chechQuantity() {
@@ -393,5 +456,4 @@ function makeHidden() {
 
 </script>
 </body>
-</html>
 </html>

@@ -31,6 +31,8 @@ body {
 	list-style: none;
 	padding: 20px;
 	display: inline-block;
+	/* font-weight: 600;
+	font-size: 20px; */
 }
 
 #navigation {
@@ -122,17 +124,19 @@ body {
 	</ul>
 	</div>
 	<%
-int deletePId= Integer.parseInt(request.getParameter("deleteProductid"));
-ProductDaoImpl product= new ProductDaoImpl();
-List<Product> allproduct = product.viewProduts();
-int result=product.deleteProduct(deletePId);
-if(result>0){
-response.sendRedirect("AdminAllProducts.jsp");
-}
+	
+	int deletePId= Integer.parseInt(request.getParameter("deleteProductid"));
+	ProductDaoImpl product= new ProductDaoImpl();
+	List<Product> allproduct = product.viewProduts();
+	int result=product.deleteProduct(deletePId);
+	if(result>0){
+	response.sendRedirect("AdminAllProducts.jsp");
+	}
+	
 	%>
+	
 	<% for(Product products : allproduct)
-		
-	{
+		{
 	%>
 	<form action="cart">
 		<div id="product">

@@ -216,7 +216,8 @@ public class UserDaoImpl implements UserDAO {
 	}
 
 	public void updateWalletMoney(Order order) {
-
+		System.out.println(order.getUser().getWallet() );
+		System.out.println(order.getUser().getUserId());
 		String query = "update users set user_wallet='" + order.getUser().getWallet() + "' where user_id = '"
 				+ order.getUser().getUserId() + "'";
 		Connection con = ConnectionUtil.getDBconnect();

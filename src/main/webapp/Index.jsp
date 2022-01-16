@@ -258,6 +258,7 @@ body {
 #errorMsg{
 position: relative;
 left: 60px;
+color:red;
 }
 
 .loginHere{
@@ -309,10 +310,10 @@ font-weight: 600;
 				<h1 class="loginHere">Login Here</h1>
 				<label class="label" for="fullName">Email*</label><br> 
 				<input type="text"
-					name="loginMail" required placeholder="Enter Email" onmouseover="hideMsg()"><br>
+					name="loginMail" required placeholder="Enter Email" onmouseleave="hideMsg()"><br>
 				<br>
 				<br> <label class="label" for="password">Password *</label><br> 
-				<input type="password" name="loginPassword" placeholder="Password" name=""
+				<input type="password" name="loginPassword" placeholder="Password" 
 					value="" required 
 					pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%?&]{8,15}$"
 					title="Minimum eight and Minimum 8 and maximum 15 characters, at least one uppercase letter, one lowercase letter, one number and one special character" onmouseover="hideMsg()"><br>

@@ -64,7 +64,6 @@
    background: linear-gradient(to right, rgb(200, 47, 58) 0%,rgb(44, 169, 207) 100%);
 }
 body {
-	/* background: linear-gradient(rgba(26,176,156,0.7),rgba(239,78,28,0.5)) ,url(Images/homepage_img.jpg); */
 	background-image: url(Assets/homepage_img.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -83,21 +82,26 @@ left:90px;
 #userProfile td,tr{
 padding: 20px;
 }
+
 #userProfile input{
 margin-top: 42.5px;
 }
+
 #userProfile label{
 margin-top: 50px;
 }
+
 #userProfile input{
 height: 30px;
 width: 200px;
 }
+
 #walletMoneyUpdateForm{
 position: absolute;
 left: 500px;
 bottom: 450px;
 }
+
 textarea {
   resize: none;
 }
@@ -150,17 +154,12 @@ String AddressNotFound = (String)session.getAttribute("AddressNotFound");
 	<!-- User Profile -->
 	<div id="userProfile">
 	<form action="ProfileUpdate">
-	<table border="1px">
-		<tr>
-			<td><label>Name :</label>
-			<td><input id="" name="updatedName" pattern="[A-Za-z]{3,}" title="name should be minimum 3 letters and maximum 30 letters" required min="3" max="10" value="<%=currentUser.getUsername()%>"><br></td>
-			<td rowspan="2" colspan="2" width="700px">
-			<div id="walletMoneyUpdateForm">
-	<form action="walletUpdate">
-		<input type="number" name="UpdateWallet" "UpdateWallet" min="1" max="5000" value="<%=currentUser.getWallet()%>">
-		<button>Add Money</button>
-	</form>
-	</div></td>
+		<table border="1px">
+			<tr>
+				<td><label>Name :</label>
+				<td><input id="" name="updatedName" pattern="[A-Za-z ]{3,}" title="name should be minimum 3 letters and maximum 30 letters" required min="3" max="10" value="<%=currentUser.getUsername()%>"><br></td>
+				<td rowspan="2" colspan="2" width="700px">
+				</td>
 		</tr>
 		
 	<tr>
@@ -174,12 +173,7 @@ String AddressNotFound = (String)session.getAttribute("AddressNotFound");
 		<td><label>Mobile No :</label></td>
 		<td><input id="" name="UpdatedMobNum"  pattern="[6-9][0-9]{9}" title="MObile Number Must Have 10 Digits" required  value="<%=currentUser.getUserMobile()%>"></td>
 	    	<td rowspan="2" colspan="2" width="700px">
-	    	<div id="pointMoney">
-	<form action="ConvertMoney">
-	<input type="number" name="pointsMoney" "UpdateWallet" min="1" max="5000" value="<%=currentUser.getPoints()%>" readonly>
-		<button>Convert to Cash</button>
-	</form>
-	</div></td>
+	    	</td>
 	</tr>	
 	
 	<tr>
@@ -193,6 +187,21 @@ String AddressNotFound = (String)session.getAttribute("AddressNotFound");
 			</tr>
 				
 		</form>
+		
+		<div id="walletMoneyUpdateForm">
+	<form action="walletUpdate">
+		<input type="number" name="UpdateWallet" "UpdateWallet" min="1" max="5000" value="<%=currentUser.getWallet()%>">
+		<button>Add Money</button>
+	</form>
+	</div>
+	
+	<div id="pointMoney">
+	<form action="ConvertMoney">
+	<input type="number" name="pointsMoney" "UpdateWallet" min="1" max="5000" value="<%=currentUser.getPoints()%>" readonly>
+		<button>Convert to Cash</button>
+	</form>
+	</div>
+	
 		</table>
 </div>
 

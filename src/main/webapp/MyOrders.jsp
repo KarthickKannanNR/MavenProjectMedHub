@@ -319,7 +319,7 @@ left: 55px;
 				</div>
 				<% if(flag && cancel)
 				{%>
-					<h3>Ordered Cancelled</h3>
+					<!-- <h3>Ordered Cancelled</h3> -->
 				<div id="btn">
 					<button>
 						<a id="cancel" href="MyOrders.jsp?orderId=<%=myAllOrders.getOrderModel().getOrderId()%>">Cancel Order</a>

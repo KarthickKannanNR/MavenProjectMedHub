@@ -36,9 +36,9 @@ body {
 
 #navigation {
     background: linear-gradient(to right, rgb(4, 47, 58) 0%, rgb(44, 169, 207) 100%);
-    position:absolute;
-	align-items: center;
-	top:0px;
+    position: fixed;
+    top:0px;
+    
 }
 
 #navigation ul li a {

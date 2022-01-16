@@ -85,6 +85,8 @@ body {
 	padding: 20px;
 	display: inline-block;
 	margin-left: 60px;
+	/* font-weight: 600;
+	font-size: 20px; */
 }
 
 #navigation {
@@ -106,6 +108,16 @@ body {
 	border: 1px solid black;
 	border: none;
 	padding: 15px;
+}
+#addProductForm label{
+position: relative;
+left:33px;
+outline: none;
+border: none;
+}
+
+input[type="file"]{
+outline:none;
 }
 </style>
 </head>
@@ -144,30 +156,30 @@ body {
 			<!--             <label for="name">Product Name</label>
  -->
 			<input class="inputBox" type="text" required name="productName"
-				placeholder="Product Name"><br>
+				placeholder="Product Name" ><br>
 			<br>
 			<!--             <label for="price">Price</label>
  -->
-			<input class="inputBox" type="text" name="price" placeholder="Price"><br>
+			<input class="inputBox" type="number"  required min="1" name="price" placeholder="Price"><br>
 			<br>
 			<!--             <label for="Quantity" >Quantity</label>
  -->
-			<input class="inputBox" type="text" required name="quantity"
+			<input class="inputBox" type="number" required min="1" name="quantity"
 				placeholder="Quantity"><br>
 			<br>
 			<!--             <label for="image">Image Url</label>
  -->
-			<input class="inputBox" type="text" required name="imageUrl"
-				placeholder="Image Url"><br>
+			<label>Add Image<input class="inputBox" type="file" required name="imageFile"
+				placeholder="Image Url"></label><br>
 			<br>
 			<!--             <label for="Points">Points</label>
  -->
-			<input class="inputBox" type="text" required name="points"
+			<input class="inputBox" type="number" required min="1"  name="points"
 				placeholder="Points"><br>
 			<br>
 			<!--             <label for="Offer">Offer</label>
  -->
-			<input class="inputBox" type="text" required name="offer"
+			<input class="inputBox" type="number" required min="1" name="offer"
 				placeholder="Offer%"><br>
 			<br>
 			<br>

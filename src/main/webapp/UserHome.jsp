@@ -284,7 +284,8 @@ box-shadow: 0 0 10px black;
 		</div>
 		
 <!-- 					Search Products		
- -->		<form action="FilteredProduct.jsp" class="prodSearch" >
+-->		
+		<form action="FilteredProduct.jsp" class="prodSearch" >
 		<input id="searchBar" type="text" name="ProductName" required="required" placeholder="Search Products & categories">
 		<button type="submit" id="searchBtn">&#128269;</button>
 		</form>
@@ -321,9 +322,7 @@ box-shadow: 0 0 10px black;
 					<a><button>
 						<a id="buynow" href="BuyProduct.jsp?pid=<%=products.getProductId()%>">Buy Now</a>
 					</button></a>
-					<%--  <button>
-						<a id="btn1" href="AddToCart.jsp?cartpId<%=products.getProductId()%>">Add To Cart</a>
-					</button> --%>
+					
 					</button>
 				</div>
 			</div>

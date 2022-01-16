@@ -56,6 +56,6 @@ public class CartServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 		
-		res.sendRedirect("Payment.jsp");
+		res.sendRedirect("Cart.jsp");
 	}
 }

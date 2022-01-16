@@ -8,7 +8,8 @@
 <head>
 <meta charset="ISO-8859-1">
  <link rel = "icon" type = "" href = "Assets/medhublogo.png">
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" ></script>
 <title>All Users</title>
 <style>
 * {
@@ -84,8 +85,9 @@ body {
 	</div>
 	<div>
 		<% UserDaoImpl userdao = new UserDaoImpl();
-List<User> userList = new ArrayList<User>();
-userList=userdao.ViewAllUser();%>
+			List<User> userList = new ArrayList<User>();
+			userList=userdao.ViewAllUser();
+		%>
 		<div id="allusers">
 			<table>
 				<thead>

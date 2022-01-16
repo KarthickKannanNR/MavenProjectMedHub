@@ -134,6 +134,7 @@ left:150px;
 				<option value="devices">
 				<option value="healthdrink">
 			</datalist>
+			
 			<br>
 			<br> <label for="name">Product Name</label>
 			<input 	class="inputBox" type="text" required name="productName" placeholder="Product Name" value="<%=currentProduct.getProductName()%>"><br>
