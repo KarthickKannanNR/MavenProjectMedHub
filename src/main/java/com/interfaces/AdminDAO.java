@@ -6,6 +6,6 @@ import com.medHub.model.Admin;
 
 public interface AdminDAO {
 	
-	public Admin login(String email, String password) throws SQLException;
+	public Admin login(Admin admin) throws SQLException;
 
 }

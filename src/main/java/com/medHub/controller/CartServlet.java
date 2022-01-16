@@ -28,9 +28,7 @@ public class CartServlet extends HttpServlet{
 	
 		HttpSession session = req.getSession();
 		double totalprice=Double.parseDouble(req.getParameter("cartTotalPrice"));
-		System.out.println(totalprice);
 		int quantity = Integer.parseInt(req.getParameter("cartQuanity"));
-		System.out.println(quantity);
 		User currentUser = (User) session.getAttribute("user");
 		Product currentproduct = (Product) session.getAttribute("currentproduct");
 		CartDaoImpl cartDao = new CartDaoImpl();
@@ -43,7 +41,6 @@ public class CartServlet extends HttpServlet{
 		try {
 			prodquant = cartDao.productexist(cart);
 			if(prodquant < 0) {
-				System.out.println(cartDao.productexist(cart));
 			cartDao.insertProduct(cart);
 			}else {
 				int oldprice = cartDao.productexist1(cart);

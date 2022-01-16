@@ -40,7 +40,6 @@ public class RemoveCartItems extends HttpServlet{
 			 removeStatus=cartdao.removecartItems(cart);
 			if(removeStatus>0)
 			{
-				System.out.println("cartItems deleted");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

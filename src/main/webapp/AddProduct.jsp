@@ -64,6 +64,10 @@ body {
 	padding: 5px;
 	left: 150px;
 	top: 50px;
+	border-radius: 2px;
+	outline: none;
+	border: none;
+	box-shadow: 0 0 5px black;
 }
 
 #addProductForm  button:hover {
@@ -194,4 +198,7 @@ outline:none;
 	</div>
 	</div>
 </body>
+<script>
+	
+</script>
 </html>

@@ -43,6 +43,7 @@ public class OrderItemsDaoImpl implements OrderItemDAO{
 			return res;
 
 	}
+	
 
 	public List<OrderItems> ViewMyOrders(User currentUser) {
 		// TODO Auto-generated method stub
@@ -62,7 +63,6 @@ public class OrderItemsDaoImpl implements OrderItemDAO{
 			while(rs.next())
 
 			{
-				System.out.println(rs.getDate(11).toLocalDate());
 				orderItems = new OrderItems(rs.getString(1),rs.getInt(2),rs.getInt(3),rs.getDouble(4),rs.getDouble(5),rs.getInt(6),rs.getString(7),rs.getString(8),rs.getInt(9),rs.getInt(10),rs.getDate(11).toLocalDate());
 				myOrderList.add(orderItems);
 			}

@@ -89,10 +89,10 @@ body {
 			userList=userdao.ViewAllUser();
 		%>
 		<div id="allusers">
-			<table>
-				<thead>
+			<table class="table table-striped">
+				<thead class="table table-dark">
 					<tr>
-						<th>User id</th>
+						<th >User id</th>
 						<th>Full Name</th>
 						<th>Address</th>
 						<th>Email</th>

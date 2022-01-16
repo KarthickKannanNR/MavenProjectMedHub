@@ -33,7 +33,6 @@ public class RegisterServlet extends HttpServlet {
 		UserDaoImpl userDao = new UserDaoImpl();
 		userDao.insert(user);
 		//userDao.insert(user);
-		System.out.println(fullName+""+mobile+""+mail+""+password);
 		res.getWriter().print("Registered");
 		
 		try {

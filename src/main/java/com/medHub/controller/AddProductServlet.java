@@ -25,7 +25,7 @@ public class AddProductServlet extends HttpServlet {
 		String productname= req.getParameter("productName");
 		double price = Double.parseDouble(req.getParameter("price"));
 		int quantity= Integer.parseInt(req.getParameter("quantity"));
-		String imageurl= req.getParameter("imageUrl");
+		String imageurl= req.getParameter("imageFile");
 		int points = Integer.parseInt(req.getParameter("points"));
 		int offer=Integer.parseInt(req.getParameter("offer"));
 		String description= req.getParameter("description");
@@ -37,6 +37,7 @@ public class AddProductServlet extends HttpServlet {
 			boolean flag=products.insertProduct(product);
 			if(flag)
 			{
+				
 			}
 			else {
 				throw new ProductExists();

@@ -24,9 +24,7 @@ public class ConvertPointsMoney extends HttpServlet{
 		User currentUser = (User) session.getAttribute("user");
 		int points=Integer.parseInt(req.getParameter("pointsMoney"));
 		double Converted = Math.round((points * 10)/100);
-		System.out.println(Converted);
 		double wallet=currentUser.getWallet()+Converted;
-		System.out.println(wallet);
 		UserDaoImpl userDao = new UserDaoImpl();
 		User user = new User();
 		int result=userDao.addMoneyInWallet(wallet, currentUser);

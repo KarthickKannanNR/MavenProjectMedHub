@@ -79,8 +79,8 @@ body {
 #product #details {
 	position: relative;
 	left: 220px;
-	top: -165px;
-}
+	top:-60px;
+	}
 
 #product #btn {
 	position: relative;

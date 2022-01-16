@@ -38,8 +38,7 @@ public class CartDaoImpl {
 		}
 		catch(Exception e)
 		{
-			System.out.println(e.getMessage());;
-			System.out.println("Something Went Wrong");
+			e.printStackTrace();
 		}
 		
 		

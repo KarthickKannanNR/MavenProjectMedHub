@@ -27,18 +27,15 @@ public class CartOrderServlet extends HttpServlet {
 	public void service(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		
 		HttpSession session = req.getSession();
-		System.out.println("cart servlet called");
 		UserDaoImpl user = new UserDaoImpl();
 		ProductDaoImpl productDao = new ProductDaoImpl();
 		Product product = new Product();
 		OrderItems orderItems = new OrderItems();
 		Cart cart = new Cart();
 		CartDaoImpl cartdao = new CartDaoImpl();
-		System.out.println("2");
 		Order order = new Order();
 		OrderDaoImpl orderDao = new OrderDaoImpl();
 		OrderItemsDaoImpl orderItemsDaoImpl = new OrderItemsDaoImpl();
-		System.out.println("2");
 
 		User currentUser = (User) session.getAttribute("user");
 
@@ -49,7 +46,6 @@ public class CartOrderServlet extends HttpServlet {
 		int cartpoints = Integer.parseInt(req.getParameter("cartpoints"));
 		int CartprodId = Integer.parseInt(req.getParameter("CartproductId"));
 		int removeStatus;
-		System.out.println("5");
 
 		Product currentProduct = productDao.findProductByProductId(CartproductId);
 		cart.setProduct(currentProduct);
@@ -71,12 +67,10 @@ public class CartOrderServlet extends HttpServlet {
 				order.setUser(currentUser);
 				order.getUser().setPoints(currentProduct.getPoints() + currentUser.getPoints());
 				order.getUser().setWallet(currentUser.getWallet() - totalPrice);
-				System.out.println("Order called");
 				orderDao.orders(order, currentUser);
 				user.updateUserPoints(order);
 				user.updateWalletMoney(order);
 				int orderId=orderDao.getByOrderId();
-				System.out.println("order id found"+orderId);
 				orderItems.setProduct(currentProduct);
 				orderItems.setUser(currentUser);
 				orderItems.setOrderId(orderId);
@@ -92,25 +86,12 @@ public class CartOrderServlet extends HttpServlet {
 				}
 			}
 			else {
-				System.out.println("Not Enough Money");
 			}
 		} else {
 			res.sendRedirect("UserProfile.jsp");
 
 		}
-//		if (currentUser.getPoints() > 500) {
-//		System.out.println(currentUser.getPoints());
-//		int points = currentUser.getPoints();
-//		System.out.println(points);
-//		int finalPoints=currentUser.getPoints();
-//		int convert = (int) Math.round(points * .10);
-//		System.out.println("fghhgh" + convert);
-//		order.getUser().setWallet(order.getUser().getWallet() + convert);
-//		user.updateWalletMoney(order);
-//		order.getUser().setPoints(0);
-//		user.updateUserPoints(order);
-//
-//	}
+
 
 	}
 }

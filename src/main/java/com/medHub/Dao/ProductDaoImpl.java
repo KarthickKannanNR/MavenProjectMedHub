@@ -16,7 +16,7 @@ import com.medHub.util.ConnectionUtil;
 
 public class ProductDaoImpl implements ProductDAO {
 
-//																		Show All Products
+//									Show All Products
 	public List<Product> viewProduts() {
 		String viewQuery = "select * from products where status='available'";
 		Connection con = ConnectionUtil.getDBconnect();
@@ -33,7 +33,6 @@ public class ProductDaoImpl implements ProductDAO {
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
 		}
 
 		return productList;
@@ -64,16 +63,14 @@ public class ProductDaoImpl implements ProductDAO {
 		}
 
 		catch (Exception e) {
-			System.out.println(e.getMessage());
+
 			return false;
 		}
 		return false;
 	}
 
-//																				Update Products By ADmin
+//								Update Products By ADmin
 	public int updateProducts(Product product) throws SQLException {
-		// TODO Auto-generated method stub
-		System.out.println("update method called");
 		String updateQwery = "update products set product_category=?,product_name=?,price=?,available_Quantity=?,product_img=?,points_per_unit=?,offer=?,description=? where product_id=?";
 		Connection con = ConnectionUtil.getDBconnect();
 		PreparedStatement pst = null;
@@ -102,7 +99,7 @@ public class ProductDaoImpl implements ProductDAO {
 		return result;
 	}
 
-//																				Delete Product by admin
+//									Delete Product by admin
 	public int deleteProduct(int productId) throws SQLException {
 		String qwery = "update products set status='unavailable' where product_id=?";
 		Connection con = ConnectionUtil.getDBconnect();
@@ -120,23 +117,6 @@ public class ProductDaoImpl implements ProductDAO {
 		return res;
 
 	}
-
-//		public int findProductId()
-//		{
-//			int productId=0;
-//			String query="select id from products where product_name=?";
-//			Connection con = GetConnection.getDBconnect();
-//			try {
-//				PreparedStatement pst= con.prepareStatement(query);
-//				pst.setString(1,query);
-//			} catch (SQLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			
-//			
-//			return 0;
-//			}
 
 	// find Product By Name
 	public Product findProductByName(String productName) {
@@ -196,7 +176,8 @@ public class ProductDaoImpl implements ProductDAO {
 	}
 
 	public List<Product> searchProduct(String Productname) {
-		String query = "select * from products where product_name like '" + Productname+ "%'  OR product_category like '" + Productname + "%' ";
+		String query = "select * from products where product_name like '" + Productname
+				+ "%'  OR product_category like '" + Productname + "%' ";
 		List<Product> findedProducts = new ArrayList<Product>();
 		try {
 			Connection con = ConnectionUtil.getDBconnect();
@@ -209,13 +190,8 @@ public class ProductDaoImpl implements ProductDAO {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 		}
 		return findedProducts;
 	}
-
-
-	
-	
 
 }

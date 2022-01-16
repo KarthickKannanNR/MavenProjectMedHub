@@ -34,9 +34,7 @@ public class OrderDaoImpl implements OrderDAO{
 	
 	public int  getByOrderId()
 	{
-		System.out.println("1");
 		String qwery="select max(order_id) from orders";
-		System.out.println(2);
 		Connection con = ConnectionUtil.getDBconnect();
 		Order order= null;
 		int orderId=0;
@@ -100,7 +98,6 @@ public class OrderDaoImpl implements OrderDAO{
 		}
 		catch(Exception e)
 		{
-			System.out.println(e.getStackTrace());
 		}
 		return false;
 	}

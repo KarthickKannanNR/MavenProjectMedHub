@@ -22,8 +22,6 @@ public class AdminDaoImpl implements AdminDAO{
 	public Admin login(Admin admin) throws SQLException
 	{
 		Admin adminmodule=null;
-		System.out.println(admin.getAdminMail());
-		System.out.println(admin.getAdminPassword());
 		String check="select * from admin where admin_email=? and admin_password=?";
 		ConnectionUtil conn= new ConnectionUtil();
 		Connection con=conn.getDBconnect();	
@@ -34,18 +32,15 @@ public class AdminDaoImpl implements AdminDAO{
 	
 		if(rs.next()) {
 			adminmodule=new Admin(rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getLong(6));
-			System.out.println(rs.getString(2));
 			return adminmodule;
 		}
 		return adminmodule;
 		
 		}
 
-	@Override
-	public Admin login(String email, String password) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+
+
 	
 	
 }

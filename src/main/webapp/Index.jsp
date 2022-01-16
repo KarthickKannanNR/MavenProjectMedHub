@@ -266,9 +266,11 @@ position: relative;
 left:45px;
 top: -60px;
 }
+
 .label{
 font-weight: 600;
 }
+
 </style>
 </head>
 <body>
