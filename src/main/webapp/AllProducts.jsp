@@ -156,7 +156,7 @@ a {
 	<form action="cart">
 		<div id="product">
 			<div id="img">
-				<img src="<%=products.getProductImg()%>" alt="horlicks">
+				<img src="<%=products.getProductImg()%>" alt="<%=products.getProductName()%>">
 				<h3><%=products.getProductName()%></h3>
 			</div>
 			<div id="details">

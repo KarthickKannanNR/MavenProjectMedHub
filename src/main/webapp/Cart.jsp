@@ -165,7 +165,7 @@ img {
 
 #product #details {
 	position: relative;
-	left: 220px;
+	left: 240px;
 	top: -90px;
 }
 
@@ -245,8 +245,8 @@ left: 1100px;
 
 			<nav class="list">
 				<ul>
-					<li><a href="Cart.jsp">Cart</a></li>
 					<li><a href="Index.jsp">SignOut</a></li>
+					<li><a href="Cart.jsp">Cart</a></li>
 					<li><a href="UserProfile.jsp">MyProfile</a></li>
 					<li><a href="MyOrders.jsp?orderId=0">MyOrders</a></li>
 					<li><a href="MyOrders.jsp?orderId=0">About-Us</a></li>
@@ -274,7 +274,7 @@ left: 1100px;
 		
 			<div id="product">
 				<div id="img">
-					<img src="<%=cartList.getProduct().getProductImg()%>" alt="horlicks">
+					<img src="Assets/<%=cartList.getProduct().getProductImg()%>" alt="horlicks">
 					<h3><%=cartList.getProduct().getProductName() %></h3>
 				</div>
 				<div id="details">

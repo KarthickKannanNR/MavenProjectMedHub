@@ -27,10 +27,10 @@ body {
 
 #addProductForm {
 	position: absolute;
-	top: 150px;
+	top: 90px;
 	left: 500px;
 	background-color: rgb(240, 231, 231);
-	height: 550px;
+	height: 525px;
 	width: 360px;
 	border-radius: 5px;
 }
@@ -134,6 +134,7 @@ outline:none;
 						Products</a></li>
 				<li><a href="AddProduct.jsp">Add Products</a></li>
 				<li id="logout"><a class="navbar-brand" href="Index.jsp">Logout</a></li>
+				
 		</div>
 		</ul>
 	</div>
@@ -190,7 +191,7 @@ outline:none;
 			<!--             <label for="">Description</label><br><br>
  -->
 			<textarea class="inputBox"
-				style="max-height: 100px; min-height: 20px; width: 400px; max-width: 200px; min-width: 300px;"
+				style="max-height: 70px; min-height: 20px; width: 400px; max-width: 200px; min-width: 300px;"
 				required name="description" placeholder="Product Description"></textarea>
 			<br>
 			<button type="submit">Add</button>

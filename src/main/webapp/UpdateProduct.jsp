@@ -81,8 +81,9 @@ body {
 }
 
 #navigation {
-	background-color: rgb(83, 137, 168);
-	align-items: center;
+	background: linear-gradient(to right, rgb(200, 47, 58) 0%,rgb(44, 169, 207) 100%);
+	width: 100%;
+	margin-top: 0%;
 }
 
 #navigation ul li a {
@@ -115,6 +116,8 @@ left:150px;
 				<li><a href="AdminAllProducts.jsp?deleteProductid=0">All Products</a></li>
 				<li><a href="AddProduct.jsp">Add Products</a></li>
 				<li id="logout"><a class="navbar-brand" href="Index.jsp">Logout</a></li>
+				<li id="home"><a class="navbar-brand" href="AdminHome.jsp">Logout</a></li>
+				
 		</div>
 		</ul>
 			
@@ -143,7 +146,7 @@ left:150px;
 			<br> <label for="Quantity">Quantity</label> <br>
 			<input class="inputBox" type="text" required name="quantity" placeholder="Quantity" value="<%=currentProduct.getQuantity()%>"><br>
 			<br> <label for="image">Image Url</label> <br>
-			<input class="inputBox" type="text" required name="imageUrl" placeholder="Image Url" value="<%=currentProduct.getProductImg()%>"><br>
+			<input class="inputBox" type="file" required name="imageUrl" placeholder="Image Url" value="<%=currentProduct.getProductImg()%>"><br>
 			<br> <label for="Points">Points</label> <br>
 			 <input class="inputBox" type="text" required name="points" placeholder="Points" value="<%=currentProduct.getPoints()%>"><br>
 			<br> <label for="Offer">Offer</label> <br>

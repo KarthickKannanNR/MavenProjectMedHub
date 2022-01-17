@@ -75,10 +75,10 @@ background: linear-gradient(to right, rgb(200, 47, 58) 0%,rgb(44, 169, 207) 100%
 	border-radius: 5px;
 	cursor: pointer;
 }
+
 .list li:hover{
 	transition-duration: 0.2s;
 	transform: translateY(-10px);
-
 }
 
 body {

@@ -44,28 +44,7 @@ public class CartDaoImpl {
 		
 		
 	}
-//	public List<ProductModel> viewProduts()
-//	{
-//		String viewQuery="select * from products";
-//		Connection con=GetConnection.getDBconnect();
-//		List<ProductModel> productList=new ArrayList<ProductModel>();
-//		try {
-//			Statement smt = con.createStatement();
-//			ResultSet rs= smt.executeQuery(viewQuery);
-//			
-//			while(rs.next()) {
-//				ProductModel product=new ProductModel(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDouble(5),
-//						rs.getInt(6),rs.getString(7));
-//				productList.add(product);				
-//				}
-//			
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			System.out.println(e.getMessage());
-//		}
-//		
-//		return productList;
-//	}
+
 
 	public List<Cart> viewCart(User currentUser) {
 		currentUser.getUserId();

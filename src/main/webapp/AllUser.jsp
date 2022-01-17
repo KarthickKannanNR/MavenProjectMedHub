@@ -73,7 +73,7 @@ body {
 </style>
 </head>
 <body>
-	<div id="container">
+	<div id="container" >
 		<div id="navigation">
 			<ul>
 				<li><a href="AllUser.jsp">All Users</a></li>

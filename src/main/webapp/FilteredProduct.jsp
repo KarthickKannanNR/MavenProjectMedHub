@@ -293,7 +293,7 @@ box-shadow: 0 0 10px black;
 		</div>		
 
 		<form action="" class="prodSearch" >
-		<input id="searchBar" type="text" name="ProductName" required placeholder="Search Products & categories">
+		<input id="searchBar" type="text" name="ProductName" required placeholder="Search By Products & categories">
 		<button id="searchBtn" >&#128269;</button>
 		</form>
 		<% 

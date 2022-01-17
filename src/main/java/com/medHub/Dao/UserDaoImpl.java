@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.exceptions.UserExists;
 import com.interfaces.UserDAO;
 import com.medHub.model.Order;
 import com.medHub.model.Product;
@@ -30,16 +31,14 @@ public class UserDaoImpl implements UserDAO {
 			int res = pst.executeUpdate();
 			PreparedStatement smt = con.prepareStatement(commit);
 			smt.execute();
-			pst.close();
-			con.close();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-
-		}
+			
+			} catch (Exception e) {
+			
+			}
 
 	}
 
-						//	user login
+								//	user login
 	public User login(User user) {
 
 		User loginUser = null;
@@ -51,22 +50,19 @@ public class UserDaoImpl implements UserDAO {
 			Statement stm = con.createStatement();
 			int i = stm.executeUpdate(check);
 			ResultSet rs = stm.executeQuery(check);
-//	if(i>0) {
-//		return loginUser;
-//	}
+
 
 			if (rs.next()) {
 				user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDouble(5),
 						rs.getString(6), rs.getLong(7), rs.getString(8), rs.getInt(9));
 
 				return user;
-			}
+				}
 
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			} catch (Exception e) {
 //		e.printStackTrace();
-		}
-		return loginUser;
+			}
+			return loginUser;
 
 	}
 	

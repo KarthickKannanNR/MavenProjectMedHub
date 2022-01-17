@@ -65,7 +65,7 @@ public class OrderItems extends Order {
 	}
 
 	public OrderItems(String productName, int points, int quantity, double unitPrice, double totalPrice, int orderId,
-			String productImg, String description, int offer, int productId,LocalDate orderDate) {
+			String productImg, String description, int offer, int productId,LocalDate orderDate,String orderStatus) {
 		this.product.setProductName(productName);
 		this.product.setPoints(points);
 		this.unitPrice = unitPrice;
@@ -77,6 +77,7 @@ public class OrderItems extends Order {
 		this.product.setOffer(offer);
 		this.product.setProductId(productId);
 		this.orderdate=orderDate;
+		this.orderModel.setOrderStatus(orderStatus);
 	}
 
 	public User getUser() {

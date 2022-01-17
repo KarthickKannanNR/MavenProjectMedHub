@@ -9,4 +9,7 @@ public interface CartDAO {
 
 	public void insertProduct(Cart cart);
 	public List<Cart> viewCart(User currentUser);
+	public int productexist(Cart cart);
+	public int updatequantity(Cart cart);
+	public int removecartItems(Cart cart);
 }

@@ -78,6 +78,10 @@ public class CartOrderServlet extends HttpServlet {
 				orderItems.setUnitPrice(unitPrice);
 				orderItems.setTotalPrice(totalPrice);
 				int result=	orderItemsDaoImpl.insertOrders(orderItems);
+				if(result>0)
+				{
+					res.sendRedirect("Cart.jsp");
+				}
 				try {
 					removeStatus=cartdao.removecartItems(cart);
 				} catch (SQLException e) {

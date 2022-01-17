@@ -40,6 +40,7 @@ public class RemoveCartItems extends HttpServlet{
 			 removeStatus=cartdao.removecartItems(cart);
 			if(removeStatus>0)
 			{
+				res.sendRedirect("Cart.jsp");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

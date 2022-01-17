@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+
  <link rel = "icon" type = "" href = "Assets/medhublogo.png">
 <title>User Profile</title>
 <style>
@@ -58,7 +59,6 @@
 	border-radius: 5px;
 	cursor: pointer;
 	transform:translatey(-10px);
-	
 }
 .list{
    background: linear-gradient(to right, rgb(200, 47, 58) 0%,rgb(44, 169, 207) 100%);
@@ -67,6 +67,9 @@ body {
 	background-image: url(Assets/homepage_img.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
+	overflow-x:hidden; 
+	background-color: rgb(107,119,146,0.5);
+	
 }
 
 .logo img {
@@ -77,6 +80,9 @@ body {
 #userProfile{
 position: absolute;
 left:90px;
+background-color: rgb(107,119,146,0.5);
+top:90px;
+
 }
 
 #userProfile td,tr{
@@ -98,12 +104,113 @@ width: 200px;
 
 #walletMoneyUpdateForm{
 position: absolute;
-left: 500px;
-bottom: 450px;
+left: 600px;
+bottom: 464px;
+}
+
+#walletMoneyUpdateForm button{
+position: relative;
+left:30px;
+height: 30px;
+border: none;
+outline: none;
+border-radius: 2px;
+background-color: yellowgreen;
+box-shadow: 0 0 2px black;
+width: 100px;
+}
+
+#walletMoneyUpdateForm button:hover{
+box-shadow: 0 0 5px black;
+transition-duration:0.2s;
+color:white;
 }
 
 textarea {
   resize: none;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 0 5px black;
+  
+  }
+
+#pointMoney{
+position: relative;
+top:190px;
+left:600px;
+}
+
+#pointMoney button{
+position: relative;
+left:30px;
+height: 30px;
+border: none;
+outline: none;
+border-radius: 2px;
+background-color: yellowgreen;
+box-shadow: 0 0 2px black;
+padding: 5px;
+}
+
+#pointMoney button:hover{
+box-shadow: 0 0 5px black;
+transition-duration:0.2s;
+color:white;
+
+}
+
+#saveChangesBtn{
+background-color: yellowgreen;
+position: relative;
+left:160px;
+width: 100px;
+height: 30px;
+outline: none;
+border: none;
+border-radius: 3px;
+}
+
+#saveChangesBtn:hover{
+box-shadow: 0 0 5px black;
+transition-duration:0.2s;
+color:white;
+}
+
+#updatedName{
+position: relative;
+bottom:20px;
+}
+
+#updatedPassword{
+position: relative;
+bottom:20px;
+}
+
+#UpdatedMobNum{
+position: relative;
+bottom:20px;
+}
+
+input{
+outline: none;
+border: none;
+box-shadow: 0 0 5px black;
+border-radius: 2px;
+}
+
+#userProfile{
+color:white;
+}
+
+input:hover{
+box-shadow: 5px 5px 5px black;
+transition-duration:0.2s;
+}
+
+textarea:hover {
+box-shadow: 5px 5px 5px black;
+transition-duration:0.2s;	
 }
 
 </style>
@@ -118,8 +225,8 @@ String AddressNotFound = (String)session.getAttribute("AddressNotFound");
 
 		<nav class="list" class="container-fluid p-0">
 			<ul>
-					<li><a href="Cart.jsp">Cart</a></li>
 					<li><a href="Index.jsp">SignOut</a></li>
+					<li><a href="Cart.jsp">Cart</a></li>
 					<li><a href="UserProfile.jsp">MyProfile</a></li>
 					<li><a href="MyOrders.jsp?orderId=0">MyOrders</a></li>
 					<li><a href="MyOrders.jsp?orderId=0">About-Us</a></li>
@@ -154,24 +261,24 @@ String AddressNotFound = (String)session.getAttribute("AddressNotFound");
 	<!-- User Profile -->
 	<div id="userProfile">
 	<form action="ProfileUpdate">
-		<table border="1px">
+		<table >
 			<tr>
 				<td><label>Name :</label>
-				<td><input id="" name="updatedName" pattern="[A-Za-z ]{3,}" title="name should be minimum 3 letters and maximum 30 letters" required min="3" max="10" value="<%=currentUser.getUsername()%>"><br></td>
+				<td><input id="updatedName" name="updatedName" pattern="[A-Za-z ]{3,}" title="name should be minimum 3 letters and maximum 30 letters" required min="3" max="10" value="<%=currentUser.getUsername()%>"><br></td>
 				<td rowspan="2" colspan="2" width="700px">
 				</td>
 		</tr>
 		
 	<tr>
 		<td><label>Password :</label></td>
-		<td><input id="" name="updatedPassword"  required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%?&]{8,15}$"
+		<td><input id="updatedPassword" name="updatedPassword"  required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%?&]{8,15}$"
 		title="Minimum eight and Minimum 8 and maximum 15 characters, at least one uppercase letter, one lowercase letter, one number and one special character" value="<%=currentUser.getUserPassword()%>"><br></td>
 	</tr>
 	
 	
 	<tr>
 		<td><label>Mobile No :</label></td>
-		<td><input id="" name="UpdatedMobNum"  pattern="[6-9][0-9]{9}" title="MObile Number Must Have 10 Digits" required  value="<%=currentUser.getUserMobile()%>"></td>
+		<td><input id="UpdatedMobNum" name="UpdatedMobNum"  pattern="[6-9][0-9]{9}" title="MObile Number Must Have 10 Digits" required  value="<%=currentUser.getUserMobile()%>"></td>
 	    	<td rowspan="2" colspan="2" width="700px">
 	    	</td>
 	</tr>	
@@ -182,7 +289,7 @@ String AddressNotFound = (String)session.getAttribute("AddressNotFound");
 	</tr>	
 			<tr>
 			<td colspan="2"> 
-			<button>Save Changes</button>
+			<button id="saveChangesBtn">Save Changes</button>
 			</td>
 			</tr>
 				
@@ -190,6 +297,7 @@ String AddressNotFound = (String)session.getAttribute("AddressNotFound");
 		
 		<div id="walletMoneyUpdateForm">
 	<form action="walletUpdate">
+		<label> Wallet : </label>
 		<input type="number" name="UpdateWallet" "UpdateWallet" min="1" max="5000" value="<%=currentUser.getWallet()%>">
 		<button>Add Money</button>
 	</form>
@@ -197,8 +305,9 @@ String AddressNotFound = (String)session.getAttribute("AddressNotFound");
 	
 	<div id="pointMoney">
 	<form action="ConvertMoney">
+	<label> points : </label>
 	<input type="number" name="pointsMoney" "UpdateWallet" min="1" max="5000" value="<%=currentUser.getPoints()%>" readonly>
-		<button>Convert to Cash</button>
+		<button>Convert To Cash</button>
 	</form>
 	</div>
 	

@@ -1,3 +1,4 @@
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="javax.swing.plaf.metal.MetalBorders.Flush3DBorder"%>
 <%@page import="java.util.List"%>
@@ -82,6 +83,7 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 	overflow-x:hidden; 
+	height: 3500px;
 }
 
 .logo img {
@@ -168,14 +170,14 @@ img {
 
 #product #details {
 	position: relative;
-	left: 220px;
-	top: -90px;
+	left: 240px;
+	top: -116px;
 }
 
 #product #btn {
 	position: relative;
 	left: 900px;
-	top:-130px;
+	top:-160px;
 }
 
 #product #btn button {
@@ -240,8 +242,8 @@ left: 55px;
 
 			<nav class="list">
 				<ul>
-					<li><a href="Cart.jsp">Cart</a></li>
 					<li><a href="Index.jsp">SignOut</a></li>
+					<li><a href="Cart.jsp">Cart</a></li>
 					<li><a href="UserProfile.jsp">MyProfile</a></li>
 					<li><a href="MyOrders.jsp?orderId=0">MyOrders</a></li>
 					<li><a href="MyOrders.jsp?orderId=0">About-Us</a></li>
@@ -260,7 +262,7 @@ left: 55px;
  --%>		</div>
 
 		<% 
-		
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		int orderId=Integer.parseInt(request.getParameter("orderId"));
 		OrderDaoImpl orderDao=new OrderDaoImpl();	
 		boolean deleteStatus=currentCancelOrder.deleteProduct(orderId);
@@ -286,19 +288,19 @@ left: 55px;
 			boolean cancel = orderItem.cancelDate(myAllOrders.getOrderdate(),myAllOrders.getOrderModel().getOrderId());
 			System.out.println(cancel);
 			 %>
-		
+			
 			<div id="product">
 				<div id="img">
-					<img src="<%=myAllOrders.getProduct().getProductImg()%>" alt="horlicks">
+					<img src="Assets/<%=myAllOrders.getProduct().getProductImg()%>" alt="horlicks">
 					<h3><%=myAllOrders.getProduct().getProductName() %></h3>
 				</div>
 				<div id="details">
 					<h3>
 						Order Date :
-						<%=myAllOrders.getOrderdate()%></h3>
+						<%=myAllOrders.getOrderdate().format(format)%></h3>
 					<h3>
 					Description :
-					<%=myAllOrders.getDescription()%>
+					<%=myAllOrders.getProduct().getDescription()%>
 					</h3>
 					<h3>
 						price :<%=myAllOrders.getUnitPrice()+ "rs"%></h3>
@@ -315,6 +317,9 @@ left: 55px;
 					<h3>
 						Total Amt :
 						<%=myAllOrders.getTotalPrice() %></h3>
+					<h3>
+						Order Status :
+						<%=myAllOrders.getOrderModel().getOrderStatus()%></h3>	
 						
 				</div>
 				<% if(flag && cancel)

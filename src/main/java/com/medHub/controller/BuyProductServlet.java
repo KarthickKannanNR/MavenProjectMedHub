@@ -1,6 +1,7 @@
 package com.medHub.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -62,7 +63,7 @@ public class BuyProductServlet extends HttpServlet {
 						order.getUser().setWallet(order.getUser().getWallet() - price);
 						user.updateUserPoints(order);
 						user.updateWalletMoney(order);
-						orderDao.orders(order, currentUser);
+						boolean result=orderDao.orders(order, currentUser);
 						int orderId = orderDao.getByOrderId();
 						order.setOrderId(orderId);
 						orderItems.setOrderModel(order);
@@ -73,8 +74,15 @@ public class BuyProductServlet extends HttpServlet {
 						orderItems.setUnitPrice(currentproduct.getUnitPrice());
 						orderItems.setTotalPrice(price);
 						orderItemsDaoImpl.insertOrders(orderItems);
-						res.getWriter().println("order placed!!");
-						res.sendRedirect("Payment.jsp");
+						//res.getWriter().println("order placed!!");
+								//alert box when ordered placed sucessfully
+						PrintWriter out = res.getWriter();
+						
+						out.println("<script type=\"text/javascript\">");
+						out.println("alert('Ordered Placed Sucessfully');");
+						out.println("location= 'MyOrders.jsp?orderId=0';");
+						out.println("</script>");
+						
 					}else {
 						try {
 						throw new AddressNotFound();

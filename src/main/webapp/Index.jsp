@@ -14,13 +14,7 @@
 	box-sizing: border-box;
 	font-family: Arial, Helvetica, sans-serif;
 }
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active  {
-  transition: background-color 5000s;
-  -webkit-text-fill-color: #fff !important;
-}
+
 
 .list li {
 	list-style: none;
@@ -29,9 +23,11 @@ input:-webkit-autofill:active  {
 	padding: 15px;
 	transition: transform 0.4s;
 }
+
 .list li a{
 	padding: -10px;
 }
+
 
 .list ul {
 	/* background-color: #10847E;*/
@@ -47,7 +43,7 @@ input:-webkit-autofill:active  {
 }
 
 .list ul {
-	padding-right: 45px;
+	padding-right: 60px;
 }
 
 .list ul, .list li, .list a {
@@ -259,6 +255,7 @@ body {
 position: relative;
 left: 60px;
 color:red;
+top:20px;
 }
 
 .loginHere{

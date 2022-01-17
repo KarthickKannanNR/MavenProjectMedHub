@@ -13,6 +13,7 @@ public class Order {
 	private double price;
 	private String orderStatus;
 	private String orderType;
+	
 	public User getUser() {
 		return user;
 	}

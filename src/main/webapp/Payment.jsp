@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Payment Page</title>
+<title>order Confirmed</title>
 </head>
 <style>
 * {

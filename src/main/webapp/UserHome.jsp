@@ -82,9 +82,9 @@ body {
 	/* background: linear-gradient(rgba(26,176,156,0.7),rgba(239,78,28,0.5)) ,url(Images/homepage_img.jpg); */
 	background-image: url(Assets/homepage_img.jpg);
 	background-repeat: no-repeat;
-	background-size: cover;
 	overflow-x: hidden;
-	height: 3500px;
+	background-size: cover;
+	height: 3200px;
 }
 
 .logo img {
@@ -266,8 +266,8 @@ box-shadow: 0 0 10px black;
 
 			<nav class="list">
 				<ul>
-					<li><a href="Cart.jsp">Cart</a></li>
 					<li><a href="Index.jsp">SignOut</a></li>
+					<li><a href="Cart.jsp">Cart</a></li>
 					<li><a href="UserProfile.jsp">MyProfile</a></li>
 					<li><a href="MyOrders.jsp?orderId=0">MyOrders</a></li>
 					<li><a href="MyOrders.jsp?orderId=0">About-Us</a></li>
@@ -286,7 +286,7 @@ box-shadow: 0 0 10px black;
 <!-- 					Search Products		
 -->		
 		<form action="FilteredProduct.jsp" class="prodSearch" >
-		<input id="searchBar" type="text" name="ProductName" required="required" placeholder="Search Products & categories">
+		<input id="searchBar" type="text" name="ProductName" required="required" placeholder="Search By Products & categories">
 		<button type="submit" id="searchBtn">&#128269;</button>
 		</form>
 		<% 
@@ -301,7 +301,7 @@ box-shadow: 0 0 10px black;
 		
 			<div id="product">
 				<div id="img">
-					<img src="<%=products.getProductImg() %>" alt="horlicks">
+					<img src="Assets/<%=products.getProductImg() %>" alt="horlicks">
 					<h3><%=products.getProductName() %></h3>
 				</div>
 				<div id="details">

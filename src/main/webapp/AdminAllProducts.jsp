@@ -7,8 +7,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
- <link rel = "icon" type = "" href = "Assets/medhublogo.png">
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" ></script>
+<link rel = "icon" type = "" href = "Assets/medhublogo.png">
 <title>All Products</title>
 <style>
 * {
@@ -51,17 +52,15 @@ body {
 	color: black;
 }
 
-#product {
-	position: relative;
-	top: 30px;
-	left: 50px;
-}
+
 
 #product {
 	position: relative;
 	background-color: rgb(158, 202, 207);
 	height: 250px;
 	border-radius: 5px;
+	width: 1200px;
+	left: 70px;
 }
 
 #product img {
@@ -69,11 +68,13 @@ body {
 	width: 90px;
 	position: relative;
 	left: 40px;
+	top:50px;
 }
 
-#product h3 {
+#product h5 {
 	position: relative;
-	left: 10px;
+	left: 20px;
+	top:60px;
 }
 
 #product #details {
@@ -107,9 +108,20 @@ body {
 	box-shadow: 0 0 5px black;
 }
 
-#product #img h3 {
+#product #img h5 {
 	position: relative;
-	left: 30px;
+	left: 40px;
+}
+
+#details h5{
+	position: relative;
+	top:-40px;
+	left:50px;
+}
+#deleteBtn{
+position: relative;
+left:100px;
+bottom: 60px;
 }
 </style>
 </head>
@@ -120,6 +132,7 @@ body {
 			<li><a href="AdminAllProducts.jsp?deleteProductid=0">All Products</a></li>
 			<li><a href="AddProduct.jsp">Add Products</a></li>
 			<li id="logout"><a href="Index.jsp">Logout</a></li>
+			
 	</div>
 	</ul>
 	</div>
@@ -141,35 +154,35 @@ body {
 	<form action="cart">
 		<div id="product">
 			<div id="img">
-				<img src="<%=products.getProductImg() %>" alt="horlicks">
-				<h3><%=products.getProductName() %></h3>
+				<img src="Assets/<%=products.getProductImg()%>" alt="<%=products.getProductName()%>">
+				<h5><%=products.getProductName()%></h5>
 			</div>
 			<div id="details">
-				<h3>
+				<h5>
 					Product Id :
-					<%=products.getProductId() %></h3>
-				<h3>
+					<%=products.getProductId() %></h5>
+				<h5>
 					Description :
-					<%=products.getDescription() %></h3>
-				<h3>
-					price :<%=products.getUnitPrice()+ "rs"%></h3>
-				<h3>
+					<%=products.getDescription() %></h5>
+				<h5>
+					price :<%=products.getUnitPrice()+ "rs"%></h5>
+				<h5>
 					Offer :
 					<%=products.getOffer() %>%
-				</h3>
-				<h3>
+				</h5>
+				<h5>
 					Points :
-					<%=products.getPoints() %></h3>
-				<h3>
+					<%=products.getPoints() %></h5>
+				<h5>
 					Available Quantity :
-					<%=products.getQuantity() %></h3>
+					<%=products.getQuantity() %></h5>
 			</div>
 			<div id="btn">
 				<a href="UpdateProduct.jsp?productId=<%=products.getProductId() %>"
-					name="updateProduct">Update</a><br>
+					name="updateProduct" class="btn btn-warning" >Update</a><br>
 				<br> <a
 					href="AdminAllProducts.jsp?deleteProductid=<%=products.getProductId() %>"
-					name="deleteProduct">Delete</a>
+					name="deleteProduct" class="btn btn-danger" id="deleteBtn" >Delete</a>
 			</div>
 		</div>
 	</form>

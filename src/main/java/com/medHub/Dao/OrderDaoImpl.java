@@ -15,7 +15,7 @@ import com.medHub.util.ConnectionUtil;
 public class OrderDaoImpl implements OrderDAO{
 	
 
-	public  void  orders(Order order,User currentUser) {
+	public  boolean  orders(Order order,User currentUser) {
 		
 		String orderQuery="insert into orders (user_id,price) values(?,?)";
 		Connection con = ConnectionUtil.getDBconnect();
@@ -25,11 +25,16 @@ public class OrderDaoImpl implements OrderDAO{
 			pst.setDouble(2, order.getPrice());
 			pst.executeUpdate();
 			pst.executeUpdate("commit");
+			int result = pst.executeUpdate();
+			if(result>0)
+			{
+				return true;
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.getMessage();
 			}
-
+		return false;
 	}
 	
 	public int  getByOrderId()
