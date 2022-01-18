@@ -63,7 +63,7 @@ public class OrderDaoImpl implements OrderDAO{
 	public boolean deleteProduct(int orderId) throws SQLException
 	{
 		boolean flag=false;
-		String qwery="update orders set order_status='canceled' where order_id =?";
+		String qwery="update orders set order_status='cancelled' where order_id =?";
 		Connection con = ConnectionUtil.getDBconnect();
 		PreparedStatement pst=con.prepareStatement(qwery);
 		pst.setInt(1, orderId);

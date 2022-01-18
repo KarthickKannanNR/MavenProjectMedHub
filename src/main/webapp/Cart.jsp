@@ -248,8 +248,8 @@ left: 1100px;
 					<li><a href="Index.jsp">SignOut</a></li>
 					<li><a href="Cart.jsp">Cart</a></li>
 					<li><a href="UserProfile.jsp">MyProfile</a></li>
-					<li><a href="MyOrders.jsp?orderId=0">MyOrders</a></li>
-					<li><a href="MyOrders.jsp?orderId=0">About-Us</a></li>
+					<li><a href="MyOrders.jsp?orderId=0&totalPrice=0&quantity=0&points=0&productId=0">MyOrders</a></li>
+					<li><a href="Aboutus.jsp">About-Us</a></li>
 					<li><a href="UserHome.jsp">Home</a></li>
 					
 				</ul>

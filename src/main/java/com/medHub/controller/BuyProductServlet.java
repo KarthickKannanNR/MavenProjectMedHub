@@ -80,7 +80,7 @@ public class BuyProductServlet extends HttpServlet {
 						
 						out.println("<script type=\"text/javascript\">");
 						out.println("alert('Ordered Placed Sucessfully');");
-						out.println("location= 'MyOrders.jsp?orderId=0';");
+						out.println("location= 'MyOrders.jsp?orderId=0&totalPrice=0&quantity=0&points=0&productId=0';");
 						out.println("</script>");
 						
 					}else {

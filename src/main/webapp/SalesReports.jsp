@@ -10,7 +10,7 @@
  <link rel = "icon" type = "" href = "Assets/medhublogo.png">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" ></script>
-<title>All Users</title>
+<title>Sales Report</title>
 <style>
 * {
 	margin: 0;
@@ -70,6 +70,31 @@ body {
 	top: 100px;
 }
 
+.searchDate{
+position: absolute;
+left:420px;
+top:100px;
+}
+
+.max{
+position: relative;
+left: 60px;
+}
+
+.searchDate button{
+position: relative;
+left:80px;
+outline: none;
+border: none;
+box-shadow: 0 0 5px black;
+border-radius: 3px;
+}
+
+.searchDate button:hover{
+box-shadow: 2px 2px 5px black;
+transition-duration:0.2s;
+}
+
 </style>
 </head>
 <body>
@@ -84,7 +109,17 @@ body {
 		</div>
 		</ul>
 	</div>
-	<div>
+		<div class="searchDate" >
+		<form action="filter">
+			<label>From</label>
+			<input type="date" id="startDate" name="startDate">
+				
+			<label class="max">To</label>		
+			<input class="max" type="date" id="maxDate" name="endDate">
+			<button type="submit"> View Sales</button>
+			</form>
+		</div>	
+	<%-- <div>
 		<% UserDaoImpl userdao = new UserDaoImpl();
 			List<User> userList = new ArrayList<User>();
 			userList=userdao.ViewAllUser();
@@ -116,7 +151,22 @@ body {
 				</tbody>
 			</table>
 		</div>
-
+ --%>
 	</div>
 </body>
+<script>
+today();
+function today(){
+  
+var currentTime = new Date() 
+var maxDate = new Date(currentTime.getFullYear(), currentTime.getMonth(), + currentTime.getDate()+1); //max date current date
+console.log(maxDate);
+let date = JSON.stringify(maxDate)
+date = date.slice(1,11)
+console.log(date)
+document.getElementById("maxDate").setAttribute("max",date);
+
+}
+
+</script>
 </html>

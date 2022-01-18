@@ -31,7 +31,7 @@ public class UserDaoImpl implements UserDAO {
 			int res = pst.executeUpdate();
 			PreparedStatement smt = con.prepareStatement(commit);
 			smt.execute();
-			
+		
 			} catch (Exception e) {
 			
 			}
@@ -274,6 +274,53 @@ public class UserDaoImpl implements UserDAO {
 		}
 		return flag;
 
+	}
+	
+	public void updateUserPoints(int points,User currentUser) {
+		try {
+			
+			String pointsQuery = "update users set points='" + points + "' where user_id = '"+ currentUser.getUserId()+ "'";
+			Connection con = ConnectionUtil.getDBconnect();
+			PreparedStatement ps = con.prepareStatement(pointsQuery);
+			ps.executeUpdate();
+			ps = con.prepareStatement("commit");
+			ps.executeUpdate();
+		} catch (Exception e) {
+		}
+
+	}
+
+						//	update walletmoney	
+	public void updateWalletMoney(double wallet,User currentUser) {
+		
+		String query = "update users set user_wallet='" + wallet + "' where user_id = '"+ currentUser.getUserId() + "'";
+		Connection con = ConnectionUtil.getDBconnect();
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			int result = ps.executeUpdate();
+			ps.executeUpdate("commit");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public boolean checkMail(String mail) {
+		
+		String query = "select * from users where user_email= '"+mail+"'";
+		Connection con = ConnectionUtil.getDBconnect();
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			int result = ps.executeUpdate();
+			ps.executeUpdate("commit");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return false;
 	}
 
 }

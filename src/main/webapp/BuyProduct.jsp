@@ -55,11 +55,11 @@ background: linear-gradient(to right, rgb(200, 47, 58) 0%,rgb(44, 169, 207) 100%
 	/* margin-top: 0%; */
 	right: 0px;
 	width: 1372px;
+	color: white;
+	padding-right: 0px;
+	
 }
 
-.list ul {
-	padding-right: 0px;
-}
 
 .list ul, .list li, .list a {
 	text-decoration: none;
@@ -68,6 +68,7 @@ background: linear-gradient(to right, rgb(200, 47, 58) 0%,rgb(44, 169, 207) 100%
 	font-size: 25px;
 	font-weight: 500;
 	/* margin-right: 20px; */
+	color: white;
 }
 
 .list li:hover, .list a:hover {
@@ -196,6 +197,7 @@ outline: none;
 border:none;
 background-color: rgba(158, 202, 207,0.1); 
 color: black;
+font-size: 15px;
 }
 
 #totalprice{
@@ -291,11 +293,23 @@ left:100px;
 .payNow button:hover{
 box-shadow: 0 0 5px black;
 transition-duration:0.2s;
+cursor: pointer;
 }
 
 .addToCart button:hover{
 box-shadow: 0 0 5px black;
 transition-duration:0.2s;
+}
+
+#rs{
+position: relative;
+right: 240px;
+}
+
+#percentage{
+position: relative;
+top:30px;
+right:275px;
 }
 
 </style>
@@ -360,10 +374,11 @@ session.setAttribute("currentproduct", currentProduct);
 					<p name="pName"><%=currentProduct.getProductName() %></p>
 					<p name="pDescription"><%=currentProduct.getDescription() %></p>
 					<input name="pUnitPrice" id="price" value="<%=currentProduct.getUnitPrice()%>" disabled>
+					<label id="rs">Rs</label>
 					<p name="pQuantity"><%=currentProduct.getQuantity() %></p>
 					<p name="pgetPoints"><%=currentProduct.getPoints() %></p>
-					<input name="pOffer" id="offer" value="<%=currentProduct.getOffer()%>" disabled> 
-					</td>
+					<input name="pOffer" id="offer" value="<%=currentProduct.getOffer()%>" disabled>
+					<span id="percentage">%</span></td>
 				<td>
 					<div id="qty">
 						<div id="qtyBox">
@@ -373,7 +388,7 @@ session.setAttribute("currentproduct", currentProduct);
 						</div>
 						<h3 id="TotalPriceLabel">Total price : Rs </h3>
 						<div id="totalPriceDiv">
-						<input name="totalPrice" id="totalprice" >
+						<input name="totalPrice" id="totalprice">
 						</div>
 						<p name="message" id="message"></p>
 						<div class="payNow">

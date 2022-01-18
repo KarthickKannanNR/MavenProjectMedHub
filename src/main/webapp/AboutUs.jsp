@@ -84,6 +84,7 @@ body {
 	background-repeat: no-repeat;
 	overflow-x: hidden;
 	background-size: cover;
+	height: 3200px;
 }
 
 .logo img {
@@ -269,7 +270,6 @@ box-shadow: 0 0 10px black;
 					<li><a href="Cart.jsp">Cart</a></li>
 					<li><a href="UserProfile.jsp">MyProfile</a></li>
 					<li><a href="MyOrders.jsp?orderId=0&totalPrice=0&quantity=0&points=0&productId=0">MyOrders</a></li>
-					<li><a href="AboutUs.jsp">About-Us</a></li>
 					<li><a href="UserHome.jsp">Home</a></li>					
 				</ul>
 				<div>
@@ -278,58 +278,7 @@ box-shadow: 0 0 10px black;
 						src="Assets/medhublogo.png"
 						alt="logo">
 			</nav>
-		</div>
-		<h2 id="userName">welcome <%=currentUser.getName()%></h2>
-		</div>
-		
-<!-- 					Search Products		
--->		
-		<form action="FilteredProduct.jsp" class="prodSearch" >
-		<input id="searchBar" type="text" name="ProductName" required="required" placeholder="Search By Products & categories">
-		<button type="submit" id="searchBtn">&#128269;</button>
-		</form>
-		<% 
-		ProductDaoImpl product= new ProductDaoImpl();
-		List<Product> allproduct = product.viewProduts();
-		 Product searchProducts = new Product(); 	
-	%>
-		<% for(Product products : allproduct)
-		
-	{
-	%>
-		
-			<div id="product">
-				<div id="img">
-					<img src="Assets/<%=products.getProductImg() %>" alt="horlicks">
-					<h3><%=products.getProductName()%></h3>
-				</div>
-				<div id="details">
-					<h3>
-						Description :
-						<%=products.getDescription()%></h3>
-					<h3>
-						Price :<%=products.getUnitPrice()+ "rs"%></h3>
-					<h3>
-						Offer :
-						<%=products.getOffer() %>%
-					</h3>
-					<h3>
-						Points :
-						<%=products.getPoints() %></h3>
-				</div>
-				<div id="btn">
-					<a><button>
-						<a id="buynow" href="BuyProduct.jsp?pid=<%=products.getProductId()%>">Buy Now</a>
-					</button></a>
-					
-					</button>
-				</div>
-			</div>
-		
-		<br>
-		<br>
-		<%} %>
-		
+				
 
 	</div>
 

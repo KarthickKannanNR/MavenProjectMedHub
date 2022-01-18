@@ -312,7 +312,7 @@ box-shadow: 0 0 10px black;
 		
 			<div id="product">
 				<div id="img">
-					<img src="<%=products.getProductImg() %>" alt="horlicks">
+					<img src="Assets/<%=products.getProductImg() %>" alt="horlicks">
 					<h3><%=products.getProductName() %></h3>
 				</div>
 				<div id="details">

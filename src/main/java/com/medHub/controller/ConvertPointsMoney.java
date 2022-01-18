@@ -23,6 +23,9 @@ public class ConvertPointsMoney extends HttpServlet{
 		HttpSession session = req.getSession();
 		User currentUser = (User) session.getAttribute("user");
 		int points=Integer.parseInt(req.getParameter("pointsMoney"));
+		try {
+		if(currentUser.getWallet()>500)
+		{
 		double Converted = Math.round((points * 10)/100);
 		double wallet=currentUser.getWallet()+Converted;
 		UserDaoImpl userDao = new UserDaoImpl();
@@ -33,6 +36,12 @@ public class ConvertPointsMoney extends HttpServlet{
 		if(flag)
 		{
 			res.sendRedirect("UserProfile.jsp");
+		}
+		}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
 		}
 		
 		

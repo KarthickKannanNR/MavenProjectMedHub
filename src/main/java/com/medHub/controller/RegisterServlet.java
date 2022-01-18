@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 import com.medHub.dao.UserDaoImpl;
@@ -21,28 +22,42 @@ public class RegisterServlet extends HttpServlet {
 
 	@Override
 	public void service(HttpServletRequest req,HttpServletResponse res) throws IOException {
-
-		String fullName= req.getParameter("regfullName");
-		String mail=req.getParameter("regMail");
+		
+		HttpSession session = req.getSession(); 
+		String fullName= req.getParameter("regfullName").toLowerCase();
+		String mail=req.getParameter("regMail").toLowerCase();
 		long mobile=Long.parseLong(req.getParameter("regMobile"));
 		String password=req.getParameter("regPassword");
 		//int age= Integer.parseInt(req.getParameter("regAge"));
 //		UserModel user = new UserModel(fullName,age,mobile,mail,password);
 //		UserDao userDao= new UserDao();
+		UserDaoImpl userdao = new UserDaoImpl();
+		if(userdao.checkMail(mail))
+		{
+			
+		}
+		
+		if (mail.contains("@medhub.com")) {
+			
+			//System.out.println("notallow");
+			session.setAttribute("notallow", "@medhub.com domain not allowed !");
+			try {
+				res.sendRedirect("Index.jsp");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
 		User user = new User(fullName,mobile,mail,password);
 		UserDaoImpl userDao = new UserDaoImpl();
 		userDao.insert(user);
 		//userDao.insert(user);
-		res.getWriter().print("Registered");
 		
-		try {
-			//HttpSession session = (HttpSession) req.getSession(); 
-			
-			res.sendRedirect("RegisterWelcomeMessage.jsp");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		
+	
 
 	}
 

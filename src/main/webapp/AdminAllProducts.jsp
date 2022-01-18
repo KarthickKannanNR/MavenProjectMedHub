@@ -56,7 +56,7 @@ body {
 
 #product {
 	position: relative;
-	background-color: rgb(158, 202, 207);
+	background-color: rgb(158, 202, 207, 0.5);
 	height: 250px;
 	border-radius: 5px;
 	width: 1200px;

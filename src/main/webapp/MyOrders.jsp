@@ -177,7 +177,7 @@ img {
 #product #btn {
 	position: relative;
 	left: 900px;
-	top:-160px;
+	top:-180px;
 }
 
 #product #btn button {
@@ -223,17 +223,25 @@ top:90px;
 left: 55px;
 }
 
+#productId{
+visibility: hidden;
+}
+
 </style>
 </head>
 
 <body>
 	<%
-	OrderItemsDaoImpl myOrder= new OrderItemsDaoImpl();User currentUser = (User)session.getAttribute("user");
+	OrderItemsDaoImpl myOrder= new OrderItemsDaoImpl();
+	User currentUser = (User)session.getAttribute("user");
 	List<OrderItems> myOrderList = myOrder.ViewMyOrders(currentUser);
 	OrderDaoImpl currentCancelOrder = new OrderDaoImpl();
 	OrderItemsDaoImpl orderItem = new OrderItemsDaoImpl();
+	ProductDaoImpl productDao = new ProductDaoImpl();
+	UserDaoImpl userDao = new UserDaoImpl();
 /* 	LocalDate date =  orderItem.getCurrentDate().toLocaleString();
 	Date localDepartureDate = java.sql.Date.valueOf(date); */
+	
 	
 	%>
 	<div id="container">
@@ -246,7 +254,7 @@ left: 55px;
 					<li><a href="Cart.jsp">Cart</a></li>
 					<li><a href="UserProfile.jsp">MyProfile</a></li>
 					<li><a href="MyOrders.jsp?orderId=0">MyOrders</a></li>
-					<li><a href="MyOrders.jsp?orderId=0">About-Us</a></li>
+					<li><a href="AboutUs.jsp">About-Us</a></li>
 					<li><a href="UserHome.jsp">Home</a></li>
 					
 				</ul>
@@ -266,6 +274,30 @@ left: 55px;
 		int orderId=Integer.parseInt(request.getParameter("orderId"));
 		OrderDaoImpl orderDao=new OrderDaoImpl();	
 		boolean deleteStatus=currentCancelOrder.deleteProduct(orderId);
+		
+		double totalAmt= Double.parseDouble(request.getParameter("totalPrice"));
+		double returnAmt = Math.round(totalAmt-(totalAmt*10/100));
+		double availableWallet= currentUser.getWallet()+returnAmt;
+		int quanity = Integer.parseInt(request.getParameter("quantity"));
+		int points = Integer.parseInt(request.getParameter("points"));
+		int productId = Integer.parseInt(request.getParameter("productId"));
+		userDao.updateWalletMoney(availableWallet, currentUser);
+		currentUser.setWallet(availableWallet);
+		int availablePoints = currentUser.getPoints()-points;
+		userDao.updateUserPoints(availablePoints, currentUser);
+		currentUser.setPoints(availablePoints);
+		Product cancelledProduct;
+		if(productId>0)
+		{
+			 cancelledProduct = productDao.findProductByProductId(productId);
+			 int updatedQty = cancelledProduct.getQuantity()+quanity;
+			cancelledProduct.setQuantity(updatedQty);
+			productDao.updateProductQuantity(cancelledProduct, updatedQty);
+		}
+		
+		
+		
+		
 		if(deleteStatus)
 		{%>
 			<script>
@@ -277,7 +309,7 @@ left: 55px;
 
 		
 		/* orderDao.deleteProduct(myAllOrders.getOrderModel().getOrderId()); */
-		
+				
 		
 	
 		<% boolean flag;
@@ -286,7 +318,6 @@ left: 55px;
 			flag =orderDao.checkStatus(myAllOrders.getOrderModel().getOrderId());
 			System.out.println(myAllOrders.getOrderdate());
 			boolean cancel = orderItem.cancelDate(myAllOrders.getOrderdate(),myAllOrders.getOrderModel().getOrderId());
-			System.out.println(cancel);
 			 %>
 			
 			<div id="product">
@@ -308,18 +339,26 @@ left: 55px;
 						Offer Applied:
 						<%=myAllOrders.getProduct().getOffer() %>%
 					</h3>
-					<h3>
+					
+					<h3 name="points">
 						Points :
 						<%=myAllOrders.getProduct().getPoints() %></h3>
-						<h3>
+						
+						<h3 name="quantity">
 						Total Quantity:
 						<%=myAllOrders.getQuantity() %></h3>
-					<h3>
+					<h3 name="totalPrice">
 						Total Amt :
-						<%=myAllOrders.getTotalPrice() %></h3>
+						<%=myAllOrders.getTotalPrice() + "rs"%></h3>
 					<h3>
 						Order Status :
 						<%=myAllOrders.getOrderModel().getOrderStatus()%></h3>	
+						
+						<h3 name="productId" id="productId">
+						Order Date :
+						<%=myAllOrders.getProduct().getProductId()%></h3>
+					<h3>
+		
 						
 				</div>
 				<% if(flag && cancel)
@@ -327,7 +366,8 @@ left: 55px;
 					<!-- <h3>Ordered Cancelled</h3> -->
 				<div id="btn">
 					<button>
-						<a id="cancel" href="MyOrders.jsp?orderId=<%=myAllOrders.getOrderModel().getOrderId()%>">Cancel Order</a>
+						<a id="cancel" href="MyOrders.jsp?orderId=<%=myAllOrders.getOrderModel().getOrderId()%>&quantity=<%=myAllOrders.getQuantity()%>
+											&totalPrice=<%=myAllOrders.getTotalPrice()%>&points=<%=myAllOrders.getProduct().getPoints()%>&productId=<%=myAllOrders.getProduct().getProductId()%>">Cancel Order</a>
 					</button>
 					<br>
 					</button>
@@ -338,7 +378,6 @@ left: 55px;
 		<br>
 		<br>
 		<%}%>
-		
 		
 	
 <!-- 		<h2 id="copyrights">© 2021 MedHub.com. All rights reserved.</h2>

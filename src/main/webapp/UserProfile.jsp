@@ -228,8 +228,8 @@ String AddressNotFound = (String)session.getAttribute("AddressNotFound");
 					<li><a href="Index.jsp">SignOut</a></li>
 					<li><a href="Cart.jsp">Cart</a></li>
 					<li><a href="UserProfile.jsp">MyProfile</a></li>
-					<li><a href="MyOrders.jsp?orderId=0">MyOrders</a></li>
-					<li><a href="MyOrders.jsp?orderId=0">About-Us</a></li>
+					<li><a href="MyOrders.jsp?orderId=0&totalPrice=0&quantity=0&points=0&productId=0">MyOrders</a></li>
+					<li><a href="AboutUs.jsp">About-Us</a></li>
 					<li><a href="UserHome.jsp">Home</a></li>
 			</ul>
 			<div class="logo">
@@ -306,7 +306,7 @@ String AddressNotFound = (String)session.getAttribute("AddressNotFound");
 	<div id="pointMoney">
 	<form action="ConvertMoney">
 	<label> points : </label>
-	<input type="number" name="pointsMoney" "UpdateWallet" min="1" max="5000" value="<%=currentUser.getPoints()%>" readonly>
+	<input type="number" name="pointsMoney" "UpdateWallet" min="500" max="5000" value="<%=currentUser.getPoints()%>" title="You need to reach 500 points to convert" readonly>
 		<button>Convert To Cash</button>
 	</form>
 	</div>

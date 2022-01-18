@@ -81,11 +81,11 @@ body {
 	position: absolute;
 	top: 200px;
 	left: 490px;
-	background-color: rgb(221, 187, 125);
+	background-color:rgb(245,178,120);
 	height: 400px;
 	width: 400px;
 	border-radius: 5px;
-	visibility: visible;
+	visibility: hidden;
 	box-shadow: 0 0 5px black;
 }
 
@@ -171,14 +171,14 @@ body {
 
 /* register screen */
 #registerScreen {
-	height: 600px;
+	height: 450px;
 	width: 400px;
 	position: absolute;
 	top: 120px;
 	left: 490px;
-	background-color: rgb(221, 187, 125);
+	background-color: rgb(245,178,120);
 	border-radius: 5px;
-	visibility: hidden;
+	visibility: visible;
 }
 
 #registerScreenContent {
@@ -321,7 +321,7 @@ font-weight: 600;
 				<br>
 				<br>
 				<br> <a onclick="getRegisterForm()" id="register">Not
-					Registered Yet ?</a>
+					Registered Yet ?</a>l
 				<!--  <a id="forgetpassword"
                     href="ForgetPassword.html">Forget Password</a><br> -->
 				<% String error=(String)session.getAttribute("error");
@@ -340,31 +340,31 @@ font-weight: 600;
 					<label for="fullName" class="reglab"">FullName*</label><br>
 					<br> <input type="text" name="regfullName" id="fullname"
 						placeholder="Enter fullname" required ><br>
+						
 					<br> <label for="mail" class="reglab">Mail Id</label><br>
-					<br> <input type="email" name="regMail"
-						placeholder="Enter Mail Id" required><br>
+					<br> <input type="email" onkeyup="checkMail()" name="regMail"
+						id="regMail" placeholder="Enter Mail Id" required ><br>
+						<label id="existsMsg"></label>
 					<BR> <label for="phone" class="reglab">Mobile Number*</label><br>
 					<br> <input type="text" name="regMobile" required
-						placeholder="Enter Mobile Number" pattern="[0-9]{10}"
+						placeholder="Enter Mobile Number" pattern="[6-9][0-9]{9}"
 						title="MObile Number Must Have 10 Digits" required min="3" max="10"><br>
 					<br> <label for="password" class="reglab">Password*</label><br>
 					<br> <input type="password" input="password"
 						placeholder="Password" name="regPassword" value="" required
 						pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%?&]{8,15}$"
 						title="Minimum eight and Minimum 8 and maximum 15 characters, at least one uppercase letter, one lowercase letter, one number and one special character"><br>
-					<br> <label for="confirnPassword" class="reglab"
-						name="regConfirmPassword">Confirm Password*</label><br>
-					<br> <input type="password" name="confirmPassword"
-						placeholder="Confirm Password" required
-						pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%?&]{8,15}$"
-						title="Minimum 8 and maximum 15 characters, at least one uppercase letter, one lowercase letter, one number and one special character"><br>
-					<br>
+				<br>
 					<br>
 					<!-- <label for="address" class="reglab">Address</label></br><br> -->
 					<!-- <textarea name="address" id="address" cols="30" rows="5"
                         style="max-width: 300px;max-height: 100px;border-radius: 3px;outline: none;"></textarea><br><br> -->
-
-					<button id="regbtn" type="submit">Register</button>
+					<button id="regbtn" type="submit">Register</button><br>
+					<% String notallow=(String)session.getAttribute("notallow");
+            if(notallow!=null) {%>
+            <h4><%=session.getAttribute("notallow") %></h4>
+           
+            <%} session.removeAttribute("notallow"); %>
 			</div>
 			</form>
 		</div>
@@ -391,6 +391,46 @@ function hideMsg()
 	document.getElementById("errorMsg").style.visibility="hidden";
 	
 	}
+
+</script>
+<script>
+function checkMail() {
+	
+	let email=document.getElementById("regMail").value;
+	console.log(email);
+    var url="chechEmail.jsp?email="+email;  
+    if(window.XMLHttpRequest){  
+    request=new XMLHttpRequest();  
+    }  
+    else if(window.ActiveXObject){  
+    request=new ActiveXObject("Microsoft.XMLHTTP");  
+    }  
+    try  
+    {  
+    request.onreadystatechange=getInfo;  
+    request.open("GET",url,true);  
+    request.send();  
+    }  
+    catch(e)  
+    {  
+    alert("Unable to connect to server");  
+    }
+        
+       }
+    
+    function getInfo(){  
+    	if(request.readyState==4){  
+    	var response =request.responseText; 
+    	//console.log(response);
+    	document.getElementById('existsMsg').innerHTML=response;
+    	 document.getElementById("existsMsg").style.color = "red";
+    	document.getElementById("existsMsg").style.visibility = "visible";
+    	//console.log(response);
+
+    	}  
+    	
+    	}
+
 
 
 </script>
