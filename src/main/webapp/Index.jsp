@@ -316,7 +316,7 @@ font-weight: 600;
 				<h1 class="loginHere">Login Here</h1>
 				<label class="label" for="fullName">Email*</label><br> 
 				<input type="email"
-					name="loginMail" required placeholder="Enter Email" onmouseleave="hideMsg()"><br>
+					name="loginMail" required placeholder="Enter Email"  pattern="[A-Za-z0-9]+[@][a-zA-Z]+[.][A-Za-z]{2,3}"  onmouseleave="hideMsg()"><br>
 				<br>
 				<br> <label class="label" for="password">Password *</label><br> 
 				<input type="password" name="loginPassword" placeholder="Password" 

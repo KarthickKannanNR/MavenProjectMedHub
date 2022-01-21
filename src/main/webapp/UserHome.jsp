@@ -296,6 +296,7 @@ box-shadow: 0 0 10px black;
 		<input id="searchBar" type="text" name="ProductName" required="required" placeholder="Search By Products & categories">
 		<button type="submit" id="searchBtn">&#128269;</button>
 		</form>
+		
 		<% 
 		ProductDaoImpl product= new ProductDaoImpl();
 		List<Product> allproduct = product.viewProduts();

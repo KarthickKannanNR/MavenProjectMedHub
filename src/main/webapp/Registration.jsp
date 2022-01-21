@@ -319,9 +319,9 @@ color: red;
 						
 					<br> <label for="mail" class="reglab">Mail Id</label><br>
 					<br> <input type="email" onkeyup="checkMail()" name="regMail"
-						id="regMail" placeholder="Enter Mail Id" required ><br>
-						<label id="existsMsg"></label>
-					<BR> <label for="phone" class="reglab">Mobile Number*</label><br>
+						id="regMail" placeholder="Enter Mail Id"  pattern="[A-Za-z0-9]+[@][a-zA-Z]+[.][A-Za-z]{2,3}"  required ><br>
+						<label id="existsMsg"></label><br>
+					 <label for="phone" class="reglab">Mobile Number*</label><br>
 					<br> <input id="mobile" type="text" onkeyup="mobileNum()" name="regMobile" required
 						placeholder="Enter Mobile Number" pattern="[6-9][0-9]{9}"
 						title="MObile Number Must Have 10 Digits" required min="3" max="10"><br>
@@ -330,7 +330,7 @@ color: red;
 					<br> <input type="password" input="password"
 						placeholder="Password" name="regPassword" value="" required
 						pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%?&]{8,15}$"
-						title="Minimum eight and Minimum 8 and maximum 15 characters, at least one uppercase letter, one lowercase letter, one number and one special character"><br>
+						title="Minimum 8 and maximum 15 characters, at least one uppercase letter, one lowercase letter, one number and one special character"><br>
 				<br>
 					<br>
 					<!-- <label for="address" class="reglab">Address</label></br><br> -->
@@ -429,7 +429,7 @@ function mobileNum() {
     }  
     try  
     {  
-    request.onreadystatechange=getInfo;  
+    request.onreadystatechange=getInfoMobile;  
     request.open("GET",url,true);  
     request.send();  
     }  
@@ -440,7 +440,7 @@ function mobileNum() {
         
        }
     
- function getInfo(){  
+ function getInfoMobile(){  
     	if(request.readyState==4){  
     	var response =request.responseText; 
     	//console.log(response);

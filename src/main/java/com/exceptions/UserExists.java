@@ -2,7 +2,7 @@ package com.exceptions;
 
 public class UserExists extends Exception{
 	
-String message="This Email Already Registered";
+String message="This User Already Registered";
 	
 	@Override
 	public String getMessage()
