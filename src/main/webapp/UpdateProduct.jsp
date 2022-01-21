@@ -8,6 +8,9 @@
 <head>
 <meta charset="ISO-8859-1">
  <link rel = "icon" type = "" href = "Assets/medhublogo.png">
+<script>
+    history.forward();
+</script>
 
 <title>Update Product</title>
 <style>
@@ -106,16 +109,23 @@ position: relative;
 top: 70px;
 left:150px;
 }
+
+#addProductForm label{
+position: relative;
+left:20px;
+}
 </style>
 </head>
 <body>
+<%response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");%>
+
 	<div id="container">
 		<div id="navigation">
 			<ul>
 				<li><a href="AllUser.jsp">All Users</a></li>
 				<li><a href="AdminAllProducts.jsp?deleteProductid=0">All Products</a></li>
 				<li><a href="AddProduct.jsp">Add Products</a></li>
-				<li id="logout"><a class="navbar-brand" href="Index.jsp">Logout</a></li>
+				<li><a href="SalesReports.jsp">Sales Reports</a></li>
 				<li id="home"><a class="navbar-brand" href="AdminHome.jsp">Logout</a></li>
 				
 		</div>

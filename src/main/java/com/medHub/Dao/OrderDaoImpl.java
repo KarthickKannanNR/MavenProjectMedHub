@@ -93,7 +93,7 @@ public class OrderDaoImpl implements OrderDAO{
 		{
 			
 		status=rs.getString(1).toLowerCase();
-		if(!status.equals("canceled"))
+		if(!status.equals("cancelled"))
 		{
 			return true;
 

@@ -15,6 +15,11 @@
 <meta name="theme-color" content="#ba8f88" >
 
 <title>Userhome</title>
+
+<script>
+    history.forward();
+</script>
+
 <style>
 * {
 	margin: 0;
@@ -255,6 +260,9 @@ box-shadow: 0 0 10px black;
 </head>
 
 <body>
+
+<%  response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");%>
+
 	<%User currentUser = (User)session.getAttribute("user");
 	session.setAttribute("userNotFound", null);
 	%>

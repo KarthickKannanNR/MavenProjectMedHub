@@ -1,13 +1,12 @@
 package com.exceptions;
 
-public class UserExists extends Exception{
+public class OutOfStockException extends Exception{
 	
-String message="This Email Already Registered";
+String message="Currently the product is out of stock !";
 	
 	@Override
 	public String getMessage()
 	{
-		
 		return message;
 	}
 
@@ -15,6 +14,5 @@ String message="This Email Already Registered";
 	public String toString() {
 		return message;
 	}
-	
 
 }

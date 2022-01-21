@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.exceptions.CartNotEnoughQty;
+import com.exceptions.NegativePoints;
 import com.medHub.dao.OrderDaoImpl;
 import com.medHub.dao.OrderItemsDaoImpl;
 import com.medHub.dao.ProductDaoImpl;
@@ -24,8 +27,7 @@ public class ConvertPointsMoney extends HttpServlet{
 		User currentUser = (User) session.getAttribute("user");
 		int points=Integer.parseInt(req.getParameter("pointsMoney"));
 		try {
-		if(currentUser.getWallet()>500)
-		{
+		if(points>0) {
 		double Converted = Math.round((points * 10)/100);
 		double wallet=currentUser.getWallet()+Converted;
 		UserDaoImpl userDao = new UserDaoImpl();
@@ -37,13 +39,20 @@ public class ConvertPointsMoney extends HttpServlet{
 		{
 			res.sendRedirect("UserProfile.jsp");
 		}
-		}
-		}
-		catch(Exception e)
+		}else
 		{
-			e.printStackTrace();
+			try {
+				throw new NegativePoints();
+				}catch(NegativePoints e)
+				{
+					session.setAttribute("negativePoints",e.getMessage());
+					res.sendRedirect("UserProfile.jsp");
+				}
+			
 		}
-		
-		
+	}catch(Exception e)
+		{
+		e.printStackTrace();
+		}
 	}
 }

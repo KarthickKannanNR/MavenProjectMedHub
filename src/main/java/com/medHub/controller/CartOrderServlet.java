@@ -1,6 +1,7 @@
 package com.medHub.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.exceptions.AddressNotFound;
+import com.exceptions.CartNotEnoughQty;
+import com.exceptions.InsuffientMoney;
+import com.exceptions.OutOfStockException;
 import com.medHub.dao.CartDaoImpl;
 import com.medHub.dao.OrderDaoImpl;
 import com.medHub.dao.OrderItemsDaoImpl;
@@ -51,7 +56,9 @@ public class CartOrderServlet extends HttpServlet {
 		cart.setProduct(currentProduct);
 		cart.setUser(currentUser);
 		
-		if (currentProduct.getQuantity() != 0 && (currentProduct.getQuantity() - cartQuantity) > 0) {
+		if(currentUser.getAddress()!=null && !currentUser.getAddress().equals("null")) {
+		if(currentProduct.getQuantity() != 0) {
+		if (currentProduct.getQuantity() - cartQuantity > 0) {
 
 			if ((currentUser.getWallet() - totalPrice) >= 0) {
 				order.setProduct(currentProduct);
@@ -80,7 +87,13 @@ public class CartOrderServlet extends HttpServlet {
 				int result=	orderItemsDaoImpl.insertOrders(orderItems);
 				if(result>0)
 				{
-					res.sendRedirect("Cart.jsp");
+					/*
+					 * res.sendRedirect("Cart.jsp");
+					 */					PrintWriter out = res.getWriter();
+					out.println("<script type=\"text/javascript\">");
+					out.println("alert('Order Placed Successfully');");
+					out.println("location='Cart.jsp'");
+					out.println("</script>");
 				}
 				try {
 					removeStatus=cartdao.removecartItems(cart);
@@ -90,12 +103,47 @@ public class CartOrderServlet extends HttpServlet {
 				}
 			}
 			else {
+				try {
+					throw new InsuffientMoney();
+				}catch(InsuffientMoney iF)
+				{
+					session.setAttribute("notEnoughAmt",iF.getMessage());
+					res.sendRedirect("UserProfile.jsp");
+				}
 			}
-		} else {
-			res.sendRedirect("UserProfile.jsp");
+		}else {
+			try {
+				throw new CartNotEnoughQty();
+				}catch(CartNotEnoughQty e)
+				{
+					session.setAttribute("lessStock",e.getMessage());
+					res.sendRedirect("Cart.jsp");
+				}
+
+		} 
+		
+		}else {
+			try {
+			throw new OutOfStockException();
+			}catch(OutOfStockException e)
+			{
+				session.setAttribute("outOfStock",e.getMessage());
+				res.sendRedirect("Cart.jsp");
+			}
 
 		}
-
-
+		}else {
+			try {
+				throw new AddressNotFound();
+				}
+				catch(AddressNotFound ad)
+				{
+					session.setAttribute("AddressNotFoundFromCart", ad.getMessage());
+					res.sendRedirect("UserProfile.jsp");
+				}
+			
+		}
+		
+		
 	}
 }

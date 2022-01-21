@@ -46,8 +46,9 @@ public class BuyProductServlet extends HttpServlet {
 
 		if (currentUser.getWallet() >= price) 
 			{
-					if(currentUser.getAddress()!=null) 
+					if(currentUser.getAddress()!=null && !currentUser.getAddress().equals("null")) 
 					{
+						System.out.println("add null found");
 					order.getProduct().setQuantity((order.getProduct().getQuantity() - qty));
 					try {
 							int updateQty = currentproduct.getQuantity() - qty;

@@ -7,6 +7,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <link rel = "icon" type = "" href = "Assets/medhublogo.png">
+<script>
+    history.forward();
+</script> 
 
 <title>Add Product</title>
 <style>
@@ -126,13 +129,15 @@ outline:none;
 </style>
 </head>
 <body>
+<%response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");%>
+
 	<div id="container">
 		<div id="navigation">
 			<ul>
 				<li><a href="AllUser.jsp">All Users</a></li>
-				<li><a href="AdminAllProducts.jsp?deleteProductid=0">All
-						Products</a></li>
+				<li><a href="AdminAllProducts.jsp?deleteProductid=0">AllProducts</a></li>
 				<li><a href="AddProduct.jsp">Add Products</a></li>
+				<li><a href="SalesReports.jsp">Sales Reports</a></li>
 				<li id="logout"><a class="navbar-brand" href="Index.jsp">Logout</a></li>
 				
 		</div>
@@ -174,8 +179,9 @@ outline:none;
 			<br>
 			<!--             <label for="image">Image Url</label>
  -->
-			<label>Add Image<input class="inputBox" type="file" required name="imageFile"
-				placeholder="Image Url"></label><br>
+			<label>Add Image</label>
+			<input class="inputBox" type="file" required name="imageFile"
+				placeholder="Image Url"><br>
 			<br>
 			<!--             <label for="Points">Points</label>
  -->

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
+import com.exceptions.UserExists;
+import com.exceptions.UserNotFound;
 import com.medHub.dao.UserDaoImpl;
 import com.medHub.model.*;
 
@@ -28,37 +30,55 @@ public class RegisterServlet extends HttpServlet {
 		String mail=req.getParameter("regMail").toLowerCase();
 		long mobile=Long.parseLong(req.getParameter("regMobile"));
 		String password=req.getParameter("regPassword");
+		User user = null;
 		//int age= Integer.parseInt(req.getParameter("regAge"));
 //		UserModel user = new UserModel(fullName,age,mobile,mail,password);
 //		UserDao userDao= new UserDao();
 		UserDaoImpl userdao = new UserDaoImpl();
+		try {
 		if(userdao.checkMail(mail))
 		{
-			
-		}
 		
-		if (mail.contains("@medhub.com")) {
+			if (mail.contains("@medhub.com")) {
 			
 			//System.out.println("notallow");
 			session.setAttribute("notallow", "@medhub.com domain not allowed !");
 			try {
-				res.sendRedirect("Index.jsp");
+				res.sendRedirect("Registration.jsp");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}else
+			{
+			user = new User(fullName,mobile,mail,password);
+			UserDaoImpl userDao = new UserDaoImpl();
+			userDao.insert(user);
+			res.sendRedirect("RegisterWelcomeMessage.jsp");
+			}
+		}
+	
+		else {
+			
+			throw new UserExists();
+				
 		}
 		
 		
-		User user = new User(fullName,mobile,mail,password);
-		UserDaoImpl userDao = new UserDaoImpl();
-		userDao.insert(user);
+	
+		
+		
+		
 		//userDao.insert(user);
 		
 		
 		
 	
-
+		}catch(UserExists e) {
+			session.setAttribute("error", e.getMessage());
+			
+			res.sendRedirect("Registration.jsp");
+		}
 	}
 
 }

@@ -12,9 +12,9 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" ></script>
 <title>Sales Report</title>
-<script>
+<!-- <script>
     history.forward();
-</script>
+</script> -->
 
 <style>
 * {
@@ -62,7 +62,7 @@ body {
 #allusers table, th, tr, td {
 	border: 2px solid black;
 	border-collapse: collapse;
-	padding: 10px;
+	
 }
 
 #allusers table th {
@@ -71,8 +71,8 @@ body {
 
 #allusers {
 	position: absolute;
-	left: 18%;
-	top: 100px;
+	left: 30%;
+	top: 150px;
 }
 
 .searchDate{
@@ -92,7 +92,7 @@ left:80px;
 outline: none;
 border: none;
 box-shadow: 0 0 5px black;
-border-radius: 3px;
+border-radius: 1.5px;
 }
 
 .searchDate button:hover{
@@ -103,8 +103,8 @@ transition-duration:0.2s;
 </style>
 </head>
 <body>
-<%response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");%>
-
+<%-- <%response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");%>
+ --%>
 	<div id="container" >
 		<div id="navigation">
 			<ul>
@@ -112,27 +112,32 @@ transition-duration:0.2s;
 				<li><a href="AdminAllProducts.jsp?deleteProductid=0">All Products</a></li>
 				<li><a href="AddProduct.jsp">Add Products</a></li>
 				<li><a href="SalesReports.jsp">Sales Reports</a></li>
-				<li id="logout"><a href="Index.jsp">Logout</a></li>
+				<li id="home"><a class="navbar-brand" href="AdminHome.jsp">Logout</a></li>
+				
 		</div>
 		</ul>
 	</div>
 		<div class="searchDate" >
 		<form action="SalesReports2.jsp">
 			<label>From</label>
-			<input type="date" id="startDate" name="startDate">
+			<input type="date" id="startDate" name="startDate" required>
 			<label class="max">To</label>		
-			<input class="max" type="date" id="maxDate" name="endDate">
+			<input class="max" type="date" id="maxDate" name="endDate" required>
 			<button type="submit"> View Sales</button>
 			</form>
 		</div>	
  		<% 
-		ResultSet rs = (ResultSet)session.getAttribute("orders");
+ 		  String fromDate = request.getParameter("startDate"); 
+		  String toDate =  request.getParameter("endDate");
+		  OrderItemsDaoImpl orderItem = new OrderItemsDaoImpl();
+		  ResultSet rs=  orderItem.salesReport(fromDate,toDate);
+		  double totalAmt=0;
 		%>
 		
 	 <div>
 		<% 
 		%>
-		<%-- <div id="allusers">
+		 <div id="allusers">
 			<table class="table table-striped">
 				<thead class="table table-dark">
 					<tr>
@@ -155,10 +160,19 @@ transition-duration:0.2s;
 						<td><%=rs.getDouble(5)%></td>
 						
 					</tr>
-					<%} %>
+					<%
+					totalAmt+=rs.getDouble(5);
+					} %>
+					<tr>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th>Total Price</th>
+					<th><%=totalAmt %></th>
+					</tr>
 				</tbody>
 			</table>
-		</div>  --%>
+		</div>  
  
 	</div>
 </body>
@@ -173,6 +187,8 @@ let date = JSON.stringify(maxDate)
 date = date.slice(1,11)
 console.log(date)
 document.getElementById("maxDate").setAttribute("max",date);
+document.getElementById("startDate").setAttribute("max",date);
+
 
 }
 

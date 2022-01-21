@@ -3,7 +3,7 @@ package com.exceptions;
 public class AddressNotFound extends Exception{
 	
 	
-	String message="Address Not Found,Please update your Address";
+	String message="Address Not Found,Please update your Delivery Address";
 	
 	@Override
 	public String getMessage()

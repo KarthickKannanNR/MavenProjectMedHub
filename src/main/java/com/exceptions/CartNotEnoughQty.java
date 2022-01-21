@@ -1,8 +1,8 @@
 package com.exceptions;
 
-public class UserExists extends Exception{
+public class CartNotEnoughQty extends Exception{
 	
-String message="This Email Already Registered";
+	String message="Currently The Available Quantity Is Lesser Than You Choosed ! Try After Sometime";
 	
 	@Override
 	public String getMessage()
@@ -15,6 +15,5 @@ String message="This Email Already Registered";
 	public String toString() {
 		return message;
 	}
-	
 
 }

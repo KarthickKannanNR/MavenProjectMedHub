@@ -133,6 +133,7 @@ a {
 </style>
 </head>
 <body>
+<%response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");%>
 
 	<li><a href="AllUser.jsp">All Users</a></li>
 	<div id="navigation">

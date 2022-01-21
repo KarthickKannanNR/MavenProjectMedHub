@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <link rel = "icon" type = "" href = "Assets/medhublogo.png">
+<link rel = "icon" type = "" href = "Assets/medhublogo.png">
 
 <title>Cart</title>
 <style>
@@ -218,6 +218,8 @@ img {
 	top:20px;
 }
 
+
+
 #btn  {
 	position: relative;
 	top: -40px;
@@ -232,10 +234,26 @@ position: relative;
 left: 1100px;
 }
 
+#errorMsg{
+position: absolute;
+top:180px;
+left:900px;
+color: red;
+}
+
+#lessStock{
+position: absolute;
+top:150px;
+left:510px;
+color: red;
+}
+
 </style>
 </head>
 
 <body>
+
+
 	<%User currentUser = (User)session.getAttribute("user");
 	
 	%>
@@ -266,8 +284,10 @@ left: 1100px;
 		<% OrderItemsDaoImpl myOrder= new OrderItemsDaoImpl();
 		CartDaoImpl cartDao = new CartDaoImpl();
 		List<Cart> cartItems = cartDao.viewCart(currentUser);
-		/* orderDao.deleteProduct(myAllOrders.getOrderModel().getOrderId()); */		
-		%>
+		/* orderDao.deleteProduct(myAllOrders.getOrderModel().getOrderId()); */	
+    %>
+		
+		
 		<% for(Cart cartList : cartItems)
 			 {
 			 %>
@@ -313,7 +333,19 @@ left: 1100px;
 		<br>
 		<%}%>
 		
-		
+<%    String errorMessage= (String)session.getAttribute("outOfStock"); 
+	  String lessStockMsg= (String)session.getAttribute("lessStock"); 
+      if(errorMessage!=null)
+      { %>
+			<h3 id="errorMsg" ><%=errorMessage%></h3>
+			<%} session.removeAttribute("outOfStock"); %>		
+			
+	 <% if(lessStockMsg!=null)
+      { %>
+			<h3 id="lessStock" ><%=lessStockMsg%></h3>
+			 <% session.removeAttribute("lessStock"); %>
+			<%} %>
+			 		
 		
 	</div>
 

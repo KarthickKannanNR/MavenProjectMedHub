@@ -13,6 +13,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <link rel = "icon" type = "" href = "Assets/medhublogo.png">
 
+
 <title>Userhome</title>
 <style>
 * {
@@ -265,6 +266,8 @@ box-shadow: 0 0 10px black;
 </head>
 
 <body>
+
+
 	<%User currentUser = (User)session.getAttribute("user");
 	session.setAttribute("userNotFound", null);
 	String Pname = request.getParameter("ProductName").toLowerCase();

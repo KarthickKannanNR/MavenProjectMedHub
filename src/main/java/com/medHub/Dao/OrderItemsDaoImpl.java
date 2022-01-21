@@ -113,6 +113,50 @@ public class OrderItemsDaoImpl implements OrderItemDAO{
 				
 				
 					}
+
+
+			public ResultSet salesReport(String fromDate, String toDate) {
+				
+				List<OrderItems> salesReport = new ArrayList<OrderItems>();
+				OrderItems orderItem;
+				System.out.println(fromDate);
+				System.out.println(toDate);
+				LocalDate startDate = LocalDate.parse(fromDate);
+				LocalDate endDate = LocalDate.parse(toDate);
+				System.out.println(startDate);
+				System.out.println(endDate);
+				
+				String query = "select trunc(o.order_date),p.product_name,sum(oi.quantity) as quantity,oi.total_price as price, (sum(oi.quantity)*oi.total_price) as totalPrice\r\n"
+						+ " from order_items oi\r\n"
+						+ " join orders o on o.order_id = oi.order_id\r\n"
+						+ " join products p on p.product_id = oi.product_id\r\n"
+						+ " where trunc(o.order_date) between ? and ? \r\n"
+						+ "group by(trunc(o.order_date),p.product_name,oi.quantity,oi.total_price,o.order_id)";
+				Connection con = ConnectionUtil.getDBconnect();
+				boolean flag = false;
+				PreparedStatement ps;
+				ResultSet rs = null;
+				try {
+					 ps = con.prepareStatement(query);
+					 ps.setDate(1, java.sql.Date.valueOf(startDate));
+					ps.setDate(2, java.sql.Date.valueOf(endDate));
+					 rs = ps.executeQuery();
+					
+					while(rs.next())
+
+					{
+						return rs;
+					}
+						
+					} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					}
+					
+						return rs;
+				
+					}
+			
 }
 
 

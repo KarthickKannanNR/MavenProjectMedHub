@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <link rel = "icon" type = "" href = "Assets/medhublogo.png">
+<link rel = "icon" type = "" href = "Assets/medhublogo.png">
 
 <title>My Orders</title>
 <style>
@@ -231,6 +231,8 @@ visibility: hidden;
 </head>
 
 <body>
+
+
 	<%
 	OrderItemsDaoImpl myOrder= new OrderItemsDaoImpl();
 	User currentUser = (User)session.getAttribute("user");
@@ -253,7 +255,7 @@ visibility: hidden;
 					<li><a href="Index.jsp">SignOut</a></li>
 					<li><a href="Cart.jsp">Cart</a></li>
 					<li><a href="UserProfile.jsp">MyProfile</a></li>
-					<li><a href="MyOrders.jsp?orderId=0">MyOrders</a></li>
+					<li><a href="MyOrders.jsp?orderId=0&totalPrice=0&quantity=0&points=0&productId=0">MyOrders</a></li>
 					<li><a href="AboutUs.jsp">About-Us</a></li>
 					<li><a href="UserHome.jsp">Home</a></li>
 					
@@ -303,6 +305,7 @@ visibility: hidden;
 			<script>
 			alert("Ordered Cancelled Sucessfully");
 			</script>
+			response.sendRedirect("MyOrders.jsp");
 			
 		<% }%>
 		
@@ -366,8 +369,8 @@ visibility: hidden;
 					<!-- <h3>Ordered Cancelled</h3> -->
 				<div id="btn">
 					<button>
-						<a id="cancel" href="MyOrders.jsp?orderId=<%=myAllOrders.getOrderModel().getOrderId()%>&quantity=<%=myAllOrders.getQuantity()%>
-											&totalPrice=<%=myAllOrders.getTotalPrice()%>&points=<%=myAllOrders.getProduct().getPoints()%>&productId=<%=myAllOrders.getProduct().getProductId()%>">Cancel Order</a>
+						<a id="cancel" onclick="check()"  href="MyOrders.jsp?orderId=<%=myAllOrders.getOrderModel().getOrderId()%>&quantity=<%=myAllOrders.getQuantity()%>
+							&totalPrice=<%=myAllOrders.getTotalPrice()%>&points=<%=myAllOrders.getProduct().getPoints()%>&productId=<%=myAllOrders.getProduct().getProductId()%>">Cancel Order</a>
 					</button>
 					<br>
 					</button>
@@ -389,5 +392,15 @@ visibility: hidden;
 
 
 </body>
+
+<script>
+function check(){
+    var result = confirm("if you want to cancel 10% cancelation charge will be detected on your total price");
+
+    if(result==false){
+        event.preventDefault();
+    }
+}
+</script>
 
 </html>

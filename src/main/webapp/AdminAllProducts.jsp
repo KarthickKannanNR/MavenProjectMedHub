@@ -10,6 +10,10 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" ></script>
 <link rel = "icon" type = "" href = "Assets/medhublogo.png">
+<script>
+    history.forward();
+</script>
+
 <title>All Products</title>
 <style>
 * {
@@ -121,16 +125,19 @@ body {
 #deleteBtn{
 position: relative;
 left:100px;
-bottom: 60px;
+bottom: 63px;
 }
 </style>
 </head>
 <body>
+<%response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");%>
+
 	<div id="navigation" class="container-fluid">
 		<ul>
 			<li><a href="AllUser.jsp">All Users</a></li>
 			<li><a href="AdminAllProducts.jsp?deleteProductid=0">All Products</a></li>
 			<li><a href="AddProduct.jsp">Add Products</a></li>
+			<li><a href="SalesReports.jsp">Sales Reports</a></li>
 			<li id="logout"><a href="Index.jsp">Logout</a></li>
 			
 	</div>

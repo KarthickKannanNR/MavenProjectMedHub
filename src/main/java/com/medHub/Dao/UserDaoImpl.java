@@ -307,20 +307,25 @@ public class UserDaoImpl implements UserDAO {
 	}
 
 	public boolean checkMail(String mail) {
-		
+		boolean flag = true;
 		String query = "select * from users where user_email= '"+mail+"'";
 		Connection con = ConnectionUtil.getDBconnect();
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
-			int result = ps.executeUpdate();
-			ps.executeUpdate("commit");
+			ResultSet result = ps.executeQuery();
+		
+			if(result.next())
+			{
+				flag=false;
+				
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		
-		return false;
+		return flag;
 	}
 
 }

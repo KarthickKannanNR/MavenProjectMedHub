@@ -9,6 +9,7 @@
 
  <link rel = "icon" type = "" href = "Assets/medhublogo.png">
 <title>User Profile</title>
+
 <style>
 * {
 	margin: 0;
@@ -213,13 +214,54 @@ box-shadow: 5px 5px 5px black;
 transition-duration:0.2s;	
 }
 
+.InsuffiendMoney{
+position: absolute;
+left:780px;
+top:170px;
+color:red;
+z-index: 1;
+}
+
+.addressNull{
+position: relative;
+top:430px;
+left:100px;
+color: red;
+z-index: 2;
+}
+
+.cartOrder{
+position: absolute;
+left:780px;
+top:170px;
+color:red;
+z-index: 1;
+}
+
+#pointsMsg{
+position: absolute;
+left:760px;
+top:280px;
+color: red;
+z-index: 1;
+
+}
+
+label{
+font-weight: 600;
+}
 </style>
 </head>
 <body>
+
 <%
 String InsuffiendMoney = (String)session.getAttribute("InsuffientMoney");
 User currentUser = (User)session.getAttribute("user");
 String AddressNotFound = (String)session.getAttribute("AddressNotFound");
+String cartOrderMOney = (String)session.getAttribute("notEnoughAmt");
+String NegativePoints = (String)session.getAttribute("negativePoints"); 
+String AddressNotFoundFromCart = (String)session.getAttribute("AddressNotFoundFromCart");
+
 %>
 <div class="nav">
 
@@ -254,9 +296,25 @@ String AddressNotFound = (String)session.getAttribute("AddressNotFound");
 		<h3><%=AddressNotFound %></h3>
 		</div>
 		
-	<%}		session.removeAttribute("AddressNotFound");
-	%>
+	<%}		 session.removeAttribute("AddressNotFound");%>
+	<% 
+	if(cartOrderMOney!=null)
+	{ %>
+		<div class="cartOrder">
+		<h3><%=cartOrderMOney %></h3>
+		</div>
+		
+	<%}  session.removeAttribute("notEnoughAmt"); %>
 	
+       <% if(NegativePoints!=null)
+     {%>
+			<h3 id="pointsMsg"><%=NegativePoints%></h3>
+			<%} session.removeAttribute("negativePoints");%>
+			
+	 <% if(AddressNotFoundFromCart!=null)
+     {%>
+			<h3 class="addressNull"><%=AddressNotFoundFromCart%></h3>
+			<%} session.removeAttribute("AddressNotFoundFromCart");%>			
 	
 	<!-- User Profile -->
 	<div id="userProfile">

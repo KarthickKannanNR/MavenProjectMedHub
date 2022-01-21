@@ -11,8 +11,8 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <link rel = "icon" type = "" href = "Assets/medhublogo.png">
-<meta name="theme-color" content="#ba8f88" >
+<link rel="icon" type="" href="Assets/medhublogo.png">
+<meta name="theme-color" content="#ba8f88">
 
 <title>Userhome</title>
 <style>
@@ -28,12 +28,13 @@
 	display: inline-block;
 }
 
-.nav{
-   background: linear-gradient(to right, rgb(200, 47, 58) 0%,rgb(44, 169, 207) 100%);
-   position: fixed;
-   width: 100%;
-   box-shadow:0 0 10px black;
-   z-index: 1;
+.nav {
+	background: linear-gradient(to right, rgb(200, 47, 58) 0%,
+		rgb(44, 169, 207) 100%);
+	position: fixed;
+	width: 100%;
+	box-shadow: 0 0 10px black;
+	z-index: 1;
 }
 
 .list li {
@@ -73,18 +74,16 @@
 	cursor: pointer;
 }
 
-.list li:hover{
+.list li:hover {
 	transition-duration: 0.2s;
 	transform: translateY(-10px);
 }
 
 body {
-	/* background: linear-gradient(rgba(26,176,156,0.7),rgba(239,78,28,0.5)) ,url(Images/homepage_img.jpg); */
-	background-image: url(Assets/homepage_img.jpg);
-	background-repeat: no-repeat;
+ 	background-repeat: no-repeat;
 	overflow-x: hidden;
-	background-size: cover;
-	height: 3200px;
+	background-size: 100% 100%;
+	background-image: url(Assets/homepage_img.jpg);
 }
 
 .logo img {
@@ -109,185 +108,115 @@ body {
 
 #copyrights {
 	text-align: center;
-	color: yellow;	
-}
-
-#allproducts a {
-	text-decoration: none;
-	color: black;
-}
-
-#allproducts a:hover {
-	text-decoration: underline;
-	color: white;
-}
-
-#allproducts {
-	text-align: center;
+	color: yellow;
 }
 
 
-#product {
-	position: relative;
-	top: 30px;
-	left: 50px;
-	background-color: rgba(158, 202, 207, 0.5);
-	height: 190px;
+
+
+.aboutUs {
+	background: linear-gradient(to right, rgb(255,105,99) 0%,
+		rgb(255,123,100)100%);
 	border-radius: 5px;
-	width: 1200px;
-	top:150px;
+	height: 800px;
+	width: 950px;
+	position: absolute;
+	top: 150px;
+	left: 200px;
+	background-size: cover;
+	box-shadow: 0 0 15px black;
 }
 
-#product:hover{
-box-shadow: 0 0 10px black;
-transition-duration:0.3s;
+.aboutUs p{
+text-indent: 150px;
+line-height: 1.5;
+text-align: justify;
+margin: 20px;
+color: white;
 }
 
-#product img {
-	height: 100px;
-	width: 90px;
-	position: relative;
-	left: 40px;
-	top:20px;
+.aboutUs h1{
+text-align: center;
+
 }
-
-#product h3 {
-	position: relative;
-	left: 10px;
-}
-
-#product #details {
-	position: relative;
-	left: 250px;
-	top: -90px;
-}
-
-#product #btn {
-	position: relative;
-	top: -250px;
-	left: 900px;
-}
-
-#product #btn button {
-	height: 30px;
-	width: 90px;
-	border: none;
-	border-radius: 5px;
-	background-color: none;
-}
-
-#product #btn button{
-	position: relative;
-	background-color: yellowgreen;
-	bottom:-150px;
-	
-}
-
-#btn1 {
-	position: relative;
-}
-
-#product #btn button:hover {
-	box-shadow: 0 0 5px black;
-	color: green;
-	transition-duration: 0.2s;
-	
-}
-
-#product #img h3 {
-	position: relative;
-	left: 40px;
-	top:20px;
-}
-
-/* #btn #buynow {
-	position: relative;
-
-} */
-
-a {
-	text-decoration: none;
-	color: black;
-}
-
-#userName{
-position: absolute;
-top:90px;
-left: 55px;
-}
-
-.prodSearch{
-position: fixed;
-left:200px;
-z-index: 1;
-top:18px;
-}
-
-#searchBar{
-height: 30px;
-width:250px;
-outline: none;
-border: none;
-border-top-left-radius: 2px;
-border-bottom-left-radius: 2px;
-}
-
-#searchBtn{
-position:absolute;
-height:30px;
-width: 40px;
-border: none;
-border-top-right-radius: 2px;
-border-bottom-right-radius: 2px;
-}
-
-#searchBtn:hover{
-cursor: pointer;
-background-color: rgb(173, 238, 120);
-box-shadow: 0 0 5px black;
-transition-duration:0.2s;
-}
-
-#searchBar:Hover{
-box-shadow: 0 0 10px black;
-}
-
 </style>
 </head>
 
 <body>
-	<%User currentUser = (User)session.getAttribute("user");
+
+
+	<%-- <%User currentUser = (User)session.getAttribute("user");
 	session.setAttribute("userNotFound", null);
 	%>
-	
+	 --%>
 	<div id="container">
-	<div class="container-fluid p-0" >
-		<div class="nav">
+		<div class="container-fluid p-0">
+			<div class="nav">
 
-			<nav class="list">
-				<ul>
-					<li><a href="Index.jsp">SignOut</a></li>
-					<li><a href="Cart.jsp">Cart</a></li>
-					<li><a href="UserProfile.jsp">MyProfile</a></li>
-					<li><a href="MyOrders.jsp?orderId=0&totalPrice=0&quantity=0&points=0&productId=0">MyOrders</a></li>
-					<li><a href="UserHome.jsp">Home</a></li>					
-				</ul>
-				<div>
-				<div class="logo">
-					<img
-						src="Assets/medhublogo.png"
-						alt="logo">
-			</nav>
-				
+				<nav class="list">
+					<ul>
+						<li><a href="Index.jsp">SignOut</a></li>
+						<li><a href="Cart.jsp">Cart</a></li>
+						<li><a href="UserProfile.jsp">MyProfile</a></li>
+						<li><a
+							href="MyOrders.jsp?orderId=0&totalPrice=0&quantity=0&points=0&productId=0">MyOrders</a></li>
+						<li><a href="UserHome.jsp">Home</a></li>
+					</ul>
+					<div>
+						<div class="logo">
+							<img src="Assets/medhublogo.png" alt="logo">
+				</nav>
+			</div>
 
-	</div>
+			<div class="aboutUs">
+				<h1>Our Story</h1>
+				<p>Our Company was founded in 2021 by Karthick kannan N R,
+					our Managing Director and Chief Executive Officer, with the vision
+					to set up a trusted pharmacy retail brand that offers genuine
+					medicines and delivers better value to the customer by reducing
+					inefficiencies in the supply chain using technology. The founder,
+					Managing Director and Chief Executive Officer of our Company,
+					Gangadi Madhukar Reddy, both a doctor and an entrepreneur, plays an
+					instrumental role in the strategic direction and growth of our
+					business. Our Company's shareholders include marquee investors,
+					including Lavender Rose, belonging to the Warburg Pincus group, and
+					affiliates of Premji Invest, and we maintain strong corporate
+					governance and internal controls. <br><br> 
+					
+					 <P>We operate 2,165 stores in 242
+					cities distributed across Tamil Nadu, Andhra Pradesh, Telangana,
+					Karnataka, Odisha, West Bengal and Maharashtra as of June 30, 2021.
+					We have a total of 14,762 permanent full-time in-house employees
+					working for us in a range of business activities.</p>  
+					<br><br>
+					
+					<p>Our operations
+					include the manufacturing and contract manufacturing of private
+					label pharmaceutical, wellness and FMCG products, wholesale and
+					retail sale, import, distribution, and pathology diagnostic
+					laboratory testing.</p> 
+					<br><br>
+					
+					<P>
+					Our omni-channel platform enables us to service
+					our customers through our stores as well as our online channels,
+					thereby enabling us to leverage our strong offline channel to
+					establish and grow our online presence.</p>
+					<br><br>
+					
+					<p> Our 'click and pick'
+					service allows customers to place orders directly online for
+					collection at their preferred store at a convenient time. Our
+					customers also have the option to return any items purchased
+					through our online channel at their preferred stores, subject to
+					the standard terms and conditions. Through our 'door-to-door'
+					delivery service, in the cities of Hyderabad and Bangalore, our
+					customers can place orders over the telephone, through our website
+					or our mobile application</p>
+			</div>
 
-	</div>
-	<div id="footer">
-			
-	</div>
-
-
+		</div>
+		<div id="footer"></div>
 </body>
 
 </html>

@@ -1,8 +1,8 @@
 package com.exceptions;
 
-public class UserExists extends Exception{
-	
-String message="This Email Already Registered";
+public class NegativePoints extends Exception{
+
+	String message="Points in negative, You Can't Convert";
 	
 	@Override
 	public String getMessage()
@@ -15,6 +15,4 @@ String message="This Email Already Registered";
 	public String toString() {
 		return message;
 	}
-	
-
 }

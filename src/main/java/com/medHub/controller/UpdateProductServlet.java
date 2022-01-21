@@ -17,6 +17,7 @@ public class UpdateProductServlet extends HttpServlet{
 	
 	public void service(HttpServletRequest req,HttpServletResponse res) throws IOException {
 		
+		ProductDaoImpl productdao = new ProductDaoImpl();
 		int prodId= Integer.parseInt(req.getParameter("currentProdId"));
 		String category= req.getParameter("category");
 		String productname= req.getParameter("productName");
@@ -26,15 +27,16 @@ public class UpdateProductServlet extends HttpServlet{
 		int points = Integer.parseInt(req.getParameter("points"));
 		int offer=Integer.parseInt(req.getParameter("offer"));
 		String description= req.getParameter("description");
-				
-		Product product= new Product(category,productname,price,quantity,imageurl,points,offer,description,prodId);
+		Product currentProduct = productdao.findProductByProductId(prodId);	
+		int updateQty= currentProduct.getQuantity()+quantity;
+		Product product= new Product(category,productname,price,updateQty,imageurl,points,offer,description,prodId);
 		ProductDaoImpl products = new ProductDaoImpl();
 		
 		try {
 			int result=products.updateProducts(product);
 			if(result>0)
 			{
-				product= new Product(category,productname,price,quantity,imageurl,points,offer,description,prodId);
+				product= new Product(category,productname,price,updateQty,imageurl,points,offer,description,prodId);
 				res.sendRedirect("AdminAllProducts.jsp?deleteProductid=0");
 			}
 		} catch (SQLException e) {

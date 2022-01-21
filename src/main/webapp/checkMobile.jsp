@@ -9,24 +9,23 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>checkMobile</title>
 </head>
 <body>
-
 <%
-String email =request.getParameter("email"); 
+String mobile =request.getParameter("mobile"); 
+
 try
 {  
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","oracle");
-PreparedStatement ps=con.prepareStatement("select * from users where user_email=? ");  
-ps.setString(1,email);  
+PreparedStatement ps=con.prepareStatement("select * from users where user_mobile=? ");  
+ps.setString(1,mobile);  
 ResultSet rs=ps.executeQuery();  
 if(rs.next())
 {
-	
 	PrintWriter Write = response.getWriter();
-   Write.println("Already Registered Email");
+   Write.println("Already Registered number");
 	
 
 }  

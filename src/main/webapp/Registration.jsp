@@ -5,20 +5,17 @@
 <head>
 <meta charset="ISO-8859-1">
 <link rel = "icon" type = "" href = "Assets/medhublogo.png">
-
-<title>Home</title>
-
 <script>
     history.forward();
 </script>
-
+<title>Registeration</title>
 <style>
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 	font-family: Arial, Helvetica, sans-serif;
-	}
+}
 
 
 .list li {
@@ -86,10 +83,11 @@ body {
 	position: absolute;
 	top: 200px;
 	left: 490px;
-	background-color:rgb(255,255,255);
+	background-color:rgb(245,178,120);
 	height: 400px;
 	width: 400px;
 	border-radius: 5px;
+	visibility: hidden;
 	box-shadow: 0 0 5px black;
 }
 
@@ -137,7 +135,7 @@ body {
 	border-right: none;
 	background: transparent;
 	font-size: 18px;
-	color: black;
+	color: white;
 }
 
 .loginscreen h2 {
@@ -180,7 +178,7 @@ body {
 	position: absolute;
 	top: 120px;
 	left: 490px;
-	background-color: rgb(245,178,120);
+	background-color: rgb(255,255,255);
 	border-radius: 5px;
 	visibility: visible;
 }
@@ -198,14 +196,13 @@ body {
 	background: none;
 	outline: none;
 	width: 300px;
-	color: white;
+	color: black;
 	font-size: 18px;
 }
 
 #register {
 	position: relative;
-	left: 38px;
-	color:black;
+	left: 60px;
 }
 
 #registerScreenContent button {
@@ -273,12 +270,18 @@ top: -60px;
 font-weight: 600;
 }
 
+#userExists{
+position: relative;
+top:20px;
+color: red;
+}
+
 </style>
 </head>
 
 <body id="body">
+<%response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");%>
 
-<%  response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");%>
 	<div id="container">
 		<!-- <div class="header">
         </div> -->
@@ -293,6 +296,7 @@ font-weight: 600;
 					<li><a href="Index.jsp"  id="login">Login</a></li>
 				</ul>
 			</nav>
+			
 			<div class="logo">
 				<img src="Assets/medhublogo.png" alt="logo">
 
@@ -304,48 +308,13 @@ font-weight: 600;
 			</div>
 		</div>
 
-							<!-- login Form default hidden -->
-		<div class="loginscreen" id="loginform">
-			 <%  String errorMessage= (String)session.getAttribute("userNotFound"); 
-      	
-      if(errorMessage!=null)
-      { %>
-			<h3 id="errorMsg" ><%=errorMessage%></h3>
-			<%} session.removeAttribute("userNotFound");%>
-			<form action="LoginController?" class="formcontent" method="post" >
-				<h1 class="loginHere">Login Here</h1>
-				<label class="label" for="fullName">Email*</label><br> 
-				<input type="email"
-					name="loginMail" required placeholder="Enter Email" onmouseleave="hideMsg()"><br>
-				<br>
-				<br> <label class="label" for="password">Password *</label><br> 
-				<input type="password" name="loginPassword" placeholder="Password" 
-					value="" required 
-					pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%?&]{8,15}$"
-					title="Minimum eight and Minimum 8 and maximum 15 characters, at least one uppercase letter, one lowercase letter, one number and one special character" onmouseover="hideMsg()"><br>
-				<br>
-				<button id="loginbtn">Login</button>
-				<br>
-				<br>
-				<br> <a href="Registration.jsp" id="register">Not
-					Registered Yet ?</a>
-				<!--  <a id="forgetpassword"
-                    href="ForgetPassword.html">Forget Password</a><br> -->
-				<% String error=(String)session.getAttribute("error");
-            if(error!=null) {%>
-				<p><%=session.getAttribute("error") %></p>
-
-				<%} session.setAttribute("error",null); %>
-			</form>
-		</div>
-
-	<%-- 									<!-- sign/register form -->
+										<!-- sign/register form -->
 										
 		<div id="registerScreen">
 			<div id="registerScreenContent">
 				<form action="RegisterController" class="registerform" method="post">
 					<label for="fullName" class="reglab"">FullName*</label><br>
-					<br> <input type="text" name="regfullName" id="fullname"
+					<br> <input type="text" onkeypress="hideMsg()" name="regfullName" id="fullname"
 						placeholder="Enter fullname" required ><br>
 						
 					<br> <label for="mail" class="reglab">Mail Id</label><br>
@@ -353,9 +322,10 @@ font-weight: 600;
 						id="regMail" placeholder="Enter Mail Id" required ><br>
 						<label id="existsMsg"></label>
 					<BR> <label for="phone" class="reglab">Mobile Number*</label><br>
-					<br> <input type="text" name="regMobile" required
+					<br> <input id="mobile" type="text" onkeyup="mobileNum()" name="regMobile" required
 						placeholder="Enter Mobile Number" pattern="[6-9][0-9]{9}"
 						title="MObile Number Must Have 10 Digits" required min="3" max="10"><br>
+						<label id="numberExists"></label>
 					<br> <label for="password" class="reglab">Password*</label><br>
 					<br> <input type="password" input="password"
 						placeholder="Password" name="regPassword" value="" required
@@ -375,12 +345,12 @@ font-weight: 600;
             
             <% String emailError=(String)session.getAttribute("error");
             if(emailError!=null) {%>
-            <h4><%=session.getAttribute("error") %></h4>
+            <h4 id="userExists"><%=session.getAttribute("error") %></h4>
            
             <%} session.removeAttribute("error"); %>
 			</div>
 			</form>
-		</div> --%>
+		</div>
 
 		<div class="footer"></div>
 
@@ -399,15 +369,15 @@ function getRegisterForm()
     document.getElementById("loginform").style.visibility="hidden";
     // document.getElementById("loginform").style.visibility="hidden";
 }
+
 function hideMsg()
 {
-	document.getElementById("errorMsg").style.visibility="hidden";
+	document.getElementById("userExists").style.visibility="hidden";
 	
 	}
 
 </script>
 <script>
-
 function checkMail() {
 	
 	let email=document.getElementById("regMail").value;
@@ -432,7 +402,7 @@ function checkMail() {
         
        }
     
- function getInfo(){  
+    function getInfo(){  
     	if(request.readyState==4){  
     	var response =request.responseText; 
     	//console.log(response);
@@ -445,7 +415,46 @@ function checkMail() {
     	
     	}
 </script>
+<script>
+function mobileNum() {
+	
+	let number=document.getElementById("mobile").value;
+	console.log(number);
+    var url="checkMobile.jsp?mobile="+number;  
+    if(window.XMLHttpRequest){  
+    request=new XMLHttpRequest();  
+    }  
+    else if(window.ActiveXObject){  
+    request=new ActiveXObject("Microsoft.XMLHTTP");  
+    }  
+    try  
+    {  
+    request.onreadystatechange=getInfo;  
+    request.open("GET",url,true);  
+    request.send();  
+    }  
+    catch(e)  
+    {  
+    alert("Unable to connect to server");  
+    }
+        
+       }
+    
+ function getInfo(){  
+    	if(request.readyState==4){  
+    	var response =request.responseText; 
+    	//console.log(response);
+    	document.getElementById('numberExists').innerHTML=response;
+    	 document.getElementById("numberExists").style.color = "red";
+    	document.getElementById("numberExists").style.visibility = "visible";
+    	//console.log(response);
 
+    	}  
+    	
+    	}
+
+
+</script>
 
 </body>
 </html>

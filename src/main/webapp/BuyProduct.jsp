@@ -10,7 +10,9 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <link rel = "icon" type = "" href = "Assets/medhublogo.png">
+<link rel = "icon" type = "" href = "Assets/medhublogo.png">
+
+
 
 <title>BuyProduct</title>
 <style>
@@ -315,6 +317,7 @@ right:275px;
 </style>
 </head>
 <body>
+
 <%
 int pId=Integer.parseInt(request.getParameter("pid"));
 ProductDaoImpl productDao = new ProductDaoImpl();
@@ -328,7 +331,7 @@ session.setAttribute("currentproduct", currentProduct);
 					<li><a href="Cart.jsp">Cart</a></li>
 					<li><a href="Index.jsp">SignOut</a></li>
 					<li><a href="UserProfile.jsp">MyProfile</a></li>
-					<li><a href="MyOrders.jsp?orderId=0">MyOrders</a></li>
+					<li><a href="MyOrders.jsp?orderId=0&totalPrice=0&quantity=0&points=0&productId=0">MyOrders</a></li>
 					<li><a href="MyOrders.jsp?orderId=0">About-Us</a></li>
 					<li><a href="UserHome.jsp">Home</a></li>
 					
@@ -381,7 +384,7 @@ session.setAttribute("currentproduct", currentProduct);
 					<span id="percentage">%</span></td>
 				<td>
 					<div id="qty">
-						<div id="qtyBox">
+						<div id="qtyBox">	
 						<form action="prod1" onsubmit="return chechQuantity()">
 							<label for="">Quantity</label> 
 							<input type="number" id="quantity" name="quantity" min="1"  max="<%=currentProduct.getQuantity()%>" onclick="calculateamt()">
