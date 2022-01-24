@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.exceptions.CartNotEnoughQty;
-import com.exceptions.NegativePoints;
+import com.exceptions.CartNotEnoughQtyException;
+import com.exceptions.NegativePointsException;
 import com.medHub.dao.OrderDaoImpl;
 import com.medHub.dao.OrderItemsDaoImpl;
 import com.medHub.dao.ProductDaoImpl;
@@ -42,8 +42,8 @@ public class ConvertPointsMoney extends HttpServlet{
 		}else
 		{
 			try {
-				throw new NegativePoints();
-				}catch(NegativePoints e)
+				throw new NegativePointsException();
+				}catch(NegativePointsException e)
 				{
 					session.setAttribute("negativePoints",e.getMessage());
 					res.sendRedirect("UserProfile.jsp");

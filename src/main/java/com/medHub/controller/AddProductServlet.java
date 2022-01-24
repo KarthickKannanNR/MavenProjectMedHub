@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.exceptions.ProductExists;
+import com.exceptions.ProductExistsException;
 import com.medHub.dao.ProductDaoImpl;
 import com.medHub.model.Product;
 
@@ -44,12 +44,12 @@ public class AddProductServlet extends HttpServlet {
 				out.println("location='AddProduct.jsp';");
 				out.println("</script>");
 			} else {
-				throw new ProductExists();
+				throw new ProductExistsException();
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ProductExists e) {
+		} catch (ProductExistsException e) {
 			// TODO Auto-generated catch block
 			e.getMessage();
 			session.setAttribute("productExists", e.getMessage());

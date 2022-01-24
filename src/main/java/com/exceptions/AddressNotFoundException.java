@@ -1,13 +1,13 @@
 package com.exceptions;
 
-public class ProductExists extends Exception{
+public class AddressNotFoundException extends Exception{
 	
-	String message="Product Already exists";
+	
+	String message="Address Not Found,Please update your Delivery Address";
 	
 	@Override
 	public String getMessage()
 	{
-		
 		return message;
 	}
 
@@ -16,5 +16,4 @@ public class ProductExists extends Exception{
 		return message;
 	}
 	
-
 }

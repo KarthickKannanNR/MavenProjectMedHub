@@ -24,18 +24,19 @@
 }
 
 body {
-	background-image: url(Images/homepage_img.jpg);
-	background-repeat: no-repeat;
+	background-image: url(Assets/homepage_img.jpg);
+	background-repeat: repeat-y;
 	background-size: cover;
 	overflow-x:hidden;
-	height: 100vh;
 	margin-top: 0px;
 }
+
 
 #navigation ul li {
 	list-style: none;
 	padding: 20px;
 	display: inline-block;
+	padding-right: 80px;
 	/* font-weight: 600;
 	font-size: 20px; */
 }

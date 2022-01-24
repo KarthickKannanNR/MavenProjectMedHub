@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.exceptions.AddressNotFound;
-import com.exceptions.CartNotEnoughQty;
-import com.exceptions.InsuffientMoney;
+import com.exceptions.AddressNotFoundException;
+import com.exceptions.CartNotEnoughQtyException;
+import com.exceptions.InsuffientMoneyException;
 import com.exceptions.OutOfStockException;
 import com.medHub.dao.CartDaoImpl;
 import com.medHub.dao.OrderDaoImpl;
@@ -104,8 +104,8 @@ public class CartOrderServlet extends HttpServlet {
 			}
 			else {
 				try {
-					throw new InsuffientMoney();
-				}catch(InsuffientMoney iF)
+					throw new InsuffientMoneyException();
+				}catch(InsuffientMoneyException iF)
 				{
 					session.setAttribute("notEnoughAmt",iF.getMessage());
 					res.sendRedirect("UserProfile.jsp");
@@ -113,8 +113,8 @@ public class CartOrderServlet extends HttpServlet {
 			}
 		}else {
 			try {
-				throw new CartNotEnoughQty();
-				}catch(CartNotEnoughQty e)
+				throw new CartNotEnoughQtyException();
+				}catch(CartNotEnoughQtyException e)
 				{
 					session.setAttribute("lessStock",e.getMessage());
 					res.sendRedirect("Cart.jsp");
@@ -134,9 +134,9 @@ public class CartOrderServlet extends HttpServlet {
 		}
 		}else {
 			try {
-				throw new AddressNotFound();
+				throw new AddressNotFoundException();
 				}
-				catch(AddressNotFound ad)
+				catch(AddressNotFoundException ad)
 				{
 					session.setAttribute("AddressNotFoundFromCart", ad.getMessage());
 					res.sendRedirect("UserProfile.jsp");

@@ -1,6 +1,6 @@
 package com.exceptions;
 
-public class CartNotEnoughQty extends Exception{
+public class CartNotEnoughQtyException extends Exception{
 	
 	String message="Currently The Available Quantity Is Lesser Than You Choosed ! Try After Sometime";
 	

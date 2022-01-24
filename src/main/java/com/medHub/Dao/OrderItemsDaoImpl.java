@@ -126,12 +126,12 @@ public class OrderItemsDaoImpl implements OrderItemDAO{
 				System.out.println(startDate);
 				System.out.println(endDate);
 				
-				String query = "select trunc(o.order_date),p.product_name,sum(oi.quantity) as quantity,oi.total_price as price, (sum(oi.quantity)*oi.total_price) as totalPrice\r\n"
+				String query = "select trunc(o.order_date),p.product_name,sum(oi.quantity) as quantity,oi.unit_price as price, (sum(oi.quantity)*oi.unit_price) as totalPrice\r\n"
 						+ " from order_items oi\r\n"
 						+ " join orders o on o.order_id = oi.order_id\r\n"
 						+ " join products p on p.product_id = oi.product_id\r\n"
 						+ " where trunc(o.order_date) between ? and ? \r\n"
-						+ "group by(trunc(o.order_date),p.product_name,oi.quantity,oi.total_price,o.order_id)";
+						+ "group by(trunc(o.order_date),p.product_name,oi.unit_price,o.order_status) having o.order_status='order placed'";
 				Connection con = ConnectionUtil.getDBconnect();
 				boolean flag = false;
 				PreparedStatement ps;

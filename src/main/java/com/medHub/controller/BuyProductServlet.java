@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.exceptions.AddressNotFound;
-import com.exceptions.InsuffientMoney;
+import com.exceptions.AddressNotFoundException;
+import com.exceptions.InsuffientMoneyException;
 import com.medHub.dao.OrderDaoImpl;
 import com.medHub.dao.OrderItemsDaoImpl;
 import com.medHub.dao.ProductDaoImpl;
@@ -86,9 +86,9 @@ public class BuyProductServlet extends HttpServlet {
 						
 					}else {
 						try {
-						throw new AddressNotFound();
+						throw new AddressNotFoundException();
 						}
-						catch(AddressNotFound e)
+						catch(AddressNotFoundException e)
 						{
 							session.setAttribute("AddressNotFound", e.getMessage());
 							res.sendRedirect("UserProfile.jsp");
@@ -97,9 +97,9 @@ public class BuyProductServlet extends HttpServlet {
 			} else 
 				{
 						try {
-							throw new InsuffientMoney();
+							throw new InsuffientMoneyException();
 							}
-						catch(InsuffientMoney IM) 
+						catch(InsuffientMoneyException IM) 
 							{
 								session.setAttribute("InsuffientMoney", IM.getMessage());
 								res.sendRedirect("UserProfile.jsp");

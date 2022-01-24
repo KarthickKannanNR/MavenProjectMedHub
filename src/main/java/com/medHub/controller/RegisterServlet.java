@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
-import com.exceptions.UserExists;
-import com.exceptions.UserNotFound;
+import com.exceptions.UserExistsException;
+import com.exceptions.UserNotFoundException;
 import com.medHub.dao.UserDaoImpl;
 import com.medHub.model.*;
 
@@ -60,7 +60,7 @@ public class RegisterServlet extends HttpServlet {
 	
 		else {
 			
-			throw new UserExists();
+			throw new UserExistsException();
 				
 		}
 		
@@ -74,7 +74,7 @@ public class RegisterServlet extends HttpServlet {
 		
 		
 	
-		}catch(UserExists e) {
+		}catch(UserExistsException e) {
 			session.setAttribute("error", e.getMessage());
 			
 			res.sendRedirect("Registration.jsp");

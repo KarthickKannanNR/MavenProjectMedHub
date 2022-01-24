@@ -21,11 +21,12 @@
 }
 
 body {
-	background-image: url("Images/homepage_img.jpg");
-	background-repeat: no-repeat;
-	background-size: cover;
-	height: 100vh;
+	
 	overflow-x: hidden;
+}
+body{
+background-image: url(Assets/homepage_img.jpg);
+background-size: cover;
 }
 
 #addProductForm {

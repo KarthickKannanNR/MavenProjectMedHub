@@ -2,6 +2,9 @@
 <%@page import="com.medHub.model.*"%>
 <%@page import="com.medHub.dao.*"%>
 <%@page import="java.util.*"%>
+<%@page import="java.util.*"%>
+<%@page import="com.exceptions.*"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -25,7 +28,8 @@
 }
 
 body {
-	background-color: white;
+	background-image: url(Assets/homepage_img.jpg);
+	background-size: cover;
 }
 #navigation{
    background: linear-gradient(to right, rgb(200, 47, 58) 0%,rgb(44, 169, 207) 100%);
@@ -77,7 +81,7 @@ body {
 
 .searchDate{
 position: absolute;
-left:420px;
+left:385px;
 top:100px;
 }
 
@@ -92,12 +96,28 @@ left:80px;
 outline: none;
 border: none;
 box-shadow: 0 0 5px black;
-border-radius: 1.5px;
+border-radius: 2px;
+padding: 0px 10px;
+background-color: yellowgreen;
+height: 27px;
 }
 
 .searchDate button:hover{
 box-shadow: 2px 2px 5px black;
 transition-duration:0.2s;
+color: white;
+}
+
+table 
+{
+	background-color: white;
+	}
+
+.dateExp{
+position: relative;
+left:425px;
+top:70px;
+color:red;
 }
 
 </style>
@@ -112,7 +132,7 @@ transition-duration:0.2s;
 				<li><a href="AdminAllProducts.jsp?deleteProductid=0">All Products</a></li>
 				<li><a href="AddProduct.jsp">Add Products</a></li>
 				<li><a href="SalesReports.jsp">Sales Reports</a></li>
-				<li id="home"><a class="navbar-brand" href="AdminHome.jsp">Logout</a></li>
+				<li id="home" ><a class="navbar-brand" href="AdminHome.jsp">Logout</a></li>
 				
 		</div>
 		</ul>
@@ -123,25 +143,32 @@ transition-duration:0.2s;
 			<input type="date" id="startDate" name="startDate" required>
 			<label class="max">To</label>		
 			<input class="max" type="date" id="maxDate" name="endDate" required>
-			<button type="submit"> View Sales</button>
+			<button type="submit" class="btn btn-success"> View Sales</button>
 			</form>
 		</div>	
  		<% 
+ 		 double totalAmt=0;
  		  String fromDate = request.getParameter("startDate"); 
 		  String toDate =  request.getParameter("endDate");
 		  OrderItemsDaoImpl orderItem = new OrderItemsDaoImpl();
-		  ResultSet rs=  orderItem.salesReport(fromDate,toDate);
-		  double totalAmt=0;
+		 System.out.println("from"+fromDate);
+		 System.out.println("to"+toDate);
+		  int from= Integer.parseInt(fromDate.substring(8,10));
+		  int to= Integer.parseInt(toDate.substring(8,10));
+/* 		  ResultSet rs=  orderItem.salesReport(fromDate,toDate); 
+ */
+		  if(to-from>0){ 
+		    ResultSet rs=  orderItem.salesReport(fromDate,toDate);  
 		%>
 		
 	 <div>
 		<% 
 		%>
 		 <div id="allusers">
-			<table class="table table-striped">
+			<table class="table table-striped"  >
 				<thead class="table table-dark">
 					<tr>
-						<th >Order Date</th>
+						<th>Order Date</th>
 						<th>Product Name</th>
 						<th>Quantity</th>
 						<th>Unit Price</th>
@@ -173,6 +200,25 @@ transition-duration:0.2s;
 				</tbody>
 			</table>
 		</div>  
+		<%
+			 }else{
+				 try{
+					 throw new DateMismatchException();
+					 
+				 }catch(DateMismatchException e)
+				 {
+					 session.setAttribute("invalidDate",e.getMessage());
+					
+				 }
+			 }
+			 
+		%>
+		<% String invalidDate = (String)session.getAttribute("invalidDate");%>
+		
+		<% if(invalidDate!=null)
+     {%>
+			<h4 class="dateExp"><%=invalidDate%></h4>
+			<%} session.removeAttribute("invalidDate");%>	
  
 	</div>
 </body>

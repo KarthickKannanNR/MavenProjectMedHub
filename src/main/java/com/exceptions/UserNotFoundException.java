@@ -1,8 +1,8 @@
 package com.exceptions;
 
-public class NegativePoints extends Exception{
-
-	String message="Points in negative, You Can't Convert";
+public class UserNotFoundException extends Exception{
+	
+	String message="Invalid User Name or Password";
 	
 	@Override
 	public String getMessage()
@@ -15,4 +15,7 @@ public class NegativePoints extends Exception{
 	public String toString() {
 		return message;
 	}
+	
+	
+
 }

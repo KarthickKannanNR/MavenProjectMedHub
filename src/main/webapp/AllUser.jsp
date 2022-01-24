@@ -25,6 +25,9 @@
 
 body {
 	background-color: white;
+	background-image: url(Assets/homepage_img.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 #navigation{
    background: linear-gradient(to right, rgb(200, 47, 58) 0%,rgb(44, 169, 207) 100%);
@@ -70,8 +73,12 @@ body {
 
 #allusers {
 	position: absolute;
-	left: 18%;
+	left: 15.5%;
 	top: 100px;
+}
+
+table {
+	background-color: white;
 }
 
 </style>
@@ -99,12 +106,12 @@ body {
 			<table class="table table-striped">
 				<thead class="table table-dark">
 					<tr>
-						<th >User id</th>
-						<th>Full Name</th>
-						<th>Address</th>
-						<th>Email</th>
-						<th>mobile</th>
-						<th>Status</th>
+						<th >USER ID</th>
+						<th>FULL NAME</th>
+						<th>ADDRESS</th>
+						<th>EMAIL</th>
+						<th>MOBILE</th>
+						<th>STATUS</th>
 					</tr>
 				</thead>
 

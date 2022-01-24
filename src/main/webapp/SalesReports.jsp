@@ -25,7 +25,8 @@
 }
 
 body {
-	background-color: white;
+	background-image: url(Assets/homepage_img.jpg);
+	background-size: cover;
 }
 #navigation{
    background: linear-gradient(to right, rgb(200, 47, 58) 0%,rgb(44, 169, 207) 100%);
@@ -92,12 +93,16 @@ left:80px;
 outline: none;
 border: none;
 box-shadow: 0 0 5px black;
-border-radius: 3px;
+border-radius: 2px;
+padding: 0px 10px;
+background-color: yellowgreen;
+height: 27px;
 }
 
 .searchDate button:hover{
 box-shadow: 2px 2px 5px black;
 transition-duration:0.2s;
+color:white;
 }
 
 </style>
@@ -120,9 +125,11 @@ transition-duration:0.2s;
 		<form action="SalesReports2.jsp">
 			<label>From</label>
 			<input type="date" id="startDate" name="startDate">
+			
 			<label class="max">To</label>		
 			<input class="max" type="date" id="maxDate" name="endDate">
-			<button type="submit"> View Sales</button>
+			
+			<button type="submit" class="btn btn-success"> View Sales</button>
 			</form>
 		</div>	
  		<% 
@@ -173,6 +180,7 @@ let date = JSON.stringify(maxDate)
 date = date.slice(1,11)
 console.log(date)
 document.getElementById("maxDate").setAttribute("max",date);
+document.getElementById("startDate").setAttribute("max",date);
 
 }
 

@@ -1,6 +1,6 @@
 package com.exceptions;
 
-public class InsuffientMoney extends Exception{
+public class InsuffientMoneyException extends Exception{
 	
 	String message="Not enough Money In Wallet";
 	

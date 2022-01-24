@@ -1,6 +1,6 @@
 package com.exceptions;
 
-public class UserExists extends Exception{
+public class UserExistsException extends Exception{
 	
 String message="This User Already Registered";
 	

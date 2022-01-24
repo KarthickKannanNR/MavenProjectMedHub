@@ -356,7 +356,7 @@ String AddressNotFoundFromCart = (String)session.getAttribute("AddressNotFoundFr
 		<div id="walletMoneyUpdateForm">
 	<form action="walletUpdate">
 		<label> Wallet : </label>
-		<input type="number" name="UpdateWallet" "UpdateWallet" min="1" max="5000" value="<%=currentUser.getWallet()%>">
+		<input type="number" name="UpdateWallet" "UpdateWallet" min="500" max="5000" title="" value="<%=currentUser.getWallet()%>" >
 		<button>Add Money</button>
 	</form>
 	</div>

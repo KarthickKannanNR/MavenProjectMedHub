@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.exceptions.ProductExists;
+import com.exceptions.ProductExistsException;
 import com.interfaces.ProductDAO;
 import com.medHub.model.Order;
 import com.medHub.model.Product;

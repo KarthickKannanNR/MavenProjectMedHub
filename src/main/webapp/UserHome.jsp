@@ -21,12 +21,15 @@
 </script>
 
 <style>
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: Arial, Helvetica, sans-serif;
-}
+*{
+  
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     text-decoration: none;
+     font-family: Arial, sans-serif;
+     
+ }
 
 .list ul li {
 	list-style: none;
@@ -85,10 +88,13 @@
 
 body {
 	/* background: linear-gradient(rgba(26,176,156,0.7),rgba(239,78,28,0.5)) ,url(Images/homepage_img.jpg); */
-	background-image: url(Assets/homepage_img.jpg);
 	background-repeat: no-repeat;
 	overflow-x: hidden;
 	background-size: cover;
+}
+body{
+background-image: url(Assets/homepage_img.jpg);
+background-repeat: repeat-y;
 }
 
 .logo img {
@@ -256,6 +262,7 @@ transition-duration:0.2s;
 box-shadow: 0 0 10px black;
 }
 
+
 </style>
 </head>
 
@@ -267,7 +274,7 @@ box-shadow: 0 0 10px black;
 	session.setAttribute("userNotFound", null);
 	%>
 	
-	<div id="container">
+	
 	<div class="container-fluid p-0" >
 		<div class="nav">
 
@@ -280,15 +287,19 @@ box-shadow: 0 0 10px black;
 					<li><a href="AboutUs.jsp">About-Us</a></li>
 					<li><a href="UserHome.jsp">Home</a></li>					
 				</ul>
-				<div>
+				
 				<div class="logo">
 					<img
 						src="Assets/medhublogo.png"
 						alt="logo">
+				</div>
 			</nav>
 		</div>
 		<h2 id="userName">welcome <%=currentUser.getName()%></h2>
 		</div>
+		<br><br>
+		
+	
 		
 <!-- 					Search Products		
 -->		
@@ -296,6 +307,8 @@ box-shadow: 0 0 10px black;
 		<input id="searchBar" type="text" name="ProductName" required="required" placeholder="Search By Products & categories">
 		<button type="submit" id="searchBtn">&#128269;</button>
 		</form>
+		
+			
 		
 		<% 
 		ProductDaoImpl product= new ProductDaoImpl();
@@ -331,7 +344,7 @@ box-shadow: 0 0 10px black;
 						<a id="buynow" href="BuyProduct.jsp?pid=<%=products.getProductId()%>">Buy Now</a>
 					</button></a>
 					
-					</button>
+					
 				</div>
 			</div>
 		
@@ -343,6 +356,7 @@ box-shadow: 0 0 10px black;
 	</div>
 
 	</div>
+	
 	<div id="footer">
 			
 	</div>
